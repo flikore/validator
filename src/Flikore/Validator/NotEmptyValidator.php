@@ -20,6 +20,7 @@ namespace Flikore\Validator
         /**
          * Executes the real validation so it can be reused.
          * @param mixed $value The value to validate.
+         * @return boolean Whether the value pass the validation.
          */
         protected function doValidate($value)
         {
