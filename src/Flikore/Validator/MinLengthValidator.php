@@ -4,9 +4,7 @@ namespace Flikore\Validator
 {
 
     /**
-     * Validates that the number of characters of value is between a certain range.
-     * This can be used to check only the maximum (if the minimun is null) or vice-versa.
-     * To check for an exact length, set the minimum and the maximum to such exact length.
+     * Validates that the number of characters of the value is at least a given amount.
      *
      * @author George Marques <george at georgemarques.com.br>
      */
