@@ -22,7 +22,7 @@ namespace Flikore\Validator
          * @param array $rules An array of rules with the key being the name of the attribute
          *                     and the value being a Validator instance.
          */
-        public function __construct($rules)
+        public function __construct($rules = array())
         {
             $this->validators = $rules;
         }
@@ -56,6 +56,10 @@ namespace Flikore\Validator
             foreach ($this->validators as $att => $rules)
             {
                 $value = $this->getKeyValue($object, $att);
+                foreach ($rules as $rule)
+                {
+                    $rule->assert($value);
+                }
             }
         }
 
@@ -68,13 +72,19 @@ namespace Flikore\Validator
          */
         protected function getKeyValue($object, $key)
         {
-            if (is_array($object))
+            if (is_array($object) || ($object instanceof \ArrayAccess))
             {
-                if (!array_key_exists($key, $object))
+                if (!isset($object[$key]))
                 {
-                    throw new \OutOfBoundsException(sprintf(dgettext('Flikore.Validator', 'The key %s does not exist.'), $key));
+                    if (!($object instanceof \ArrayAccess))
+                    {
+                        throw new \OutOfBoundsException(sprintf(dgettext('Flikore.Validator', 'The key %s does not exist.'), $key));
+                    }
                 }
-                return $object[$key];
+                else
+                {
+                    return $object[$key];
+                }
             }
 
             if (is_object($object))
@@ -82,12 +92,13 @@ namespace Flikore\Validator
                 try
                 {
                     $prop = new \ReflectionProperty($object, $key);
-                            
                 }
                 catch (\ReflectionException $e)
                 {
-                    throw new \OutOfBoundsException(sprintf(dgettext('Flikore.Validator', 'The property %s does not exist.'), $key));
+                    throw new \OutOfBoundsException(sprintf(dgettext('Flikore.Validator', 'The property %s does not exist.'), $key), 0, $e);
                 }
+                $prop->setAccessible(true);
+                return $prop->getValue($object);
             }
         }
 
