@@ -16,7 +16,7 @@ namespace Flikore\Validator
          * @var string The error message for this validator.
          */
         protected $message = '';
-        
+
         /**
          * Stores the values to change in the template.
          * @var array Stores the values to change in the template.
@@ -32,15 +32,7 @@ namespace Flikore\Validator
          */
         public function validate($value)
         {
-            try
-            {
-                $this->assert($value);
-            }
-            catch (Exception\ValidatorException $e)
-            {
-                return false;
-            }
-            return true;
+            return $this->doValidate($value);
         }
 
         /**
@@ -49,7 +41,13 @@ namespace Flikore\Validator
          * @param mixed $value The value to test.
          * @throws Exception\ValidatorException
          */
-        public abstract function assert($value);
+        public function assert($value)
+        {
+            if (!$this->doValidate($value))
+            {
+                throw new Exception\ValidatorException($this->getErrorMessage());
+            }
+        }
 
         /**
          * Gets the error message for this validation.
@@ -61,7 +59,6 @@ namespace Flikore\Validator
             return $this->applyTemplate();
         }
 
-
         /**
          * Sets the error message for this validator.
          * @param string $message The message.
@@ -70,7 +67,7 @@ namespace Flikore\Validator
         {
             $this->message = $message;
         }
-        
+
         /**
          * Adds a new key-value pair to be replaced by the templating engine.
          * This does not check if it's replacing a specific validator value.
@@ -95,6 +92,12 @@ namespace Flikore\Validator
             }
             return $message;
         }
+
+        /**
+         * Executes the real validation so it can be reused.
+         * @param mixed $value The value to validate.
+         */
+        protected abstract function doValidate($value);
     }
 
 }

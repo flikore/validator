@@ -10,25 +10,22 @@ namespace Flikore\Validator
      */
     class NotEmptyValidator extends Validator
     {
+
         /**
          * The error message for this validator.
          * @var string The error message for this validator.
          */
         protected $message = 'The %key% must not be empty.';
-        
+
         /**
-         * Checks if the value passes the validation test and throws
-         * an exception if not.
-         * @param mixed $value The value to test.
-         * @throws Exception\ValidatorException
+         * Executes the real validation so it can be reused.
+         * @param mixed $value The value to validate.
          */
-        public function assert($value)
+        protected function doValidate($value)
         {
-            if($value === null || $value === '' || (is_array($value) && empty($value)))
-            {
-                throw new Exception\ValidatorException($this->getErrorMessage());
-            }
+            return !($value === null || $value === '' || (is_array($value) && empty($value)));
         }
+
     }
 
 }
