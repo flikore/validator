@@ -1,0 +1,13 @@
+{
+    "name": "flikore/validator",
+    "description": "A simple validation library",
+    "authors": [
+        {
+            "name": "George Marques",
+            "email": "george@georgemarques.com.br"
+        }
+    ],
+    "require": {
+
+    }
+}
