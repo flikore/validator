@@ -32,7 +32,7 @@ namespace Flikore\Validator
         protected $message = 'The %key% must have between %min% and %max% characters.';
 
         /**
-         * Creates a new Length Validator.
+         * Creates a new Length Between Validator.
          * @param int $min The minimum valid length.
          * @param int $max The maximum valid length.
          */
