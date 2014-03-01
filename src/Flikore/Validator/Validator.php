@@ -10,13 +10,25 @@ namespace Flikore\Validator
      */
     abstract class Validator
     {
+
         /**
          * Checks if the value passes the validation test.
          * @param mixed $value The value to test.
          * @return boolean Whether it passes the test or not.
          */
-        public abstract function validate($value);
-        
+        public function validate($value)
+        {
+            try
+            {
+                $this->assert($value);
+            }
+            catch (Exception\ValidatorException $e)
+            {
+                return false;
+            }
+            return true;
+        }
+
         /**
          * Checks if the value passes the validation test and throws
          * an exception if not.
@@ -24,13 +36,14 @@ namespace Flikore\Validator
          * @throws Exception\ValidatorException
          */
         public abstract function assert($value);
-        
+
         /**
          * Gets the error message for this validation.
          * This should work whether or not there was a test before.
+         * @param string $key The name of the key which contains this value.
          * @return string The error message.
          */
-        public abstract function getErrorMessage();
+        public abstract function getErrorMessage($key = null);
     }
 
 }
