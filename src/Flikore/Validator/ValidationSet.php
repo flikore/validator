@@ -3,6 +3,8 @@
 namespace Flikore\Validator
 {
 
+    use Flikore\Validator\Exception\ValidatorException;
+
     /**
      * A set of validation rules to be checked at the same input set.
      *
@@ -53,13 +55,28 @@ namespace Flikore\Validator
          */
         public function assert($object)
         {
+            $exceptions = array();
             foreach ($this->validators as $att => $rules)
             {
                 $value = $this->getKeyValue($object, $att);
                 foreach ($rules as $rule)
                 {
-                    $rule->assert($value);
+                    try
+                    {
+                        $rule->assert($value, $att);
+                    }
+                    catch (ValidatorException $e)
+                    {
+                        $exceptions[$att] = $e;
+                        break;
+                    }
                 }
+            }
+            if (!empty($exceptions))
+            {
+                $e = new ValidatorException();
+                $e->setErrors($exceptions);
+                throw $e;
             }
         }
 

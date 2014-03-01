@@ -14,6 +14,7 @@ namespace Flikore\Validator
          * Checks if the value passes the validation test and throws
          * an exception if not.
          * @param mixed $value The value to test.
+         * @param string $key The key name of this value, if any.
          * @throws Exception\ValidatorException
          */
         public function assert($value)
@@ -23,22 +24,6 @@ namespace Flikore\Validator
                 throw new Exception\ValidatorException($this->getErrorMessage());
             }
         }
-
-        /**
-         * Gets the error message for this validation.
-         * This should work whether or not there was a test before.
-         * @param string $key The name of the key which contains this value.
-         * @return string The error message.
-         */
-        public function getErrorMessage($key = null)
-        {
-            if($key === null)
-            {
-                $key = 'value';
-            }
-            return sprintf(dgettext('Flikore.Validator', 'The %s must not be empty.'), $key);
-        }
-
     }
 
 }

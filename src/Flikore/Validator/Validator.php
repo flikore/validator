@@ -12,6 +12,20 @@ namespace Flikore\Validator
     {
 
         /**
+         * The error message for this validator.
+         * @var string The error message for this validator.
+         */
+        protected $message;
+        
+        /**
+         * Stores the values to change in the template.
+         * @var array Stores the values to change in the template.
+         */
+        protected $values = array(
+            'key' => 'value'
+        );
+
+        /**
          * Checks if the value passes the validation test.
          * @param mixed $value The value to test.
          * @return boolean Whether it passes the test or not.
@@ -40,10 +54,47 @@ namespace Flikore\Validator
         /**
          * Gets the error message for this validation.
          * This should work whether or not there was a test before.
-         * @param string $key The name of the key which contains this value.
          * @return string The error message.
          */
-        public abstract function getErrorMessage($key = null);
+        public function getErrorMessage()
+        {
+            return $this->applyTemplate(); //sprintf(dgettext('Flikore.Validator', 'The %s must not be empty.'), $key);
+        }
+
+
+        /**
+         * Sets the error message for this validator.
+         * @param string $message The message.
+         */
+        public function setErrorMessage($message)
+        {
+            $this->message = $message;
+        }
+        
+        /**
+         * Adds a new key-value pair to be replaced by the templating engine.
+         * This does not check if it's replacing a specific validator value.
+         * @param string $key The key to replace (in the template as "%key%")
+         * @param string $value The value to be inserted instead of the key.
+         */
+        public function addKeyValue($key, $value)
+        {
+            $this->values[$key] = (string) $value;
+        }
+
+        /**
+         * Applies the template message to a formed one.
+         * @return string The formed message.
+         */
+        protected function applyTemplate()
+        {
+            $message = $this->message;
+            foreach ($this->values as $key => $value)
+            {
+                $message = str_replace("%$key%", $value, $message);
+            }
+            return $message;
+        }
     }
 
 }
