@@ -15,7 +15,7 @@ namespace Flikore\Validator
          * The error message for this validator.
          * @var string The error message for this validator.
          */
-        protected $message;
+        protected $message = '';
         
         /**
          * Stores the values to change in the template.
@@ -58,7 +58,7 @@ namespace Flikore\Validator
          */
         public function getErrorMessage()
         {
-            return $this->applyTemplate(); //sprintf(dgettext('Flikore.Validator', 'The %s must not be empty.'), $key);
+            return $this->applyTemplate();
         }
 
 
@@ -88,10 +88,10 @@ namespace Flikore\Validator
          */
         protected function applyTemplate()
         {
-            $message = $this->message;
+            $message = dgettext('Flikore.Validator', $this->message);
             foreach ($this->values as $key => $value)
             {
-                $message = str_replace("%$key%", $value, $message);
+                $message = str_replace("%$key%", dgettext('Flikore.Validator', $value), $message);
             }
             return $message;
         }

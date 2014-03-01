@@ -36,6 +36,7 @@ namespace Flikore\Validator
          */
         public function addRule($name, $rule)
         {
+            $rule->addKeyValue('key', $name);
             $this->validators[$name][] = $rule;
         }
 
