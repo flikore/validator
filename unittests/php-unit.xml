@@ -10,12 +10,9 @@
 </phpunit-->
 
 <phpunit colors="true" >
-    <filter><!--
-        <blacklist>
-            <file>SplClassLoader.php</file>
-        </blacklist>-->
+    <filter>
         <whitelist>
-            <directory suffix=".php">/src</directory>
+            <directory suffix=".php">src</directory>
         </whitelist>
     </filter>
 </phpunit>

@@ -31,36 +31,27 @@ class ValidatorExceptionTest extends \PHPUnit_Framework_TestCase
         
     }
 
-    public function testGetErrors()
+    public function testSetAndGetErrors()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
+        $errs = array(
+            'aa' => new ValidatorException('aa'),
+            'bb' => new ValidatorException('bb'),
         );
+
+        $this->object->setErrors($errs);
+
+        $this->assertEquals($errs, $this->object->getErrors());
     }
 
-    public function testGetEror()
+    public function testSetAndGetError()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
+        $errA = new ValidatorException('aa');
+        $errB = new ValidatorException('bb');
 
-    public function testSetErrors()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
+        $this->object->setError($errA, 'aa');
 
-    public function testSetError()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertEquals($errA, $this->object->getError('aa'));
+        $this->assertNotEquals($errB, $this->object->getError('aa'));
     }
 
 }
