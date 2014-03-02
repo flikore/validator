@@ -47,7 +47,10 @@ namespace Flikore\Validator
          */
         public function addRules($name, $rules)
         {
-            $this->validators[$name] = $rules;
+            foreach ($rules as $rule)
+            {
+                $this->addRule($name, $rule);
+            }
         }
 
         /**
