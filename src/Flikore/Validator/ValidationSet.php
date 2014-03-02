@@ -28,7 +28,7 @@ namespace Flikore\Validator
         {
             foreach ($rules as $name => $rule)
             {
-                if(is_array($rule))
+                if (is_array($rule))
                 {
                     $this->addRules($name, $rule);
                 }
@@ -61,6 +61,27 @@ namespace Flikore\Validator
             {
                 $this->addRule($name, $rule);
             }
+        }
+
+        /**
+         * Checks if the object or array passes all the validation tests.
+         * @param mixed $object The object or array to test.
+         * @return boolean Whether it passes the tests or not.
+         */
+        public function validate($object)
+        {
+            foreach ($this->validators as $att => $rules)
+            {
+                $value = $this->getKeyValue($object, $att);
+                foreach ($rules as $rule)
+                {
+                    if (!$rule->validate($value))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         /**
