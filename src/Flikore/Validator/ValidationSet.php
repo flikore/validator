@@ -26,7 +26,17 @@ namespace Flikore\Validator
          */
         public function __construct($rules = array())
         {
-            $this->validators = $rules;
+            foreach ($rules as $name => $rule)
+            {
+                if(is_array($rule))
+                {
+                    $this->addRules($name, $rule);
+                }
+                else
+                {
+                    $this->addRule($name, $rule);
+                }
+            }
         }
 
         /**
