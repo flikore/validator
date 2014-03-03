@@ -81,6 +81,7 @@ var_dump($combo->validate('123456')); // bool(false)
 var_dump($combo->validate(''));       // bool(false)
 var_dump($combo->validate(null));     // bool(false)
 var_dump($combo->validate(''));       // bool(false)
+```
 
 ### Usage with exceptions
 
@@ -104,7 +105,7 @@ The message of the exception can be set on the validator using the method `setEr
 
 Each validator has a set of values that can be used in the message. The value named `key` exists in all validator and defaults to `"value"`. Those keys replace the sequence `%key%` inside the message. To override a default value of a key, use the `addKeyValue` method (this can be used to set the `key` as the name of the form field, for example).
 
-Example:
+**Example**:
 ```php
 <?php
 
@@ -173,6 +174,7 @@ $set = new \Flikore\Validator\ValidationSet(array(
 var_dump($set->validate(array('name' => 'this is ok', 'age' => 14))); // bool(true)
 var_dump($set->validate(array('name' => 'oops',       'age' => 14))); // bool(false)
 var_dump($set->validate(array('name' => 'this is ok', 'age' => 12))); // bool(false)
+```
 
 #### Sets and exceptions
 
@@ -180,7 +182,7 @@ With a `ValidationSet`, exception messages work in a different way. The main exc
 
 Also, the key name you add to the set is also setted as the `%key%` template value in the error messages. To change that to another value, use the third argument of `addRule` and `addRules` methods with the value you want). This can be used if you want to change the language of the message or to specify a more user friendly form label.
 
-Example:
+**Example**:
 
 ```php
 <?php
