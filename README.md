@@ -215,4 +215,3 @@ catch (Flikore\Validator\Exception\ValidatorException $e)
     // user_age: The Age must be equal or greater than 13.
 }
 ```
-
