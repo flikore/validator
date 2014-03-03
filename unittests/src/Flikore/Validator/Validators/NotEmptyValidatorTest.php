@@ -27,8 +27,13 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * @license http://opensource.org/licenses/MIT MIT
+ * Tests for NotEmptyValidator class.
+ *
  * @author George Marques <george at georgemarques.com.br>
+ * @license http://opensource.org/licenses/MIT MIT
+ * @copyright (c) 2014, George Marques
+ * @package Flikore\Validator
+ * @category Tests
  */
 class NotEmptyValidatorTest extends \PHPUnit_Framework_TestCase
 {
