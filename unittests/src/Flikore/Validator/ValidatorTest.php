@@ -38,18 +38,6 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($msg, $this->object->getErrorMessage());
         
     }
-
-    /**
-     * @covers Flikore\Validator\Validator::addKeyValue
-     * @todo   Implement testAddKeyValue().
-     */
-    public function testAddKeyValue()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
     
     public function testValidate()
     {
@@ -79,5 +67,16 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
                 ->will($this->returnValue(true));
         
         $this->object->assert('anything');
+    }
+    
+    public function testAddKeyValue()
+    {
+        $v = $this->object;
+        $key = 'test key';
+        $value = 'test value';
+        $v->addKeyValue($key, $value);
+        $v->setErrorMessage("%$key%");
+        
+        $this->assertEquals($value, $v->getErrorMessage());
     }
 }
