@@ -2,6 +2,9 @@
 
 *A simple validation library*.
 
+[![Build Status](https://travis-ci.org/flikore/validator.png)](https://travis-ci.org/flikore/validator)
+[![Coverage Status](https://coveralls.io/repos/flikore/validator/badge.png)](https://coveralls.io/r/flikore/validator)
+
 Flikore validator is a validation library for PHP aimed to be simple and extensible.
 
 ## Instalation
