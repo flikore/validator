@@ -6,6 +6,8 @@ namespace Flikore\Validator\Validators
     /**
      * Validates that a number is equal or greater than a given value.
      *
+     * @customKey <i>%min%</i> The minimum valid value.
+     * 
      * @author George Marques <george at georgemarques.com.br>
      */
     class MinValueValidator extends \Flikore\Validator\Validator

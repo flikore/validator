@@ -5,6 +5,8 @@ namespace Flikore\Validator\Validators
 
     /**
      * Validates that the number of characters of the value is at most a given amount.
+     * 
+     * @customKey <i>%max%</i> The maximum valid length.
      *
      * @author George Marques <george at georgemarques.com.br>
      */

@@ -5,6 +5,8 @@ namespace Flikore\Validator\Validators
 
     /**
      * Validates that a number is exactly a certain value.
+     * 
+     * @customKey <i>%value%</i> The exact valid value.
      *
      * @author George Marques <george at georgemarques.com.br>
      */

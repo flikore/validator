@@ -5,6 +5,8 @@ namespace Flikore\Validator\Validators
 
     /**
      * Validates that the value is a valid date.
+     * 
+     * @customKey <i>%format%</i> The format specified to check the valid date.
      *
      * @author George Marques <george at georgemarques.com.br>
      */

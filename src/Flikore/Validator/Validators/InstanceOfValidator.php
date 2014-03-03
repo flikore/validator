@@ -5,6 +5,8 @@ namespace Flikore\Validator\Validators
 
     /**
      * Validates that the value is an instance of a certain class.
+     * 
+     * @customKey <i>%class%</i> The name of the valid class.
      *
      * @author George Marques <george at georgemarques.com.br>
      */

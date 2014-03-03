@@ -5,6 +5,8 @@ namespace Flikore\Validator\Validators
 
     /**
      * Validates that a number is equal or lesser than a given value.
+     * 
+     * @customKey <i>%max%</i> The maximum valid value.
      *
      * @author George Marques <george at georgemarques.com.br>
      */

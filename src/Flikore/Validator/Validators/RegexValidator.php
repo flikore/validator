@@ -5,6 +5,8 @@ namespace Flikore\Validator\Validators
 
     /**
      * Validates if a string matches a given regular expression
+     * 
+     * @customKey <i>%regex%</i> The regular expression to be matched.
      *
      * @author George Marques <george at georgemarques.com.br>
      */

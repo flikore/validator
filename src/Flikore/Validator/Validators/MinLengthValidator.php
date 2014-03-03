@@ -5,6 +5,8 @@ namespace Flikore\Validator\Validators
 
     /**
      * Validates that the number of characters of the value is at least a given amount.
+     * 
+     * @customKey <i>%min%</i> The minimum valid length.
      *
      * @author George Marques <george at georgemarques.com.br>
      */

@@ -5,6 +5,8 @@ namespace Flikore\Validator\Validators
 
     /**
      * Validates that the number of characters of the value is exactly a given amount.
+     * 
+     * @customKey <i>%length%</i> The exact valid length.
      *
      * @author George Marques <george at georgemarques.com.br>
      */

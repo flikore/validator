@@ -5,6 +5,9 @@ namespace Flikore\Validator\Validators
 
     /**
      * Validates that the number of characters of the value is between a certain range.
+     * 
+     * @customKey <i>%min%</i> The minimum valid length.
+     * @customKey <i>%max%</i> The maximum valid length.
      *
      * @author George Marques <george at georgemarques.com.br>
      */
