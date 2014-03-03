@@ -1,41 +1,41 @@
 <?php
 
-namespace Flikore\Validator
+namespace Flikore\Validator\Validators
 {
 
     /**
-     * Validates that a number is equal or greater than a given value.
+     * Validates that a number is equal or lesser than a given value.
      *
      * @author George Marques <george at georgemarques.com.br>
      */
-    class MinValueValidator extends Validator
+    class MaxValueValidator extends \Flikore\Validator\Validator
     {
         /**
-         * The minimum valid value.
-         * @var int The minimum valid value.
+         * The maximum valid value.
+         * @var int The maximum valid value.
          */
-        protected $min;
+        protected $max;
 
         /**
          * The error message for this validator.
          * @var string The error message for this validator.
          */
-        protected $message = 'The %key% be equal or greater than %min%.';
+        protected $message = 'The %key% be equal or lesser than %max%.';
 
         /**
-         * Creates a new Min Value Validator.
-         * @param int $min The minimum valid value.
+         * Creates a new Max Value Validator.
+         * @param int $max The maximum valid value.
          */
-        public function __construct($min)
+        public function __construct($max)
         {
-            if (!is_int($min))
+            if (!is_int($max))
             {
-                throw new \InvalidArgumentException('The minimum must be a valid integer');
+                throw new \InvalidArgumentException('The maximum must be a valid integer');
             }
 
-            $this->min = $min;
+            $this->max = $max;
 
-            $this->addKeyValue('min', $min);
+            $this->addKeyValue('max', $max);
         }
 
         /**
@@ -50,7 +50,7 @@ namespace Flikore\Validator
             {
                 return true;
             }
-            return ($value >= $this->min);
+            return ($value <= $this->max);
         }
 
     }

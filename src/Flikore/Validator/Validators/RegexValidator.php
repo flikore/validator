@@ -1,6 +1,6 @@
 <?php
 
-namespace Flikore\Validator
+namespace Flikore\Validator\Validators
 {
 
     /**
@@ -8,7 +8,7 @@ namespace Flikore\Validator
      *
      * @author George Marques <george at georgemarques.com.br>
      */
-    class RegexValidator extends Validator
+    class RegexValidator extends \Flikore\Validator\Validator
     {
 
         /**
