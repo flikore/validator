@@ -1,4 +1,10 @@
 php:
     - 5.3
     
-script: phpunit --bootstrap unittests/php-unit.php unittests
+before_script:
+    - composer selfupdate
+    - composer install -v --dev
+     
+script:
+    - mkdir build/logs
+    - vendor/bin/phpunit --colors --bootstrap unittests/php-unit.php unittests --coverage-clover build/logs/clover.xml
