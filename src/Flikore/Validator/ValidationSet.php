@@ -23,18 +23,20 @@ namespace Flikore\Validator
          * Creates a new validation set.
          * @param array $rules An array of rules with the key being the name of the attribute
          *                     and the value being a Validator instance.
+         * @param array $labels The association of name => label to show in error messages.
          */
-        public function __construct($rules = array())
+        public function __construct($rules = array(), $labels = array())
         {
             foreach ($rules as $name => $rule)
             {
+                $label = isset($labels[$name]) ? $labels[$name] : null;
                 if (is_array($rule))
                 {
-                    $this->addRules($name, $rule);
+                    $this->addRules($name, $rule, $label);
                 }
                 else
                 {
-                    $this->addRule($name, $rule);
+                    $this->addRule($name, $rule, $label);
                 }
             }
         }
@@ -43,10 +45,15 @@ namespace Flikore\Validator
          * Adds a new rule for a given property or key name.
          * @param string $name The name of the key or property.
          * @param Validator $rule The validation rule.
+         * @param string $label The label to be shown in the error message (intead of the name).
          */
-        public function addRule($name, $rule)
+        public function addRule($name, $rule, $label = null)
         {
-            $rule->addKeyValue('key', $name);
+            if($label === null)
+            {
+                $label = $name;
+            }
+            $rule->addKeyValue('key', $label);
             $this->validators[$name][] = $rule;
         }
 
@@ -54,12 +61,13 @@ namespace Flikore\Validator
          * Adds a new set rules for a given property or key name.
          * @param string $name The name of the key or property.
          * @param Validator[] $rules The array of rules.
+         * @param string $label The label to be shown in the error message (intead of the name).
          */
-        public function addRules($name, $rules)
+        public function addRules($name, $rules, $label = null)
         {
             foreach ($rules as $rule)
             {
-                $this->addRule($name, $rule);
+                $this->addRule($name, $rule, $label);
             }
         }
 
