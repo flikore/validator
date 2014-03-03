@@ -46,7 +46,7 @@ namespace Flikore\Validator
         protected function doValidate($value)
         {
             // ignore empty values
-            if(empty($value))
+            if(is_null($value) || $value === '')
             {
                 return true;
             }
