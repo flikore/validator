@@ -32,7 +32,6 @@ class ExactValueValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $v = new ExactValueValidator(5);
         $this->assertTrue($v->validate(5));
-        $this->assertTrue($v->validate(null));
     }
     
     public function testFailure()
@@ -48,5 +47,12 @@ class ExactValueValidatorTest extends \PHPUnit_Framework_TestCase
     public function testInvalidValueArgument()
     {
         $v = new ExactValueValidator('aa');
+    }
+    
+    public function testValidateEmptyValue()
+    {
+        $val = new ExactValueValidator(5);
+        $this->assertTrue($val->validate(''));
+        $this->assertTrue($val->validate(null));
     }
 }
