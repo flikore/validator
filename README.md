@@ -220,3 +220,24 @@ catch (Flikore\Validator\Exception\ValidatorException $e)
     // user_age: The Age must be equal or greater than 13.
 }
 ```
+
+## Available validators
+
+Currently, there are the following validator classes:
+
+* `DateValidator`
+* `ExactLengthValidator`
+* `ExactValueValidator`
+* `IntanceOfValidator`
+* `LengthBetweenValidator`
+* `MaxLengthValidator`
+* `MaxValueValidator`
+* `MinLengthValidator`
+* `MinValueValidator`
+* `NotEmptyValidator`
+* `RegexValidator`
+
+
+## Reference
+
+The documentation reference for all classes (including the validators) can be found at [http://flikore.github.io/validator/docs/index.html](http://flikore.github.io/validator/docs/index.html "http://flikore.github.io/validator/docs/index.html").
