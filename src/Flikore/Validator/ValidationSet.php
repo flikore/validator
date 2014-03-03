@@ -187,6 +187,7 @@ class ValidationSet
             $prop->setAccessible(true);
             return $prop->getValue($object);
         }
+        throw new \InvalidArgumentException('The value to validate must be an array or an object.');
     }
 
 }
