@@ -1,12 +1,22 @@
 {
     "name": "flikore/validator",
     "description": "A simple validation library",
+    "type": "library",
+    "keywords": ["validation","security","forms"],
+    "license": "MIT",
     "authors": [
         {
             "name": "George Marques",
-            "email": "george@georgemarques.com.br"
+            "email": "george@georgemarques.com.br",
+            "homepage": "http://georgemarques.com.br",
+            "role": "Developer"
         }
     ],
+    "autoload": {
+        "psr-0": {
+            "Flikore\\Validator": "src/"
+        }
+    },
     "require": {
         "php": ">=5.3.0"
     },

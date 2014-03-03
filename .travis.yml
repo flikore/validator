@@ -1,0 +1,4 @@
+php:
+    - 5.3
+    
+script: phpunit --bootstrap unittests/php-unit.php unittests
