@@ -12,6 +12,11 @@ namespace Flikore\Validator
      */
     class ValidationCombo extends Validator
     {
+        /**
+         * The error message for this validator.
+         * @var string The error message for this validator.
+         */
+        protected $message = null;
 
         /**
          * A collection of all validators.
@@ -48,7 +53,7 @@ namespace Flikore\Validator
             {
                 if(!$rule->validate($value))
                 {
-                    $this->setErrorMessage($rule->getErrorMessage());
+                    $this->setErrorMessage($this->message === null ? $rule->getErrorMessage() : $this->message);
                     return false;
                 }
             }

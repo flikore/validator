@@ -74,10 +74,23 @@ class ValidationComboTest extends \PHPUnit_Framework_TestCase
         $v->addValidator($a);
         $v->addKeyValue('key', $msgA);
 
-        $tst = false;
-
         $this->setExpectedException('Flikore\Validator\Exception\ValidatorException', $a->getErrorMessage());
 
+        $v->assert(0);
+    }
+    
+    public function testCustomMessage()
+    {
+        $v = $this->object;
+        $a = new ExactValueValidator(5);
+        
+        $msg = 'This is the test message';
+        
+        $v->setErrorMessage($msg);
+        $v->addValidator($a);
+        
+        $this->setExpectedException('Flikore\Validator\Exception\ValidatorException', $msg);
+        
         $v->assert(0);
     }
 
