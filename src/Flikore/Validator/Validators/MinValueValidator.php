@@ -20,7 +20,7 @@ namespace Flikore\Validator\Validators
          * The error message for this validator.
          * @var string The error message for this validator.
          */
-        protected $message = 'The %key% be equal or greater than %min%.';
+        protected $message = 'The %key% must be equal or greater than %min%.';
 
         /**
          * Creates a new Min Value Validator.
