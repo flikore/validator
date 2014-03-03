@@ -2,5 +2,5 @@
 
 require 'SplClassLoader.php';
 
-$loader = new SplClassLoader('Flikore\Validator', 'src');
+$loader = new Flikore\Validator\SplClassLoader('Flikore\Validator', 'src');
 $loader->register();
