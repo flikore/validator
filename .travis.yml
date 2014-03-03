@@ -6,5 +6,5 @@ php:
 install: composer install -v --dev
      
 script:
-    - mkdir build/logs
-    - vendor/bin/phpunit --colors --bootstrap unittests/php-unit.php unittests --coverage-clover build/logs/clover.xml
+    - mkdir -p build/logs
+    - vendor/bin/phpunit --colors --configuration phpunit.xml --bootstrap unittests/phpunit.php --coverage-clover build/logs/clover.xml unittests

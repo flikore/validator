@@ -18,16 +18,12 @@ class InstanceOfValidatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     * @covers Flikore\Validator\InstanceOfValidator::__construct
      */
     public function testInvalidNullArgument()
     {
         $v = new InstanceOfValidator(null);
     }
-
-    /**
-     * @covers Flikore\Validator\InstanceOfValidator::doValidate
-     */
+    
     public function testSuccessClassName()
     {
         $a = new \BadFunctionCallException();
