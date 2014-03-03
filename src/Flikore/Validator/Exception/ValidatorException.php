@@ -31,7 +31,7 @@ namespace Flikore\Validator\Exception
          * @param string $key The key to get.
          * @return ValidatorException The exception of that key or null if there's none.
          */
-        public function getEror($key)
+        public function getError($key)
         {
             return isset($this->errors[$key]) ? $this->errors[$key] : null;
         }

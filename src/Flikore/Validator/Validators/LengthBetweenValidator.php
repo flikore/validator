@@ -1,14 +1,17 @@
 <?php
 
-namespace Flikore\Validator
+namespace Flikore\Validator\Validators
 {
 
     /**
      * Validates that the number of characters of the value is between a certain range.
+     * 
+     * @customKey <i>%min%</i> The minimum valid length.
+     * @customKey <i>%max%</i> The maximum valid length.
      *
      * @author George Marques <george at georgemarques.com.br>
      */
-    class LengthBetweenValidator extends Validator
+    class LengthBetweenValidator extends \Flikore\Validator\Validator
     {
 
         /**
@@ -60,7 +63,7 @@ namespace Flikore\Validator
         protected function doValidate($value)
         {
             // ignore empty values
-            if(empty($value))
+            if(is_null($value) || $value === '')
             {
                 return true;
             }

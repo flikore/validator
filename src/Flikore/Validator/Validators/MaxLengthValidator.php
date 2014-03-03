@@ -1,14 +1,16 @@
 <?php
 
-namespace Flikore\Validator
+namespace Flikore\Validator\Validators
 {
 
     /**
      * Validates that the number of characters of the value is at most a given amount.
+     * 
+     * @customKey <i>%max%</i> The maximum valid length.
      *
      * @author George Marques <george at georgemarques.com.br>
      */
-    class MaxLengthValidator extends Validator
+    class MaxLengthValidator extends \Flikore\Validator\Validator
     {
         /**
          * The maximum valid length.
@@ -46,7 +48,7 @@ namespace Flikore\Validator
         protected function doValidate($value)
         {
             // ignore empty values
-            if(empty($value))
+            if(is_null($value) || $value === '')
             {
                 return true;
             }
