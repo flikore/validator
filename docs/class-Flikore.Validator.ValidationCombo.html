@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Flikore\Validator\ValidationCombo | Validator</title>
+
+	<script type="text/javascript" src="resources/combined.js?2575005269"></script>
+	<script type="text/javascript" src="elementlist.js?1462744569"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-Flikore.html">Flikore<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Flikore.Validator.html">Validator<span></span></a>
+						<ul>
+				<li><a href="namespace-Flikore.Validator.Exception.html">Exception</a>
+						</li>
+				<li><a href="namespace-Flikore.Validator.Validators.html">Validators</a>
+						</li>
+							</ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Flikore.Validator.SplClassLoader.html">SplClassLoader</a></li>
+				<li class="active"><a href="class-Flikore.Validator.ValidationCombo.html">ValidationCombo</a></li>
+				<li><a href="class-Flikore.Validator.ValidationSet.html">ValidationSet</a></li>
+				<li><a href="class-Flikore.Validator.Validator.html">Validator</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Flikore.Validator.html" title="Summary of Flikore\Validator"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class ValidationCombo</h1>
+
+
+	<div class="description">
+	
+<p>Combines two or more validator objects into one. This validates with all the
+inserted validators and stops at the first error, return the message of the
+validator that went wrong.</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Flikore.Validator.Validator.html"><span>Flikore\Validator\Validator</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Flikore\Validator\ValidationCombo</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Flikore.html">Flikore</a>\<a href="namespace-Flikore.Validator.html">Validator</a><br />
+		
+
+				<b>Author:</b>
+				George Marques &lt;george at georgemarques.com.br&gt;<br />
+		<b>Located at</b> <a href="source-class-Flikore.Validator.ValidationCombo.html#6-76" title="Go to source code">src/Flikore/Validator/ValidationCombo.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Flikore.Validator.ValidationCombo.html#27-33" title="Go to source code">__construct</a>( )</code>
+
+		<div class="description short">
+			
+<p>Creates a Validation Combo.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Creates a Validation Combo.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addValidator" id="_addValidator">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addValidator">#</a>
+		<code><a href="source-class-Flikore.Validator.ValidationCombo.html#35-43" title="Go to source code">addValidator</a>( <span><code><a href="class-Flikore.Validator.Validator.html">Flikore\Validator\Validator</a></code> <var>$validator</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds a new validator to the combo.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds a new validator to the combo.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$validator</var></dt>
+					<dd><code><code><a href="class-Flikore.Validator.Validator.html">Flikore\Validator\Validator</a></code></code><br>$validator The validator to add.</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="doValidate" id="_doValidate">
+
+		<td class="attributes"><code>
+			 protected 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_doValidate">#</a>
+		<code><a href="source-class-Flikore.Validator.ValidationCombo.html#45-61" title="Go to source code">doValidate</a>( <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Executes the real validation so it can be reused.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Executes the real validation so it can be reused.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value The value to validate.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>Whether the value pass the validation.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addKeyValue" id="_addKeyValue">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addKeyValue">#</a>
+		<code><a href="source-class-Flikore.Validator.ValidationCombo.html#63-75" title="Go to source code">addKeyValue</a>( <span>string <var>$key</var></span>, <span>string <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds a new key-value pair to be replaced by the templating engine. This does
+not check if it's replacing a specific validator value.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds a new key-value pair to be replaced by the templating engine. This does
+not check if it's replacing a specific validator value.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br>$key The key to replace (in the template as "%key%")</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>string</code><br>$value The value to be inserted instead of the key.</dd>
+				</dl></div>
+
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Flikore.Validator.Validator.html#_addKeyValue">Flikore\Validator\Validator::addKeyValue()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Flikore.Validator.Validator.html#methods">Flikore\Validator\Validator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Flikore.Validator.Validator.html#_applyTemplate">applyTemplate()</a>, 
+			<a href="class-Flikore.Validator.Validator.html#_assert">assert()</a>, 
+			<a href="class-Flikore.Validator.Validator.html#_getErrorMessage">getErrorMessage()</a>, 
+			<a href="class-Flikore.Validator.Validator.html#_setErrorMessage">setErrorMessage()</a>, 
+			<a href="class-Flikore.Validator.Validator.html#_validate">validate()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="message" id="$message">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Flikore.Validator.ValidationCombo.html#15-19" title="Go to source code"><var>$message</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">null</span></code></td>
+		<td class="description"><div>
+			<a href="#$message" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The error message for this validator.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The error message for this validator.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="validators" id="$validators">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-Flikore.Validator.Validator.html">Flikore\Validator\Validator</a>[]</code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Flikore.Validator.ValidationCombo.html#21-25" title="Go to source code"><var>$validators</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$validators" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A collection of all validators.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A collection of all validators.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Flikore.Validator.Validator.html#properties">Flikore\Validator\Validator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Flikore.Validator.Validator.html#$values"><var>$values</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Validator API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
