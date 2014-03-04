@@ -35,7 +35,6 @@ use Flikore\Validator\Exception\ValidatorException;
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
- * @category Exceptions
  */
 class ValidationSet
 {
