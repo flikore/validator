@@ -3,7 +3,7 @@
 *A simple validation library*.
 
 [![Build Status](https://travis-ci.org/flikore/validator.png)](https://travis-ci.org/flikore/validator)
-[![Coverage Status](https://coveralls.io/repos/flikore/validator/badge.png)](https://coveralls.io/r/flikore/validator)
+[![Coverage Status](https://coveralls.io/repos/flikore/validator/badge.png?branch=develop)](https://coveralls.io/r/flikore/validator?branch=develop)
 
 Flikore validator is a validation library for PHP aimed to be simple and extensible.
 
@@ -225,19 +225,42 @@ catch (Flikore\Validator\Exception\ValidatorException $e)
 
 Currently, there are the following validator classes:
 
+* `AlphaNumericValidator`
+* `AlphaValidator`
 * `DateValidator`
+* `EmailValidator`
+* `EqualsValidator`
 * `ExactLengthValidator`
 * `ExactValueValidator`
-* `IntanceOfValidator`
+* `IPv4Validator`
+* `IPv6Validator`
+* `InstanceOfValidator`
 * `LengthBetweenValidator`
 * `MaxLengthValidator`
 * `MaxValueValidator`
+* `MinAgeValidator`
 * `MinLengthValidator`
 * `MinValueValidator`
 * `NotEmptyValidator`
+* `NumericValidator`
 * `RegexValidator`
-
+* `UriValidator`
+* `ValueBetweenValidator`
 
 ## Reference
 
 The documentation reference for all classes (including the validators) can be found at [http://flikore.github.io/validator/docs/index.html](http://flikore.github.io/validator/docs/index.html "http://flikore.github.io/validator/docs/index.html").
+
+## Contributing
+
+If you want to contribute with the coding, follow these steps:
+
+1. Fork this repository.
+2. Create a new feature branch in your fork.
+3. Create unit tests for your changes.
+4. Change or add new code to conform your tests.
+5. Commit the modifications.
+6. Repeat 3-5 until you're done (you can create as many commits as you want).
+5. Send a pull request (with your feature branch last commit).
+
+Remember that anything in this repository is licensed with the MIT license.
