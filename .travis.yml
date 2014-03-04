@@ -8,3 +8,6 @@ install: composer install -v --dev
 script:
     - mkdir -p build/logs
     - vendor/bin/phpunit --colors --configuration phpunit.xml --bootstrap unittests/phpunit.php --coverage-clover build/logs/clover.xml unittests
+    
+after_script:
+    - php vendor/bin/coveralls -v
