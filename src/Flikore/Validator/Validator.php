@@ -102,6 +102,10 @@ abstract class Validator
      */
     public function addKeyValue($key, $value)
     {
+        if(is_object($value) && !method_exists($value, '__toString'))
+        {
+            $value = get_class($value);
+        }
         $this->values[$key] = (string) $value;
     }
 

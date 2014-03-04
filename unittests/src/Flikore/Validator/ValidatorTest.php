@@ -110,4 +110,15 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         
         $this->assertEquals($value, $v->getErrorMessage());
     }
+    
+    public function testAddKeyValueObject()
+    {
+        $v = $this->object;
+        $key = 'test key';
+        $value = new \stdClass();
+        $v->addKeyValue($key, $value);
+        $v->setErrorMessage("%$key%");
+        
+        $this->assertEquals('stdClass', $v->getErrorMessage());
+    }
 }
