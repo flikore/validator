@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Flikore\Validator\Validators\RegexValidator | Validator</title>
+	<title>Class Flikore\Validator\Validators\MinAgeValidator | Validator</title>
 
 	<script type="text/javascript" src="resources/combined.js?2575005269"></script>
 	<script type="text/javascript" src="elementlist.js?3354870788"></script>
@@ -52,12 +52,12 @@
 				<li><a href="class-Flikore.Validator.Validators.LengthBetweenValidator.html">LengthBetweenValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MaxLengthValidator.html">MaxLengthValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MaxValueValidator.html">MaxValueValidator</a></li>
-				<li><a href="class-Flikore.Validator.Validators.MinAgeValidator.html">MinAgeValidator</a></li>
+				<li class="active"><a href="class-Flikore.Validator.Validators.MinAgeValidator.html">MinAgeValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MinLengthValidator.html">MinLengthValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MinValueValidator.html">MinValueValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.NotEmptyValidator.html">NotEmptyValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.NumericValidator.html">NumericValidator</a></li>
-				<li class="active"><a href="class-Flikore.Validator.Validators.RegexValidator.html">RegexValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.RegexValidator.html">RegexValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.UriValidator.html">UriValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.ValueBetweenValidator.html">ValueBetweenValidator</a></li>
 			</ul>
@@ -102,12 +102,12 @@
 	</div>
 
 <div id="content" class="class">
-	<h1>Class RegexValidator</h1>
+	<h1>Class MinAgeValidator</h1>
 
 
 	<div class="description">
 	
-<p>Validates if a string matches a given regular expression</p>
+<p>Validates that the given date is at least a certain number of years ago.</p>
 
 	</div>
 
@@ -120,18 +120,13 @@
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by" />
-<b><span>Flikore\Validator\Validators\RegexValidator</span></b>			
+<b><span>Flikore\Validator\Validators\MinAgeValidator</span></b>			
 			
 			
 		</dd>
 	</dl>
 
 
-	<div>
-		<h4>Direct known subclasses</h4>
-			<a href="class-Flikore.Validator.Validators.AlphaNumericValidator.html">Flikore\Validator\Validators\AlphaNumericValidator</a>, 
-			<a href="class-Flikore.Validator.Validators.AlphaValidator.html">Flikore\Validator\Validators\AlphaValidator</a>
-	</div>
 
 
 
@@ -151,8 +146,8 @@
 				<b>Author:</b>
 				George Marques &lt;george at georgemarques.com.br&gt;<br />
 				<b>CustomKey:</b>
-				<i>%regex%</i> The regular expression to be matched.<br />
-		<b>Located at</b> <a href="source-class-Flikore.Validator.Validators.RegexValidator.html#29-86" title="Go to source code">src/Flikore/Validator/Validators/RegexValidator.php</a><br />
+				<i>%minAge%</i> The minimum valid age.<br />
+		<b>Located at</b> <a href="source-class-Flikore.Validator.Validators.MinAgeValidator.html#29-100" title="Go to source code">src/Flikore/Validator/Validators/MinAgeValidator.php</a><br />
 	</div>
 
 
@@ -170,24 +165,24 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Flikore.Validator.Validators.RegexValidator.html#54-69" title="Go to source code">__construct</a>( <span>string <var>$regex</var></span> )</code>
+		<code><a href="source-class-Flikore.Validator.Validators.MinAgeValidator.html#54-67" title="Go to source code">__construct</a>( <span>integer <var>$minAge</var></span> )</code>
 
 		<div class="description short">
 			
-<p>Creates a new Regex Validator.</p>
+<p>Creates a new Date Validator.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Creates a new Regex Validator.</p>
+<p>Creates a new Date Validator.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$regex</var></dt>
-					<dd><code>string</code><br>$regex The regex to match.</dd>
+					<dt><var>$minAge</var></dt>
+					<dd><code>integer</code><br>$minAge The minimum valid age.</dd>
 				</dl></div>
 
 
@@ -208,7 +203,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_doValidate">#</a>
-		<code><a href="source-class-Flikore.Validator.Validators.RegexValidator.html#71-84" title="Go to source code">doValidate</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-Flikore.Validator.Validators.MinAgeValidator.html#69-98" title="Go to source code">doValidate</a>( <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -267,28 +262,28 @@
 
 	<table class="summary" id="properties">
 	<caption>Properties summary</caption>
-	<tr data-order="regex" id="$regex">
+	<tr data-order="minAge" id="$minAge">
 		<td class="attributes"><code>
 			protected  
-			string
+			integer
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Flikore.Validator.Validators.RegexValidator.html#42-46" title="Go to source code"><var>$regex</var></a>
+				<a href="source-class-Flikore.Validator.Validators.MinAgeValidator.html#42-46" title="Go to source code"><var>$minAge</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
-			<a href="#$regex" class="anchor">#</a>
+			<a href="#$minAge" class="anchor">#</a>
 
 			<div class="description short">
 				
-<p>The regex to match.</p>
+<p>The minimum valid age.</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>The regex to match.</p>
+<p>The minimum valid age.</p>
 
 
 			</div>
@@ -301,9 +296,9 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Flikore.Validator.Validators.RegexValidator.html#48-52" title="Go to source code"><var>$message</var></a>
+				<a href="source-class-Flikore.Validator.Validators.MinAgeValidator.html#48-52" title="Go to source code"><var>$message</var></a>
 		</td>
-		<td class="value"><code><span class="php-quote">'The %key% must match the regular expression &quot;%regex%&quot;.'</span></code></td>
+		<td class="value"><code><span class="php-quote">'The %key% must be older than %minAge% years.'</span></code></td>
 		<td class="description"><div>
 			<a href="#$message" class="anchor">#</a>
 

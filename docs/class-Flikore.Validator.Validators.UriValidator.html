@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Flikore\Validator\Validators\RegexValidator | Validator</title>
+	<title>Class Flikore\Validator\Validators\UriValidator | Validator</title>
 
 	<script type="text/javascript" src="resources/combined.js?2575005269"></script>
 	<script type="text/javascript" src="elementlist.js?3354870788"></script>
@@ -57,8 +57,8 @@
 				<li><a href="class-Flikore.Validator.Validators.MinValueValidator.html">MinValueValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.NotEmptyValidator.html">NotEmptyValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.NumericValidator.html">NumericValidator</a></li>
-				<li class="active"><a href="class-Flikore.Validator.Validators.RegexValidator.html">RegexValidator</a></li>
-				<li><a href="class-Flikore.Validator.Validators.UriValidator.html">UriValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.RegexValidator.html">RegexValidator</a></li>
+				<li class="active"><a href="class-Flikore.Validator.Validators.UriValidator.html">UriValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.ValueBetweenValidator.html">ValueBetweenValidator</a></li>
 			</ul>
 
@@ -102,12 +102,12 @@
 	</div>
 
 <div id="content" class="class">
-	<h1>Class RegexValidator</h1>
+	<h1>Class UriValidator</h1>
 
 
 	<div class="description">
 	
-<p>Validates if a string matches a given regular expression</p>
+<p>Validates if a string is a valid URI.</p>
 
 	</div>
 
@@ -120,18 +120,13 @@
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by" />
-<b><span>Flikore\Validator\Validators\RegexValidator</span></b>			
+<b><span>Flikore\Validator\Validators\UriValidator</span></b>			
 			
 			
 		</dd>
 	</dl>
 
 
-	<div>
-		<h4>Direct known subclasses</h4>
-			<a href="class-Flikore.Validator.Validators.AlphaNumericValidator.html">Flikore\Validator\Validators\AlphaNumericValidator</a>, 
-			<a href="class-Flikore.Validator.Validators.AlphaValidator.html">Flikore\Validator\Validators\AlphaValidator</a>
-	</div>
 
 
 
@@ -151,8 +146,8 @@
 				<b>Author:</b>
 				George Marques &lt;george at georgemarques.com.br&gt;<br />
 				<b>CustomKey:</b>
-				<i>%regex%</i> The regular expression to be matched.<br />
-		<b>Located at</b> <a href="source-class-Flikore.Validator.Validators.RegexValidator.html#29-86" title="Go to source code">src/Flikore/Validator/Validators/RegexValidator.php</a><br />
+				<i>%protocol%</i> The valid(s) protocol(s) set in the constructor.<br />
+		<b>Located at</b> <a href="source-class-Flikore.Validator.Validators.UriValidator.html#29-127" title="Go to source code">src/Flikore/Validator/Validators/UriValidator.php</a><br />
 	</div>
 
 
@@ -170,24 +165,24 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Flikore.Validator.Validators.RegexValidator.html#54-69" title="Go to source code">__construct</a>( <span>string <var>$regex</var></span> )</code>
+		<code><a href="source-class-Flikore.Validator.Validators.UriValidator.html#60-80" title="Go to source code">__construct</a>( <span>mixed <var>$protocol</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
-<p>Creates a new Regex Validator.</p>
+<p>Creates a new Uri Validator.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Creates a new Regex Validator.</p>
+<p>Creates a new Uri Validator.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$regex</var></dt>
-					<dd><code>string</code><br>$regex The regex to match.</dd>
+					<dt><var>$protocol</var></dt>
+					<dd><code>mixed</code><br>$protocol The valid(s) protocol(s) (string or array).</dd>
 				</dl></div>
 
 
@@ -208,7 +203,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_doValidate">#</a>
-		<code><a href="source-class-Flikore.Validator.Validators.RegexValidator.html#71-84" title="Go to source code">doValidate</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-Flikore.Validator.Validators.UriValidator.html#82-125" title="Go to source code">doValidate</a>( <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -267,33 +262,6 @@
 
 	<table class="summary" id="properties">
 	<caption>Properties summary</caption>
-	<tr data-order="regex" id="$regex">
-		<td class="attributes"><code>
-			protected  
-			string
-		</code></td>
-
-		<td class="name">
-				<a href="source-class-Flikore.Validator.Validators.RegexValidator.html#42-46" title="Go to source code"><var>$regex</var></a>
-		</td>
-		<td class="value"><code></code></td>
-		<td class="description"><div>
-			<a href="#$regex" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>The regex to match.</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>The regex to match.</p>
-
-
-			</div>
-		</div></td>
-	</tr>
 	<tr data-order="message" id="$message">
 		<td class="attributes"><code>
 			protected  
@@ -301,9 +269,9 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Flikore.Validator.Validators.RegexValidator.html#48-52" title="Go to source code"><var>$message</var></a>
+				<a href="source-class-Flikore.Validator.Validators.UriValidator.html#42-46" title="Go to source code"><var>$message</var></a>
 		</td>
-		<td class="value"><code><span class="php-quote">'The %key% must match the regular expression &quot;%regex%&quot;.'</span></code></td>
+		<td class="value"><code><span class="php-quote">'The %key% must be a valid URI.'</span></code></td>
 		<td class="description"><div>
 			<a href="#$message" class="anchor">#</a>
 
@@ -316,6 +284,62 @@
 			<div class="description detailed hidden">
 				
 <p>The error message for this validator.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="message_protocol" id="$message_protocol">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Flikore.Validator.Validators.UriValidator.html#48-52" title="Go to source code"><var>$message_protocol</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'The %key% must be a valid URI and use the %protocol% protocol.'</span></code></td>
+		<td class="description"><div>
+			<a href="#$message_protocol" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>An alternative error message for this validator for when the protocol is
+set.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>An alternative error message for this validator for when the protocol is
+set.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="protocol" id="$protocol">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Flikore.Validator.Validators.UriValidator.html#54-58" title="Go to source code"><var>$protocol</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$protocol" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The valid(s) protocol(s).</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The valid(s) protocol(s).</p>
 
 
 			</div>

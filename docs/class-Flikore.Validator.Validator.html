@@ -7,7 +7,7 @@
 	<title>Class Flikore\Validator\Validator | Validator</title>
 
 	<script type="text/javascript" src="resources/combined.js?2575005269"></script>
-	<script type="text/javascript" src="elementlist.js?1462744569"></script>
+	<script type="text/javascript" src="elementlist.js?3354870788"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -100,18 +100,31 @@
 		<h4>Direct known subclasses</h4>
 			<a href="class-Flikore.Validator.ValidationCombo.html">Flikore\Validator\ValidationCombo</a>, 
 			<a href="class-Flikore.Validator.Validators.DateValidator.html">Flikore\Validator\Validators\DateValidator</a>, 
+			<a href="class-Flikore.Validator.Validators.MaxLengthValidator.html">Flikore\Validator\Validators\MaxLengthValidator</a>, 
+			<a href="class-Flikore.Validator.Validators.MaxValueValidator.html">Flikore\Validator\Validators\MaxValueValidator</a>, 
+			<a href="class-Flikore.Validator.Validators.MinAgeValidator.html">Flikore\Validator\Validators\MinAgeValidator</a>, 
+			<a href="class-Flikore.Validator.Validators.MinLengthValidator.html">Flikore\Validator\Validators\MinLengthValidator</a>, 
+			<a href="class-Flikore.Validator.Validators.MinValueValidator.html">Flikore\Validator\Validators\MinValueValidator</a>, 
 			<a href="class-Flikore.Validator.Validators.NotEmptyValidator.html">Flikore\Validator\Validators\NotEmptyValidator</a>, 
+			<a href="class-Flikore.Validator.Validators.NumericValidator.html">Flikore\Validator\Validators\NumericValidator</a>, 
 			<a href="class-Flikore.Validator.Validators.RegexValidator.html">Flikore\Validator\Validators\RegexValidator</a>, 
+			<a href="class-Flikore.Validator.Validators.UriValidator.html">Flikore\Validator\Validators\UriValidator</a>, 
+			<a href="class-Flikore.Validator.Validators.ValueBetweenValidator.html">Flikore\Validator\Validators\ValueBetweenValidator</a>, 
+			<a href="class-Flikore.Validator.Validators.EmailValidator.html">Flikore\Validator\Validators\EmailValidator</a>, 
+			<a href="class-Flikore.Validator.Validators.EqualsValidator.html">Flikore\Validator\Validators\EqualsValidator</a>, 
 			<a href="class-Flikore.Validator.Validators.ExactLengthValidator.html">Flikore\Validator\Validators\ExactLengthValidator</a>, 
 			<a href="class-Flikore.Validator.Validators.ExactValueValidator.html">Flikore\Validator\Validators\ExactValueValidator</a>, 
 			<a href="class-Flikore.Validator.Validators.InstanceOfValidator.html">Flikore\Validator\Validators\InstanceOfValidator</a>, 
-			<a href="class-Flikore.Validator.Validators.LengthBetweenValidator.html">Flikore\Validator\Validators\LengthBetweenValidator</a>, 
-			<a href="class-Flikore.Validator.Validators.MaxLengthValidator.html">Flikore\Validator\Validators\MaxLengthValidator</a>, 
-			<a href="class-Flikore.Validator.Validators.MaxValueValidator.html">Flikore\Validator\Validators\MaxValueValidator</a>, 
-			<a href="class-Flikore.Validator.Validators.MinLengthValidator.html">Flikore\Validator\Validators\MinLengthValidator</a>, 
-			<a href="class-Flikore.Validator.Validators.MinValueValidator.html">Flikore\Validator\Validators\MinValueValidator</a>
+			<a href="class-Flikore.Validator.Validators.IPv4Validator.html">Flikore\Validator\Validators\IPv4Validator</a>, 
+			<a href="class-Flikore.Validator.Validators.IPv6Validator.html">Flikore\Validator\Validators\IPv6Validator</a>, 
+			<a href="class-Flikore.Validator.Validators.LengthBetweenValidator.html">Flikore\Validator\Validators\LengthBetweenValidator</a>
 	</div>
 
+	<div>
+		<h4>Indirect known subclasses</h4>
+			<a href="class-Flikore.Validator.Validators.AlphaNumericValidator.html">Flikore\Validator\Validators\AlphaNumericValidator</a>, 
+			<a href="class-Flikore.Validator.Validators.AlphaValidator.html">Flikore\Validator\Validators\AlphaValidator</a>
+	</div>
 
 
 
@@ -121,11 +134,15 @@
 		<b>Abstract</b><br />
 		
 		<b>Namespace:</b> <a href="namespace-Flikore.html">Flikore</a>\<a href="namespace-Flikore.Validator.html">Validator</a><br />
-		
+		<b>Package:</b> Flikore\Validator<br />
 
+				<b>Copyright:</b>
+				(c) 2014, George Marques<br />
+				<b>License:</b>
+				<a href="http://opensource.org/licenses/MIT">MIT</a><br />
 				<b>Author:</b>
 				George Marques &lt;george at georgemarques.com.br&gt;<br />
-		<b>Located at</b> <a href="source-class-Flikore.Validator.Validator.html#6-102" title="Go to source code">src/Flikore/Validator/Validator.php</a><br />
+		<b>Located at</b> <a href="source-class-Flikore.Validator.Validator.html#29-132" title="Go to source code">src/Flikore/Validator/Validator.php</a><br />
 	</div>
 
 
@@ -143,7 +160,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_validate">#</a>
-		<code><a href="source-class-Flikore.Validator.Validator.html#28-36" title="Go to source code">validate</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-Flikore.Validator.Validator.html#54-62" title="Go to source code">validate</a>( <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -185,7 +202,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_assert">#</a>
-		<code><a href="source-class-Flikore.Validator.Validator.html#38-50" title="Go to source code">assert</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-Flikore.Validator.Validator.html#64-76" title="Go to source code">assert</a>( <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -229,7 +246,7 @@ not.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getErrorMessage">#</a>
-		<code><a href="source-class-Flikore.Validator.Validator.html#52-60" title="Go to source code">getErrorMessage</a>( )</code>
+		<code><a href="source-class-Flikore.Validator.Validator.html#78-86" title="Go to source code">getErrorMessage</a>( )</code>
 
 		<div class="description short">
 			
@@ -268,7 +285,7 @@ there was a test before.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setErrorMessage">#</a>
-		<code><a href="source-class-Flikore.Validator.Validator.html#62-69" title="Go to source code">setErrorMessage</a>( <span>string <var>$message</var></span> )</code>
+		<code><a href="source-class-Flikore.Validator.Validator.html#88-95" title="Go to source code">setErrorMessage</a>( <span>string <var>$message</var></span> )</code>
 
 		<div class="description short">
 			
@@ -306,7 +323,7 @@ there was a test before.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addKeyValue">#</a>
-		<code><a href="source-class-Flikore.Validator.Validator.html#71-80" title="Go to source code">addKeyValue</a>( <span>string <var>$key</var></span>, <span>string <var>$value</var></span> )</code>
+		<code><a href="source-class-Flikore.Validator.Validator.html#97-110" title="Go to source code">addKeyValue</a>( <span>string <var>$key</var></span>, <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -348,7 +365,7 @@ not check if it's replacing a specific validator value.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_applyTemplate">#</a>
-		<code><a href="source-class-Flikore.Validator.Validator.html#82-94" title="Go to source code">applyTemplate</a>( )</code>
+		<code><a href="source-class-Flikore.Validator.Validator.html#112-124" title="Go to source code">applyTemplate</a>( )</code>
 
 		<div class="description short">
 			
@@ -385,7 +402,7 @@ not check if it's replacing a specific validator value.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_doValidate">#</a>
-		<code><a href="source-class-Flikore.Validator.Validator.html#96-101" title="Go to source code">doValidate</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-Flikore.Validator.Validator.html#126-131" title="Go to source code">doValidate</a>( <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -438,7 +455,7 @@ not check if it's replacing a specific validator value.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Flikore.Validator.Validator.html#14-18" title="Go to source code"><var>$message</var></a>
+				<a href="source-class-Flikore.Validator.Validator.html#40-44" title="Go to source code"><var>$message</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">''</span></code></td>
 		<td class="description"><div>
@@ -465,11 +482,11 @@ not check if it's replacing a specific validator value.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Flikore.Validator.Validator.html#20-26" title="Go to source code"><var>$values</var></a>
+				<a href="source-class-Flikore.Validator.Validator.html#46-52" title="Go to source code"><var>$values</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>(
-        <span class="php-quote">'key'</span> =&gt; <span class="php-quote">'value'</span>
-    )</code></td>
+    <span class="php-quote">'key'</span> =&gt; <span class="php-quote">'value'</span>
+)</code></td>
 		<td class="description"><div>
 			<a href="#$values" class="anchor">#</a>
 

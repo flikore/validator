@@ -5,7 +5,7 @@
 	<meta name="generator" content="ApiGen 2.8.0" />
 	<meta name="robots" content="noindex" />
 
-	<title>File src/Flikore/Validator/Validators/NotEmptyValidator.php | Validator</title>
+	<title>File src/Flikore/Validator/Validators/NumericValidator.php | Validator</title>
 
 	<script type="text/javascript" src="resources/combined.js?2575005269"></script>
 	<script type="text/javascript" src="elementlist.js?3354870788"></script>
@@ -56,8 +56,8 @@
 				<li><a href="class-Flikore.Validator.Validators.MinAgeValidator.html">MinAgeValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MinLengthValidator.html">MinLengthValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MinValueValidator.html">MinValueValidator</a></li>
-				<li class="active"><a href="class-Flikore.Validator.Validators.NotEmptyValidator.html">NotEmptyValidator</a></li>
-				<li><a href="class-Flikore.Validator.Validators.NumericValidator.html">NumericValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.NotEmptyValidator.html">NotEmptyValidator</a></li>
+				<li class="active"><a href="class-Flikore.Validator.Validators.NumericValidator.html">NumericValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.RegexValidator.html">RegexValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.UriValidator.html">UriValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.ValueBetweenValidator.html">ValueBetweenValidator</a></li>
@@ -91,7 +91,7 @@
 				<a href="namespace-Flikore.Validator.Validators.html" title="Summary of Flikore\Validator\Validators"><span>Namespace</span></a>
 			</li>
 			<li>
-				<a href="class-Flikore.Validator.Validators.NotEmptyValidator.html" title="Summary of Flikore\Validator\Validators\NotEmptyValidator"><span>Class</span></a>
+				<a href="class-Flikore.Validator.Validators.NumericValidator.html" title="Summary of Flikore\Validator\Validators\NumericValidator"><span>Class</span></a>
 			</li>
 		</ul>
 		<ul>
@@ -132,21 +132,21 @@
 </span><span id="27" class="l"><a class="l" href="#27">27: </a><span class="php-keyword1">namespace</span> Flikore\Validator\Validators;
 </span><span id="28" class="l"><a class="l" href="#28">28: </a>
 </span><span id="29" class="l"><a class="l" href="#29">29: </a><span class="php-comment">/**
-</span></span><span id="30" class="l"><a class="l" href="#30">30: </a><span class="php-comment"> * Validates that a value is not empty. An empty value is null, empty string or empty array.
+</span></span><span id="30" class="l"><a class="l" href="#30">30: </a><span class="php-comment"> * Validates that a given value is numeric.
 </span></span><span id="31" class="l"><a class="l" href="#31">31: </a><span class="php-comment"> *
 </span></span><span id="32" class="l"><a class="l" href="#32">32: </a><span class="php-comment"> * @author George Marques &lt;george at georgemarques.com.br&gt;
 </span></span><span id="33" class="l"><a class="l" href="#33">33: </a><span class="php-comment"> * @license http://opensource.org/licenses/MIT MIT
 </span></span><span id="34" class="l"><a class="l" href="#34">34: </a><span class="php-comment"> * @copyright (c) 2014, George Marques
 </span></span><span id="35" class="l"><a class="l" href="#35">35: </a><span class="php-comment"> * @package Flikore\Validator
 </span></span><span id="36" class="l"><a class="l" href="#36">36: </a><span class="php-comment"> */</span>
-</span><span id="37" class="l"><a class="l" href="#37">37: </a><span class="php-keyword1">class</span> <a id="NotEmptyValidator" href="#NotEmptyValidator">NotEmptyValidator</a> <span class="php-keyword1">extends</span> \Flikore\Validator\Validator
+</span><span id="37" class="l"><a class="l" href="#37">37: </a><span class="php-keyword1">class</span> <a id="NumericValidator" href="#NumericValidator">NumericValidator</a> <span class="php-keyword1">extends</span> \Flikore\Validator\Validator
 </span><span id="38" class="l"><a class="l" href="#38">38: </a>{
 </span><span id="39" class="l"><a class="l" href="#39">39: </a>
 </span><span id="40" class="l"><a class="l" href="#40">40: </a>    <span class="php-comment">/**
 </span></span><span id="41" class="l"><a class="l" href="#41">41: </a><span class="php-comment">     * The error message for this validator.
 </span></span><span id="42" class="l"><a class="l" href="#42">42: </a><span class="php-comment">     * @var string The error message for this validator.
 </span></span><span id="43" class="l"><a class="l" href="#43">43: </a><span class="php-comment">     */</span>
-</span><span id="44" class="l"><a class="l" href="#44">44: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$message" href="#$message">$message</a></span> = <span class="php-quote">'The %key% must not be empty.'</span>;
+</span><span id="44" class="l"><a class="l" href="#44">44: </a>    <span class="php-keyword1">protected</span> <span class="php-var"><a id="$message" href="#$message">$message</a></span> = <span class="php-quote">'The %key% must be numeric.'</span>;
 </span><span id="45" class="l"><a class="l" href="#45">45: </a>
 </span><span id="46" class="l"><a class="l" href="#46">46: </a>    <span class="php-comment">/**
 </span></span><span id="47" class="l"><a class="l" href="#47">47: </a><span class="php-comment">     * Executes the real validation so it can be reused.
@@ -155,11 +155,16 @@
 </span></span><span id="50" class="l"><a class="l" href="#50">50: </a><span class="php-comment">     */</span>
 </span><span id="51" class="l"><a class="l" href="#51">51: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_doValidate" href="#_doValidate">doValidate</a>(<span class="php-var">$value</span>)
 </span><span id="52" class="l"><a class="l" href="#52">52: </a>    {
-</span><span id="53" class="l"><a class="l" href="#53">53: </a>        <span class="php-keyword1">return</span> !(<span class="php-var">$value</span> === <span class="php-keyword1">null</span> || <span class="php-var">$value</span> === <span class="php-quote">''</span> || (<span class="php-keyword2">is_array</span>(<span class="php-var">$value</span>) &amp;&amp; <span class="php-keyword1">empty</span>(<span class="php-var">$value</span>)));
-</span><span id="54" class="l"><a class="l" href="#54">54: </a>    }
-</span><span id="55" class="l"><a class="l" href="#55">55: </a>
-</span><span id="56" class="l"><a class="l" href="#56">56: </a>}
-</span><span id="57" class="l"><a class="l" href="#57">57: </a></span></code></pre>
+</span><span id="53" class="l"><a class="l" href="#53">53: </a>        <span class="php-comment">// ignore empty values</span>
+</span><span id="54" class="l"><a class="l" href="#54">54: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_null</span>(<span class="php-var">$value</span>) || <span class="php-var">$value</span> === <span class="php-quote">''</span>)
+</span><span id="55" class="l"><a class="l" href="#55">55: </a>        {
+</span><span id="56" class="l"><a class="l" href="#56">56: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
+</span><span id="57" class="l"><a class="l" href="#57">57: </a>        }
+</span><span id="58" class="l"><a class="l" href="#58">58: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">is_numeric</span>(<span class="php-var">$value</span>);
+</span><span id="59" class="l"><a class="l" href="#59">59: </a>    }
+</span><span id="60" class="l"><a class="l" href="#60">60: </a>
+</span><span id="61" class="l"><a class="l" href="#61">61: </a>}
+</span><span id="62" class="l"><a class="l" href="#62">62: </a></span></code></pre>
 
 	<div id="footer">
 		Validator API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
