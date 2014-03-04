@@ -67,4 +67,41 @@ class UriValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($v->validate(null));
     }
 
+    public function testValidateProtocolsSuccess()
+    {
+        $v = new UriValidator(array('http', 'https'));
+        $this->assertTrue($v->validate('http://georgemarques.com.br'));
+        $this->assertTrue($v->validate('http://flikore.github.io/validator'));
+        $this->assertTrue($v->validate('https://example.com'));
+
+        $v = new UriValidator('http');
+        $this->assertTrue($v->validate('http://georgemarques.com.br'));
+    }
+
+    public function testValidateProtocolsFail()
+    {
+        $v = new UriValidator(array('http', 'https'));
+        $this->assertFalse($v->validate('ftp://example.com'));
+        $this->assertFalse($v->validate('ssh://192.168.1.1'));
+
+        $v = new UriValidator('http');
+        $this->assertFalse($v->validate('https://example.com'));
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidProtocolObject()
+    {
+        $v = new UriValidator(new \stdClass());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidProtocolEmptyArray()
+    {
+        $v = new UriValidator(array());
+    }
+
 }

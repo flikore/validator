@@ -28,6 +28,8 @@ namespace Flikore\Validator\Validators;
 
 /**
  * Validates if a string is a valid URI.
+ * 
+ * @customKey <i>%protocol%</i> The valid(s) protocol(s) set in the constructor.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
@@ -44,6 +46,40 @@ class UriValidator extends \Flikore\Validator\Validator
     protected $message = 'The %key% must be a valid URI.';
 
     /**
+     * An alternative error message for this validator for when the protocol is set.
+     * @var string An alternative error message for this validator for when the protocol is set.
+     */
+    protected $message_protocol = 'The %key% must be a valid URI and use the %protocol% protocol.';
+
+    /**
+     * The valid(s) protocol(s).
+     * @var mixed The valid(s) protocol(s).
+     */
+    protected $protocol;
+
+    /**
+     * Creates a new Uri Validator.
+     * @param mixed $protocol The valid(s) protocol(s) (string or array).
+     */
+    public function __construct($protocol = null)
+    {
+        if (is_array($protocol) && empty($protocol))
+        {
+            throw new \InvalidArgumentException('The valid procotol list cannot be empty');
+        }
+        elseif (is_object($protocol) && (!($protocol instanceof \Traversable)))
+        {
+            throw new \InvalidArgumentException('The protocol argument cannot be a noniterable object');
+        }
+        elseif ($protocol !== null)
+        {
+            $this->setErrorMessage($this->message_protocol);
+        }
+        $this->protocol = $protocol;
+        $this->addKeyValue('protocol', $protocol);
+    }
+
+    /**
      * Executes the real validation so it can be reused.
      * @param mixed $value The value to validate.
      * @return boolean Whether the value pass the validation.
@@ -55,7 +91,37 @@ class UriValidator extends \Flikore\Validator\Validator
         {
             return true;
         }
-        return $value === filter_var($value, FILTER_VALIDATE_URL);
+        $uri_valid = $value === filter_var($value, FILTER_VALIDATE_URL);
+        if (!$this->protocol)
+        {
+            return $uri_valid;
+        }
+        else
+        {
+            if (is_array($this->protocol) || $this->protocol instanceof \Traversable)
+            {
+                $protocol_valid = false;
+                foreach ($this->protocol as $pt)
+                {
+                    if (strpos($value, $pt . '://') === 0)
+                    {
+                        $protocol_valid = true;
+                    }
+                }
+                return $uri_valid && $protocol_valid;
+            }
+            else
+            {
+                if (strpos($value, $this->protocol . '://') !== 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return $uri_valid;
+                }
+            }
+        }
     }
 
 }
