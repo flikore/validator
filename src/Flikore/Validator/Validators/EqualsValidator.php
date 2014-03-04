@@ -24,49 +24,52 @@
  * THE SOFTWARE.
  */
 
-namespace Flikore\Validator;
+namespace Flikore\Validator\Validators;
 
 /**
- * Combines two or more validator objects into one. This validates with all
- * the inserted validators and stops at the first error, return the message
- * of the validator that went wrong.
+ * Validates if a value is equal to another.
+ * 
+ * @customKey <i>%compare%</i> The value to be compared to.
+ * @customKey <i>%strict%</i> Whether the comparison is done in strict form.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class ValidationCombo extends Validator
+class EqualsValidator extends \Flikore\Validator\Validator
 {
 
     /**
      * The error message for this validator.
      * @var string The error message for this validator.
      */
-    protected $message = null;
+    protected $message = 'The %key% must be equal to %compare%.';
 
     /**
-     * A collection of all validators.
-     * @var Validator[] A collection of all validators.
+     * The value to be compared to.
+     * @var mixed The value to be compared to.
      */
-    protected $validators;
+    protected $compare;
 
     /**
-     * Creates a Validation Combo.
+     * Whether the comparison should be done in strict form.
+     * @var boolean Whether the comparison should be done in strict form.
      */
-    public function __construct()
+    protected $strict;
+
+    /**
+     * Creates a new Equals Validator.
+     * @param mixed $compare The value to compare to.
+     * @param boolean $strict Whether the comparison should be strict.
+     */
+    public function __construct($compare, $strict = false)
     {
-        $this->validators = new \SplDoublyLinkedList();
-    }
+        $this->compare = $compare;
+        $this->strict = (bool) $strict;
 
-    /**
-     * Adds a new validator to the combo.
-     * @param Validator $validator The validator to add.
-     */
-    public function addValidator(Validator $validator)
-    {
-        $validator->addKeyValue('key', $this->values['key']);
-        $this->validators->push($validator);
+        $this->addKeyValue('compare', $compare);
+        $this->addKeyValue('strict', $strict ? 'true' : 'false');
     }
 
     /**
@@ -76,29 +79,15 @@ class ValidationCombo extends Validator
      */
     protected function doValidate($value)
     {
-        foreach ($this->validators as $rule)
+        // ignore empty values
+        if (is_null($value) || $value === '')
         {
-            if (!$rule->validate($value))
-            {
-                $this->setErrorMessage($this->message === null ? $rule->getErrorMessage() : $this->message);
-                return false;
-            }
+            return true;
         }
-        return true;
-    }
-
-    /**
-     * Adds a new key-value pair to be replaced by the templating engine.
-     * This does not check if it's replacing a specific validator value.
-     * @param string $key The key to replace (in the template as "%key%")
-     * @param string $value The value to be inserted instead of the key.
-     */
-    public function addKeyValue($key, $value)
-    {
-        foreach ($this->validators as $v)
-        {
-            $v->addKeyValue($key, $value);
-        }
+        $t1 = gettype($value);
+        $t2 = gettype($this->compare);
+        $comp = $t1 == $t2;
+        return $this->strict ? ($value === $this->compare) : ($value == $this->compare);
     }
 
 }

@@ -27,7 +27,7 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Tests for ExactValueValidator class.
+ * Tests for NotEmptyValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
@@ -35,55 +35,26 @@ namespace Flikore\Validator\Validators;
  * @package Flikore\Validator
  * @category Tests
  */
-class ExactValueValidatorTest extends \PHPUnit_Framework_TestCase
+class NotEmptyValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var ExactValueValidator
-     */
-    //protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
+    public function testValidatePass()
     {
-        //$this->object = new ExactValueValidator;
+        $val = new NotEmptyValidator();
+        $this->assertTrue($val->validate(0));
+        $this->assertTrue($val->validate(' '));
+        $this->assertTrue($val->validate('false'));
+        $this->assertTrue($val->validate('null'));
+        $this->assertTrue($val->validate(array(0)));
+        
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
+    public function testValidateFail()
     {
+        $val = new NotEmptyValidator();
+        $this->assertFalse($val->validate(''));
+        $this->assertFalse($val->validate(null));
+        $this->assertFalse($val->validate(array()));
     }
-    
-    public function testSuccess()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertTrue($v->validate(5));
-    }
-    
-    public function testFailure()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertFalse($v->validate(7));
-        $this->assertFalse($v->validate(2));
-    }
-    
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidValueArgument()
-    {
-        $v = new ExactValueValidator('aa');
-    }
-    
-    public function testValidateEmptyValue()
-    {
-        $val = new ExactValueValidator(5);
-        $this->assertTrue($val->validate(''));
-        $this->assertTrue($val->validate(null));
-    }
+
 }

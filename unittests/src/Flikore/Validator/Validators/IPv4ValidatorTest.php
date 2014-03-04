@@ -27,7 +27,7 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Tests for ExactValueValidator class.
+ * Tests for IPv4Validator class.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
@@ -35,55 +35,34 @@ namespace Flikore\Validator\Validators;
  * @package Flikore\Validator
  * @category Tests
  */
-class ExactValueValidatorTest extends \PHPUnit_Framework_TestCase
+class IPv4ValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var ExactValueValidator
-     */
-    //protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
+    public function testValidatePass()
     {
-        //$this->object = new ExactValueValidator;
+        $v = new IPv4Validator();
+
+        $this->assertTrue($v->validate('192.168.1.1'));
+        $this->assertTrue($v->validate('127.0.0.1'));
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
+    public function testValidateFail()
     {
+        $v = new IPv4Validator();
+
+        $this->assertFalse($v->validate('notanIP'));
+        $this->assertFalse($v->validate('   192.168.1.1   '));
+        $this->assertFalse($v->validate('127-0-0-1'));
+        $this->assertFalse($v->validate('http://example.com'));
+        $this->assertFalse($v->validate('2001:0db8:85a3:08d3:1319:8a2e:0370:7344'));
     }
-    
-    public function testSuccess()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertTrue($v->validate(5));
-    }
-    
-    public function testFailure()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertFalse($v->validate(7));
-        $this->assertFalse($v->validate(2));
-    }
-    
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidValueArgument()
-    {
-        $v = new ExactValueValidator('aa');
-    }
-    
+
     public function testValidateEmptyValue()
     {
-        $val = new ExactValueValidator(5);
-        $this->assertTrue($val->validate(''));
-        $this->assertTrue($val->validate(null));
+        $v = new IPv4Validator();
+
+        $this->assertTrue($v->validate(''));
+        $this->assertTrue($v->validate(null));
     }
+
 }

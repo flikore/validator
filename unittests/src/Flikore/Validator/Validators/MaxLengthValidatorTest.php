@@ -27,7 +27,7 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Tests for ExactValueValidator class.
+ * Tests for MaxLengthValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
@@ -35,55 +35,37 @@ namespace Flikore\Validator\Validators;
  * @package Flikore\Validator
  * @category Tests
  */
-class ExactValueValidatorTest extends \PHPUnit_Framework_TestCase
+class MaxLengthValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var ExactValueValidator
-     */
-    //protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
+    public function testValidatePass()
     {
-        //$this->object = new ExactValueValidator;
+        $val = new MaxLengthValidator(5);
+        $this->assertTrue($val->validate('a'));
+        $this->assertTrue($val->validate('aaa'));
+        $this->assertTrue($val->validate('aaasa'));
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
+    public function testValidateFail()
     {
+        $val = new MaxLengthValidator(3);
+        $this->assertFalse($val->validate('aaaaa'));
+        $this->assertFalse($val->validate('aaaaaaaasdasdaddd'));
     }
-    
-    public function testSuccess()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertTrue($v->validate(5));
-    }
-    
-    public function testFailure()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertFalse($v->validate(7));
-        $this->assertFalse($v->validate(2));
-    }
-    
+
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testInvalidValueArgument()
+    public function testWrongLengthArgument()
     {
-        $v = new ExactValueValidator('aa');
+        $t = new MaxLengthValidator('aa');
     }
-    
+
     public function testValidateEmptyValue()
     {
-        $val = new ExactValueValidator(5);
+        $val = new MaxLengthValidator(5);
         $this->assertTrue($val->validate(''));
         $this->assertTrue($val->validate(null));
     }
+
 }

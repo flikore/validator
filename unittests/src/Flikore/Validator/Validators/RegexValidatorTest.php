@@ -27,7 +27,7 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Tests for ExactValueValidator class.
+ * Tests for RegexValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
@@ -35,55 +35,47 @@ namespace Flikore\Validator\Validators;
  * @package Flikore\Validator
  * @category Tests
  */
-class ExactValueValidatorTest extends \PHPUnit_Framework_TestCase
+class RegexValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var ExactValueValidator
-     */
-    //protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
+    public function testValidatePass()
     {
-        //$this->object = new ExactValueValidator;
+        $val = new RegexValidator('/^[a-z]+$/i');
+        $this->assertTrue($val->validate('aaaa'));
+        $this->assertTrue($val->validate('addjkhddk'));
+        $this->assertTrue($val->validate('AasASdjkD'));
     }
 
+    public function testValidateFail()
+    {
+        $val = new RegexValidator('/^[a-z]+$/i');
+        $this->assertFalse($val->validate(4));
+        $this->assertFalse($val->validate('asd d'));
+        $this->assertFalse($val->validate('8319 da9dua98s'));
+        $this->assertFalse($val->validate(' '));
+    }
+
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
+     * @expectedException \InvalidArgumentException
      */
-    protected function tearDown()
+    public function testInvalidRegexArgument()
     {
-    }
-    
-    public function testSuccess()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertTrue($v->validate(5));
-    }
-    
-    public function testFailure()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertFalse($v->validate(7));
-        $this->assertFalse($v->validate(2));
+        $t = new RegexValidator('aaa');
     }
     
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testInvalidValueArgument()
+    public function testInvalidRegexNumberArgument()
     {
-        $v = new ExactValueValidator('aa');
+        $t = new RegexValidator(0);
     }
-    
+
     public function testValidateEmptyValue()
     {
-        $val = new ExactValueValidator(5);
+        $val = new RegexValidator('/^[a-z]+$/i');
         $this->assertTrue($val->validate(''));
         $this->assertTrue($val->validate(null));
     }
+
 }

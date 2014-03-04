@@ -27,7 +27,7 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Tests for ExactValueValidator class.
+ * Tests for LengthBetweenValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
@@ -35,55 +35,45 @@ namespace Flikore\Validator\Validators;
  * @package Flikore\Validator
  * @category Tests
  */
-class ExactValueValidatorTest extends \PHPUnit_Framework_TestCase
+class LengthBetweenValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var ExactValueValidator
-     */
-    //protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
+    public function testValidatePass()
     {
-        //$this->object = new ExactValueValidator;
+        $val = new LengthBetweenValidator(2, 4);
+        $this->assertTrue($val->validate('aa'));
+        $this->assertTrue($val->validate('aaa'));
+        $this->assertTrue($val->validate('aaaa'));
     }
 
+    public function testValidateFail()
+    {
+        $val = new LengthBetweenValidator(2, 4);
+        $this->assertFalse($val->validate('aaaaa'));
+        $this->assertFalse($val->validate('a'));
+    }
+
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
+     * @expectedException \InvalidArgumentException
      */
-    protected function tearDown()
+    public function testWrongMinLengthArgument()
     {
-    }
-    
-    public function testSuccess()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertTrue($v->validate(5));
-    }
-    
-    public function testFailure()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertFalse($v->validate(7));
-        $this->assertFalse($v->validate(2));
+        $t = new LengthBetweenValidator('aa', 4);
     }
     
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testInvalidValueArgument()
+    public function testWrongMaxLengthArgument()
     {
-        $v = new ExactValueValidator('aa');
+        $t = new LengthBetweenValidator(4, 'a');
     }
-    
+
     public function testValidateEmptyValue()
     {
-        $val = new ExactValueValidator(5);
+        $val = new LengthBetweenValidator(2, 4);
         $this->assertTrue($val->validate(''));
         $this->assertTrue($val->validate(null));
     }
+
 }

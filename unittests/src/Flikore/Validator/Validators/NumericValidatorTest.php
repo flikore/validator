@@ -27,7 +27,7 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Tests for ExactValueValidator class.
+ * Tests for NumericValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
@@ -35,55 +35,44 @@ namespace Flikore\Validator\Validators;
  * @package Flikore\Validator
  * @category Tests
  */
-class ExactValueValidatorTest extends \PHPUnit_Framework_TestCase
+class NumericValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var ExactValueValidator
-     */
-    //protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
+    public function testValidatePass()
     {
-        //$this->object = new ExactValueValidator;
+        $v = new NumericValidator();
+        
+        $this->assertTrue($v->validate(2));
+        $this->assertTrue($v->validate(0));
+        $this->assertTrue($v->validate(2.4));
+        $this->assertTrue($v->validate('2'));
+        $this->assertTrue($v->validate('2.4'));
+        $this->assertTrue($v->validate('-2'));
+        $this->assertTrue($v->validate(-2));
+        $this->assertTrue($v->validate(NAN));
+        $this->assertTrue($v->validate(2e05));
+        $this->assertTrue($v->validate(0x200));
+        $this->assertTrue($v->validate(0700));
+        $this->assertTrue($v->validate('2e05'));
+        $this->assertTrue($v->validate('0x200'));
+        $this->assertTrue($v->validate('0700'));
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
+    public function testValidateFail()
     {
+         $v = new NumericValidator();
+        
+        $this->assertFalse($v->validate('not numeric'));
+        $this->assertFalse($v->validate(new \stdClass()));
+        $this->assertFalse($v->validate(array()));
     }
-    
-    public function testSuccess()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertTrue($v->validate(5));
-    }
-    
-    public function testFailure()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertFalse($v->validate(7));
-        $this->assertFalse($v->validate(2));
-    }
-    
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidValueArgument()
-    {
-        $v = new ExactValueValidator('aa');
-    }
-    
+
     public function testValidateEmptyValue()
     {
-        $val = new ExactValueValidator(5);
-        $this->assertTrue($val->validate(''));
-        $this->assertTrue($val->validate(null));
+        $v = new NumericValidator();
+        
+        $this->assertTrue($v->validate(''));
+        $this->assertTrue($v->validate(null));
     }
+
 }

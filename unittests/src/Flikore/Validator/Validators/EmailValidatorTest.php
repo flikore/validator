@@ -27,7 +27,7 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Tests for ExactValueValidator class.
+ * Tests for EmailValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
@@ -35,55 +35,34 @@ namespace Flikore\Validator\Validators;
  * @package Flikore\Validator
  * @category Tests
  */
-class ExactValueValidatorTest extends \PHPUnit_Framework_TestCase
+class EmailValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var ExactValueValidator
-     */
-    //protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
+    public function testValidatePass()
     {
-        //$this->object = new ExactValueValidator;
+        $v = new EmailValidator();
+
+        $this->assertTrue($v->validate('email@example.com'));
+        $this->assertTrue($v->validate('account@exemplo.com.br'));
+        $this->assertTrue($v->validate('domain@exemplo.br'));
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
+    public function testValidateFail()
     {
+        $v = new EmailValidator();
+
+        $this->assertFalse($v->validate('notanemail@'));
+        $this->assertFalse($v->validate('   spacesaroundaddress@example.com   '));
+        $this->assertFalse($v->validate('spacesinsideaddress @example.com'));
+        $this->assertFalse($v->validate('http://example.com'));
     }
-    
-    public function testSuccess()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertTrue($v->validate(5));
-    }
-    
-    public function testFailure()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertFalse($v->validate(7));
-        $this->assertFalse($v->validate(2));
-    }
-    
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidValueArgument()
-    {
-        $v = new ExactValueValidator('aa');
-    }
-    
+
     public function testValidateEmptyValue()
     {
-        $val = new ExactValueValidator(5);
-        $this->assertTrue($val->validate(''));
-        $this->assertTrue($val->validate(null));
+        $v = new EmailValidator();
+
+        $this->assertTrue($v->validate(''));
+        $this->assertTrue($v->validate(null));
     }
+
 }

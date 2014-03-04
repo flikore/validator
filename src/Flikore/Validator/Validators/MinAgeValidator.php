@@ -24,49 +24,46 @@
  * THE SOFTWARE.
  */
 
-namespace Flikore\Validator;
+namespace Flikore\Validator\Validators;
 
 /**
- * Combines two or more validator objects into one. This validates with all
- * the inserted validators and stops at the first error, return the message
- * of the validator that went wrong.
+ * Validates that the given date is at least a certain number of years ago.
+ * 
+ * @customKey <i>%minAge%</i> The minimum valid age.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class ValidationCombo extends Validator
+class MinAgeValidator extends \Flikore\Validator\Validator
 {
+
+    /**
+     * The minimum valid age.
+     * @var int The minimum valid age.
+     */
+    protected $minAge;
 
     /**
      * The error message for this validator.
      * @var string The error message for this validator.
      */
-    protected $message = null;
+    protected $message = 'The %key% must be older than %minAge% years.';
 
     /**
-     * A collection of all validators.
-     * @var Validator[] A collection of all validators.
+     * Creates a new Date Validator.
+     * @param int $minAge The minimum valid age.
      */
-    protected $validators;
-
-    /**
-     * Creates a Validation Combo.
-     */
-    public function __construct()
+    public function __construct($minAge)
     {
-        $this->validators = new \SplDoublyLinkedList();
-    }
-
-    /**
-     * Adds a new validator to the combo.
-     * @param Validator $validator The validator to add.
-     */
-    public function addValidator(Validator $validator)
-    {
-        $validator->addKeyValue('key', $this->values['key']);
-        $this->validators->push($validator);
+        if(!is_numeric($minAge))
+        {
+            throw new \InvalidArgumentException('The minimum age must be a number.');
+        }
+        
+        $this->minAge = (int) $minAge;
+        $this->addKeyValue('minAge', $this->minAge);
     }
 
     /**
@@ -76,29 +73,28 @@ class ValidationCombo extends Validator
      */
     protected function doValidate($value)
     {
-        foreach ($this->validators as $rule)
+        //ignore empty values
+        if (is_null($value) || $value === '')
         {
-            if (!$rule->validate($value))
-            {
-                $this->setErrorMessage($this->message === null ? $rule->getErrorMessage() : $this->message);
-                return false;
-            }
+            return true;
         }
-        return true;
-    }
-
-    /**
-     * Adds a new key-value pair to be replaced by the templating engine.
-     * This does not check if it's replacing a specific validator value.
-     * @param string $key The key to replace (in the template as "%key%")
-     * @param string $value The value to be inserted instead of the key.
-     */
-    public function addKeyValue($key, $value)
-    {
-        foreach ($this->validators as $v)
+        
+        // Validate the given value as a valid date.
+        $v = new DateValidator();
+        if(!$v->validate($value))
         {
-            $v->addKeyValue($key, $value);
+            return false;
         }
+        
+        $givenDate = $value;
+        if(!($givenDate instanceof \DateTime))
+        {
+            $givenDate = new \DateTime($value);
+        }
+        
+        $ageDate = new \DateTime(date(DATE_ISO8601, strtotime('-' . $this->minAge . ' years')));
+        
+        return $givenDate <= $ageDate;
     }
 
 }

@@ -27,7 +27,7 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Tests for ExactValueValidator class.
+ * Tests for MinValueValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
@@ -35,55 +35,37 @@ namespace Flikore\Validator\Validators;
  * @package Flikore\Validator
  * @category Tests
  */
-class ExactValueValidatorTest extends \PHPUnit_Framework_TestCase
+class MinValueValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var ExactValueValidator
-     */
-    //protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
+    public function testValidatePass()
     {
-        //$this->object = new ExactValueValidator;
+        $val = new MinValueValidator(5);
+        $this->assertTrue($val->validate(5));
+        $this->assertTrue($val->validate(7));
+        $this->assertTrue($val->validate(PHP_INT_MAX));
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
+    public function testValidateFail()
     {
+        $val = new MinValueValidator(3);
+        $this->assertFalse($val->validate(2));
+        $this->assertFalse($val->validate(0));
     }
-    
-    public function testSuccess()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertTrue($v->validate(5));
-    }
-    
-    public function testFailure()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertFalse($v->validate(7));
-        $this->assertFalse($v->validate(2));
-    }
-    
+
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testInvalidValueArgument()
+    public function testWrongValueArgument()
     {
-        $v = new ExactValueValidator('aa');
+        $t = new MinValueValidator('aa');
     }
-    
+
     public function testValidateEmptyValue()
     {
-        $val = new ExactValueValidator(5);
+        $val = new MinValueValidator(5);
         $this->assertTrue($val->validate(''));
         $this->assertTrue($val->validate(null));
     }
+
 }

@@ -27,7 +27,7 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Tests for ExactValueValidator class.
+ * Tests for AlphaNumericValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
@@ -35,55 +35,36 @@ namespace Flikore\Validator\Validators;
  * @package Flikore\Validator
  * @category Tests
  */
-class ExactValueValidatorTest extends \PHPUnit_Framework_TestCase
+class AlphaNumericValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var ExactValueValidator
-     */
-    //protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
+    public function testValidatePass()
     {
-        //$this->object = new ExactValueValidator;
+        $v = new AlphaNumericValidator();
+
+        $this->assertTrue($v->validate('valid'));
+        $this->assertTrue($v->validate('valid with spaces'));
+        $this->assertTrue($v->validate('UPPERcase'));
+        $this->assertTrue($v->validate('   '));
+        $this->assertTrue($v->validate('numbers12312'));
+        $this->assertTrue($v->validate('12312'));
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
+    public function testValidateFail()
     {
+        $v = new AlphaNumericValidator();
+
+        $this->assertFalse($v->validate('strángè charactérs'));
+        $this->assertFalse($v->validate('~'));
+        $this->assertFalse($v->validate('%%&&'));
     }
-    
-    public function testSuccess()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertTrue($v->validate(5));
-    }
-    
-    public function testFailure()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertFalse($v->validate(7));
-        $this->assertFalse($v->validate(2));
-    }
-    
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidValueArgument()
-    {
-        $v = new ExactValueValidator('aa');
-    }
-    
+
     public function testValidateEmptyValue()
     {
-        $val = new ExactValueValidator(5);
-        $this->assertTrue($val->validate(''));
-        $this->assertTrue($val->validate(null));
+        $v = new AlphaNumericValidator();
+
+        $this->assertTrue($v->validate(''));
+        $this->assertTrue($v->validate(null));
     }
+
 }

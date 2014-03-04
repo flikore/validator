@@ -27,63 +27,28 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Tests for ExactValueValidator class.
+ * Validates if a string contains only alphabetic characters (this ignore spaces).
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
- * @category Tests
  */
-class ExactValueValidatorTest extends \PHPUnit_Framework_TestCase
+class AlphaValidator extends \Flikore\Validator\Validators\RegexValidator
 {
-    /**
-     * @var ExactValueValidator
-     */
-    //protected $object;
 
     /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
+     * The error message for this validator.
+     * @var string The error message for this validator.
      */
-    protected function setUp()
-    {
-        //$this->object = new ExactValueValidator;
-    }
+    protected $message = 'The %key% must match contain only alphabetic characters and spaces.';
 
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
+     * Creates a new Alpha Validator.
      */
-    protected function tearDown()
+    public function __construct()
     {
+        parent::__construct('/^[a-z ]+$/i');
     }
-    
-    public function testSuccess()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertTrue($v->validate(5));
-    }
-    
-    public function testFailure()
-    {
-        $v = new ExactValueValidator(5);
-        $this->assertFalse($v->validate(7));
-        $this->assertFalse($v->validate(2));
-    }
-    
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidValueArgument()
-    {
-        $v = new ExactValueValidator('aa');
-    }
-    
-    public function testValidateEmptyValue()
-    {
-        $val = new ExactValueValidator(5);
-        $this->assertTrue($val->validate(''));
-        $this->assertTrue($val->validate(null));
-    }
+
 }
