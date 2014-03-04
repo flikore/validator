@@ -13,9 +13,7 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "Flikore\\Validator": "src/"
-        }
+        "psr-4": { "Flikore\\Validator\\": "src/Flikore/Validator/" }
     },
     "require": {
         "php": ">=5.3.0"
