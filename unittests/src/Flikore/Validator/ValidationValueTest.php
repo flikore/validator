@@ -87,5 +87,21 @@ class ValidationValueTest extends \PHPUnit_Framework_TestCase
     {
         new ValidationValue('stdClass', new ValidationKey('name'));
     }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testConstructWrongTypeNumber()
+    {
+        new ValidationValue(0, new ValidationKey('name'));
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testConstructWrongTypeNull()
+    {
+        new ValidationValue(null, new ValidationKey('name'));
+    }
 
 }
