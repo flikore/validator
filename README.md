@@ -3,11 +3,35 @@
 *A simple validation library*.
 
 [![Build Status](https://travis-ci.org/flikore/validator.png)](https://travis-ci.org/flikore/validator)
-[![Coverage Status](https://coveralls.io/repos/flikore/validator/badge.png)](https://coveralls.io/r/flikore/validator)
+[![Coverage Status](https://coveralls.io/repos/flikore/validator/badge.png?branch=develop)](https://coveralls.io/r/flikore/validator?branch=develop)
 
 Flikore validator is a validation library for PHP aimed to be simple and extensible.
 
 ## Instalation
+
+### Composer
+
+[Composer](http://getcomposer.org) is the preferred method to install this validator. Simply add to your `composer.json`:
+
+```json
+{
+    "require": {
+        "flikore/validator": "dev-develop"
+    }
+}
+```
+
+Run `composer install`, then include the autoload file in your project:
+
+```php
+<?php
+
+require_once 'vendor/autoload.php';
+
+// Do validation stuff
+```
+
+### Installing with Git
 
 * Clone this repository in a folder on your project:
 
@@ -21,6 +45,8 @@ git clone https://github.com/flikore/validator.git vendor/flikore/validator
 <?php
     
 require_once 'vendor/flikore/validator/autoload.php';
+
+// Do validation stuff
 ```
 
 An alternative is to create a submodule instead of cloning the repository. This way you don't need to push this library to your own repository and can also update it more easily:
@@ -179,9 +205,66 @@ var_dump($set->validate(array('name' => 'oops',       'age' => 14))); // bool(fa
 var_dump($set->validate(array('name' => 'this is ok', 'age' => 12))); // bool(false)
 ```
 
+#### Comparing with other keys
+
+It's also possible to use another key or attribute as the input value for a validator (e.g. validate if one field is equal to another). To do that, you need to use two other classes combined: `ValidationValue` and `ValidationKey`.
+
+`ValidationValue` should be included in a set as it were a validator. Its constructor requires a validator as the first argument (can be a string with a FQCN or a dummy validator object) and the arguments to the validator constructor must follow it. To use a field from the validated object in the constructor, pass it as a `ValidationKey` object with it's key property being the name of the attribute or key you want to grab from the value being validated.
+
+Let's make that clear with and example. To make sure the value of `key1` is strictly equal to the value of `key2` inside the same array, do like the following code:
+
+```php
+<?php
+
+use Flikore\Validator\ValidationKey;
+use Flikore\Validator\ValidationSet;
+use Flikore\Validator\ValidationValue;
+use Flikore\Validator\Validators as v;
+
+$set = new ValidationSet();
+
+$set->addRule('key1',
+        // The first argument is a dummy object (can also be a FQCN string).
+        new ValidationValue(new v\EqualsValidator('dummy'),
+        // The second argument is the first for the EqualsValidator constructor.
+        // In this case, we want to grab the value of "key2", so we create a new
+        // ValidationKey and specify "key2" as its key.
+        new ValidationKey('key2'),
+        // This is the third argument of ValidationValue, which will be passed as
+        // the second argument to EqualsValidator constructor. This is "true", because
+        // we want the comparison to be strict.
+        true)
+); // end addRule)
+
+$ok = array(
+    'key1' => 'equal',
+    'key2' => 'equal',
+);
+
+var_dump($set->validate($ok)); // bool(true)
+
+$notOk = array(
+    'key1' => 'equal',
+    'key2' => 'not equal',
+);
+
+var_dump($set->validate($notOk)); // bool(false)
+
+$notStrict = array(
+    'key1' =>  5,
+    'key2' => '5',
+);
+
+var_dump($set->validate($notStrict)); // bool(false)
+```
+
+Keep in mind that the values that are passed to the validator are not checked in the `ValidationValue` constructor. So if there's something wrong, it'll only cause an error when the validation is taking place and the real `Validator` is constructed.
+
+**Note**: this doesn't work with `ValidationCombo`, but since you can add multiple rules to the same key, this should not be a problem.
+
 #### Sets and exceptions
 
-With a `ValidationSet`, exception messages work in a different way. The main exception has no message attached, but it contains an array of errors with the keys being the validated array keys (or object properties) and the values being the child validator exception.
+With a `ValidationSet`, exception messages work in a different way than with a `Validator`. The main exception has no message attached, but it contains an array of errors with the keys being the validated array keys (or object properties) and the values being the child validator exception.
 
 Also, the key name you add to the set is also setted as the `%key%` template value in the error messages. To change that to another value, use the third argument of `addRule` and `addRules` methods with the value you want). This can be used if you want to change the language of the message or to specify a more user friendly form label.
 
