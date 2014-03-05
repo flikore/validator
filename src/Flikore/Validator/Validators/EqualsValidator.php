@@ -44,7 +44,7 @@ class EqualsValidator extends \Flikore\Validator\Validator
      * The error message for this validator.
      * @var string The error message for this validator.
      */
-    protected $message = 'The %key% must be equal to %compare%.';
+    protected $message = 'The %key% must be equal to "%compare%".';
 
     /**
      * The value to be compared to.
