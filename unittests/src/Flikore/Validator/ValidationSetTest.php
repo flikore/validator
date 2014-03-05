@@ -228,4 +228,15 @@ class ValidationSetTest extends \PHPUnit_Framework_TestCase
         $this->object->validate('invalid');
     }
 
+    public function testValidationValue()
+    {
+        $this->object->addRule('field1', new ValidationValue(new Validators\EqualsValidator('dummy'), new ValidationKey('field2')));
+        
+        $value = array(
+            'field1' => 'equal',
+            'field2' => 'equal',
+        );
+        
+        $this->assertTrue($this->object->validate($value));
+    }
 }
