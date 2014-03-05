@@ -49,7 +49,7 @@ class InstanceOfValidator extends \Flikore\Validator\Validator
      * The error message for this validator.
      * @var string The error message for this validator.
      */
-    protected $message = 'The %key% must be an instance of %class%.';
+    protected $message = 'The %key% must be an instance of "%class%".';
 
     /**
      * Creates a new Instance Of Validator.
