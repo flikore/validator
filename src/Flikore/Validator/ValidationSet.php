@@ -124,10 +124,18 @@ class ValidationSet
      */
     public function assert($object)
     {
+        $values = array();
+        
+        foreach (array_keys($this->validators) as $key)
+        {
+            $values[$key] = $this->getKeyValue($object, $key);
+        }
+        
         $exceptions = array();
         foreach ($this->validators as $att => $rules)
         {
-            $value = $this->getKeyValue($object, $att);
+            $value = $values[$att];
+            
             foreach ($rules as $rule)
             {
                 try
