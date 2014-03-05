@@ -97,6 +97,7 @@ abstract class Validator
     /**
      * Adds a new key-value pair to be replaced by the templating engine.
      * This does not check if it's replacing a specific validator value.
+     * 
      * @param string $key The key to replace (in the template as "%key%")
      * @param string $value The value to be inserted instead of the key.
      */
