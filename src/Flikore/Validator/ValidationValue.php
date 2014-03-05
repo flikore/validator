@@ -56,12 +56,18 @@ class ValidationValue
      * @var array A list of fields to fecth from the validated object.
      */
     protected $fields = array();
-    
+
     /**
      * The error message to the generated validator.
      * @var string The error message to the generated validator.
      */
     protected $message;
+
+    /**
+     * The key-value pairs to insert in the generated validator.
+     * @var array The key-value pairs to insert in the generated validator.
+     */
+    protected $values = array();
 
     /**
      * Creates a new validation value for a validation set.
@@ -113,20 +119,20 @@ class ValidationValue
 
         $this->args = $params;
     }
-    
+
     /**
      * Adds a new key-value pair to be replaced by the templating engine of 
      * the generated validator. This does not check if it's replacing a 
      * specific validator value.
      * 
      * @param string $key The key to replace (in the template as "%key%")
-     * @param string $value The value to be inserted instead of the key.
+     * @param mixed $value The value to be inserted instead of the key.
      */
     public function addKeyValue($key, $value)
     {
-        
+        $this->values[$key] = $value;
     }
-    
+
     /**
      * Sets the error message for the generated validator.
      * @param string $message The message.
@@ -159,9 +165,18 @@ class ValidationValue
                 $params[$i] = $fields[$key];
             }
         }
-        
+
         $ref = new \ReflectionClass($this->validator);
-        return $ref->newInstanceArgs($params);
+        $rule = $ref->newInstanceArgs($params);
+        if ($this->message)
+        {
+            $rule->setErrorMessage($this->message);
+        }
+        foreach ($this->values as $key => $value)
+        {
+            $rule->addKeyValue($key, $value);
+        }
+        return $rule;
     }
 
     /**
