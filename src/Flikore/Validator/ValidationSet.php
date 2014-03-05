@@ -104,11 +104,23 @@ class ValidationSet
      */
     public function validate($object)
     {
+        $values = array();
+
+        foreach (array_keys($this->validators) as $key)
+        {
+            $values[$key] = $this->getKeyValue($object, $key);
+        }
+
         foreach ($this->validators as $att => $rules)
         {
-            $value = $this->getKeyValue($object, $att);
+            $value = $values[$att];
+
             foreach ($rules as $rule)
             {
+                if ($rule instanceof ValidationValue)
+                {
+                    $rule = $this->getRealValidator($rule, $object);
+                }
                 if (!$rule->validate($value))
                 {
                     return false;
@@ -125,19 +137,23 @@ class ValidationSet
     public function assert($object)
     {
         $values = array();
-        
+
         foreach (array_keys($this->validators) as $key)
         {
             $values[$key] = $this->getKeyValue($object, $key);
         }
-        
+
         $exceptions = array();
         foreach ($this->validators as $att => $rules)
         {
             $value = $values[$att];
-            
+
             foreach ($rules as $rule)
             {
+                if ($rule instanceof ValidationValue)
+                {
+                    $rule = $this->getRealValidator($rule, $object);
+                }
                 try
                 {
                     $rule->assert($value, $att);
@@ -195,6 +211,23 @@ class ValidationSet
             return $prop->getValue($object);
         }
         throw new \InvalidArgumentException('The value to validate must be an array or an object.');
+    }
+
+    /**
+     * Generates a validator object based on a ValidationValue.
+     * 
+     * @param ValidationValue $validationValue The value to use as generator.
+     * @param mixed $object The object or array being validated.
+     */
+    protected function getRealValidator($validationValue, $object)
+    {
+        $needed = $validationValue->getFields();
+        $values = array();
+        foreach ($needed as $key)
+        {
+            $values[$key] = $this->getKeyValue($object, $key);
+        }
+        return $validationValue->createRule($values);
     }
 
 }

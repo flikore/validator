@@ -131,21 +131,23 @@ class ValidationSetTest extends \PHPUnit_Framework_TestCase
         $this->object->addRule('notEmpty', $r);
 
         $this->assertTrue($this->object->validate(array('notEmpty' => 'Something')));
+        $this->assertTrue($this->object->validate(array('notEmpty' => 'Another thing')));
     }
 
-    public function testAsserSuccess()
+    public function testAssertSuccess()
     {
         $r = new Validators\NotEmptyValidator();
 
         $this->object->addRule('notEmpty', $r);
 
+        // Ok as long as it doesn't raise an exeception.
         $this->object->assert(array('notEmpty' => 'aa'));
     }
 
     /**
      * @expectedException Flikore\Validator\Exception\ValidatorException
      */
-    public function testAsserFail()
+    public function testAssertFail()
     {
         $r = new Validators\NotEmptyValidator();
 
@@ -237,6 +239,29 @@ class ValidationSetTest extends \PHPUnit_Framework_TestCase
             'field2' => 'equal',
         );
         
+        $value2 = new \stdClass();
+        $value2->field1 = 'also equal';
+        $value2->field2 = 'also equal';
+        
         $this->assertTrue($this->object->validate($value));
+        $this->assertTrue($this->object->validate($value2));
+    }
+    
+    public function testValidationValueAssert()
+    {
+        $this->object->addRule('field1', new ValidationValue(new Validators\EqualsValidator('dummy'), new ValidationKey('field2')));
+        
+        $value = array(
+            'field1' => 'equal',
+            'field2' => 'equal',
+        );
+        
+        $value2 = new \stdClass();
+        $value2->field1 = 'also equal';
+        $value2->field2 = 'also equal';
+        
+        // Ok as long as it doesn't raise an exeception.
+        $this->object->assert($value);
+        $this->object->assert($value2);
     }
 }
