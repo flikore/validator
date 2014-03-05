@@ -62,6 +62,28 @@ class ValidationValueTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($rule->validate('other thing'));
     }
     
+    public function testCreateRuleWithAddKey()
+    {
+        $v = new ValidationValue(new Validators\EqualsValidator('dummy'), new ValidationKey('name'));
+        
+        $v->addKeyValue('test', 'this is value');
+        
+        $rule = $v->createRule(array('name' => 'same thing'));
+        $rule->setErrorMessage('%test%');
+        
+        $this->assertEquals('this is value', $rule->getErrorMessage());
+    }
+    
+    public function testCreateRuleWithSetMessage()
+    {
+        $v = new ValidationValue(new Validators\EqualsValidator('dummy'), new ValidationKey('name'));
+        $v->setErrorMessage('this is message');
+        
+        $rule = $v->createRule(array('name' => 'same thing'));
+        
+        $this->assertEquals('this is message', $rule->getErrorMessage());
+    }
+    
     /**
      * @expectedException \OutOfBoundsException
      */
