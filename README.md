@@ -55,6 +55,10 @@ An alternative is to create a submodule instead of cloning the repository. This 
 git submodule add https://github.com/flikore/validator.git vendor/flikore/validator
 ```
 
+### Download
+
+You can also download the [tarball](https://github.com/flikore/validator/tarball/master "tarball") (or the [zipball](https://github.com/flikore/validator/zipball/master "zipball")) and set it up in one of your project folders.
+
 ## Usage
 
 ### Basic value validation
@@ -109,7 +113,6 @@ var_dump($combo->validate('1234'));   // bool(false)
 var_dump($combo->validate('123456')); // bool(false)
 var_dump($combo->validate(''));       // bool(false)
 var_dump($combo->validate(null));     // bool(false)
-var_dump($combo->validate(''));       // bool(false)
 ```
 
 ### Usage with exceptions
@@ -200,9 +203,9 @@ $set = new \Flikore\Validator\ValidationSet(array(
     'age'  => new v\MinValueValidator(13),
 ));
 
-var_dump($set->validate(array('name' => 'this is ok', 'age' => 14))); // bool(true)
-var_dump($set->validate(array('name' => 'oops',       'age' => 14))); // bool(false)
-var_dump($set->validate(array('name' => 'this is ok', 'age' => 12))); // bool(false)
+var_dump($set->validate(array('name' => 'this is ok',          'age' => 14))); // bool(true)
+var_dump($set->validate(array('name' => 'oops',                'age' => 14))); // bool(false)
+var_dump($set->validate(array('name' => 'the age is not good', 'age' => 12))); // bool(false)
 ```
 
 #### Comparing with other keys
@@ -294,9 +297,9 @@ try
 }
 catch (Flikore\Validator\Exception\ValidatorException $e)
 {
-    foreach ($e->getErrors() as $key => $value)
+    foreach ($e->getErrors() as $key => $innerException)
     {
-        echo $key . ': ' . $value->getMessage() . PHP_EOL;
+        echo $key . ': ' . $innerException->getMessage() . PHP_EOL;
     }
     // Output:
     // user_name: The Name must have at least 5 characters.
@@ -308,8 +311,10 @@ catch (Flikore\Validator\Exception\ValidatorException $e)
 
 Currently, there are the following validator classes:
 
+* `AfterDateValidator`
 * `AlphaNumericValidator`
 * `AlphaValidator`
+* `BeforeDateValidator`
 * `DateValidator`
 * `EmailValidator`
 * `EqualsValidator`
@@ -334,6 +339,8 @@ Currently, there are the following validator classes:
 
 The documentation reference for all classes (including the validators) can be found at [http://flikore.github.io/validator/docs/index.html](http://flikore.github.io/validator/docs/index.html "http://flikore.github.io/validator/docs/index.html").
 
+The `examples` folder contains examples that can be executed. Also, check the `unittests` folder for examples of every validator class being used.
+
 ## Contributing
 
 If you want to contribute with the coding, follow these steps:
@@ -344,6 +351,10 @@ If you want to contribute with the coding, follow these steps:
 4. Change or add new code to conform your tests.
 5. Commit the modifications.
 6. Repeat 3-5 until you're done (you can create as many commits as you want).
-5. Send a pull request (with your feature branch last commit).
+5. Send a pull request (with your feature branch's last commit).
 
-Remember that anything in this repository is licensed with the MIT license.
+Remember that anything in this repository is licensed with the [MIT](http://opensource.org/licenses/MIT) license.
+
+### Bug report
+
+Send problems and suggestions to the [GitHub repository issue tracker](https://github.com/flikore/validator/issues).
