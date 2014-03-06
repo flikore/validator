@@ -67,6 +67,7 @@ class DateValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($val->validate('aaa'));
         $this->assertFalse($val->validate(25));
         $this->assertFalse($val->validate(0));
+        $this->assertFalse($val->validate(new \stdClass));
     }
 
     public function testValidateFailWithFormat()
