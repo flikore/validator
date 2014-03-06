@@ -58,6 +58,10 @@ class BeforeDateValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($val->validate(new \DateTime));
         $this->assertFalse($val->validate(new \DateTime('+1 second')));
         $this->assertFalse($val->validate(new \DateTime('+1 day')));
+        
+        $val = new BeforeDateValidator(new \DateTime('2014-03-05'));
+        $this->assertFalse($val->validate(new \DateTime('2014-03-05')));
+        $this->assertFalse($val->validate('2014-03-05'));
     }
 
     /**

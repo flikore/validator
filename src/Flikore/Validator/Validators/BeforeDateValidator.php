@@ -41,7 +41,7 @@ class BeforeDateValidator extends \Flikore\Validator\Validator
 
     /**
      * The reference date.
-     * @var int The reference date.
+     * @var \DateTime The reference date.
      */
     protected $date;
 
@@ -59,6 +59,11 @@ class BeforeDateValidator extends \Flikore\Validator\Validator
      */
     public function __construct(\DateTime $date, $format = DATE_RFC3339)
     {
+        if(!is_string($format))
+        {
+            throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The format argument must be a string.'));
+        }
+        
         $this->date = $date;
 
         $this->addKeyValue('date', $date->format($format));
@@ -82,6 +87,12 @@ class BeforeDateValidator extends \Flikore\Validator\Validator
         {
             return false;
         }
+        if(is_string($value))        
+        {
+            $value = new \DateTime($value);
+        }
+        
+        return $value < $this->date;
     }
 
 }
