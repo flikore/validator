@@ -57,6 +57,46 @@ class OrValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($v->validate(new \stdClass())); // object, not ok
         $this->assertFalse($v->validate('2014-12-12')); // not aplha nor numeric, not ok
     }
+    
+    public function testMessages()
+    {
+        $v1 = new NumericValidator();
+        $v1->setErrorMessage('numeric');
+        
+        $v2 = new AlphaValidator();
+        $v2->setErrorMessage('alpha');
+        
+        $v = new OrValidator(
+                $v1, $v2
+        );
+
+        $v->setErrorMessage('%v1%');
+        $this->assertEquals($v1->getErrorMessage(), $v->getErrorMessage());
+        
+        $v->setErrorMessage('%v2%');
+        $this->assertEquals($v2->getErrorMessage(), $v->getErrorMessage());
+    }
+    
+    public function testSetInternalMessages()
+    {
+        $v1 = new NumericValidator();
+        $v1->setErrorMessage('%custom%');
+        
+        $v2 = new AlphaValidator();
+        $v2->setErrorMessage('%custom%');
+        
+        $v = new OrValidator(
+                $v1, $v2
+        );
+        
+        $v->addKeyValue('custom', 'this is test');
+
+        $v->setErrorMessage('%v1%');
+        $this->assertEquals('this is test', $v->getErrorMessage());
+        
+        $v->setErrorMessage('%v2%');
+        $this->assertEquals('this is test', $v->getErrorMessage());
+    }
 
     public function testValidateFailEmptyValidators()
     {
@@ -76,22 +116,6 @@ class OrValidatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($v->validate(''));
         $this->assertTrue($v->validate(null));
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testErrorNotValidator()
-    {
-        new OrValidator(new \stdClass(), new \stdClass());
-    }
-    
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testErrorNull()
-    {
-        new OrValidator(null, null);
     }
     
     /**
