@@ -80,6 +80,10 @@ class RegexValidator extends \Flikore\Validator\Validator
         {
             return true;
         }
+        if(!is_string($value))
+        {
+            return false;
+        }
         return (bool) (preg_match($this->regex, $value));
     }
 
