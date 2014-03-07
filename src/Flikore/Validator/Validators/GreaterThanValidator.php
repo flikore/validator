@@ -27,49 +27,44 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Validates if a value is equal to another.
- * 
- * @customKey <i>%compare%</i> The value to be compared to.
- * @customKey <i>%strict%</i> Whether the comparison is done in strict form.
+ * Validates that a number is greater than a given value.
  *
+ * @customKey <i>%min%</i> The exclusive lower boundary.
+ * 
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class EqualsValidator extends \Flikore\Validator\Validator
+class GreaterThanValidator extends \Flikore\Validator\Validator
 {
+
+    /**
+     * The exclusive lower boundary.
+     * @var int The exclusive lower boundary.
+     */
+    protected $min;
 
     /**
      * The error message for this validator.
      * @var string The error message for this validator.
      */
-    protected $message = 'The %key% must be equal to "%compare%".';
+    protected $message = 'The %key% must be greater than %min%.';
 
     /**
-     * The value to be compared to.
-     * @var mixed The value to be compared to.
+     * Creates a new Greater Than Validator.
+     * @param int $min The exclusive lower boundary.
      */
-    protected $compare;
-
-    /**
-     * Whether the comparison should be done in strict form.
-     * @var boolean Whether the comparison should be done in strict form.
-     */
-    protected $strict;
-
-    /**
-     * Creates a new Equals Validator.
-     * @param mixed $compare The value to compare to.
-     * @param boolean $strict Whether the comparison should be strict.
-     */
-    public function __construct($compare, $strict = false)
+    public function __construct($min)
     {
-        $this->compare = $compare;
-        $this->strict = (bool) $strict;
+        if (!is_int($min))
+        {
+            throw new \InvalidArgumentException(dgettext('Flikore.Validator','The limit must be a valid integer'));
+        }
 
-        $this->addKeyValue('compare', $compare);
-        $this->addKeyValue('strict', $strict ? 'true' : 'false');
+        $this->min = $min;
+
+        $this->addKeyValue('min', $min);
     }
 
     /**
@@ -84,7 +79,7 @@ class EqualsValidator extends \Flikore\Validator\Validator
         {
             return true;
         }
-        return $this->strict ? ($value === $this->compare) : ($value == $this->compare);
+        return ($value > $this->min);
     }
 
 }

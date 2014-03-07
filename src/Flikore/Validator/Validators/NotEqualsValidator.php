@@ -27,7 +27,7 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Validates if a value is equal to another.
+ * Validates that a value is not equal to another.
  * 
  * @customKey <i>%compare%</i> The value to be compared to.
  * @customKey <i>%strict%</i> Whether the comparison is done in strict form.
@@ -37,39 +37,23 @@ namespace Flikore\Validator\Validators;
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class EqualsValidator extends \Flikore\Validator\Validator
+class NotEqualsValidator extends \Flikore\Validator\Validators\EqualsValidator
 {
 
     /**
      * The error message for this validator.
      * @var string The error message for this validator.
      */
-    protected $message = 'The %key% must be equal to "%compare%".';
+    protected $message = 'The %key% must not be equal to "%compare%".';
 
     /**
-     * The value to be compared to.
-     * @var mixed The value to be compared to.
-     */
-    protected $compare;
-
-    /**
-     * Whether the comparison should be done in strict form.
-     * @var boolean Whether the comparison should be done in strict form.
-     */
-    protected $strict;
-
-    /**
-     * Creates a new Equals Validator.
+     * Creates a new Not Equals Validator.
      * @param mixed $compare The value to compare to.
      * @param boolean $strict Whether the comparison should be strict.
      */
     public function __construct($compare, $strict = false)
     {
-        $this->compare = $compare;
-        $this->strict = (bool) $strict;
-
-        $this->addKeyValue('compare', $compare);
-        $this->addKeyValue('strict', $strict ? 'true' : 'false');
+        parent::__construct($compare, $strict);
     }
 
     /**
@@ -84,7 +68,7 @@ class EqualsValidator extends \Flikore\Validator\Validator
         {
             return true;
         }
-        return $this->strict ? ($value === $this->compare) : ($value == $this->compare);
+        return !parent::doValidate($value);
     }
 
 }

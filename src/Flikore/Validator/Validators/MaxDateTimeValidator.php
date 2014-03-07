@@ -27,53 +27,27 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Validates if a value is equal to another.
+ * Validates that a date/time is equal or before given reference.
  * 
- * @customKey <i>%compare%</i> The value to be compared to.
- * @customKey <i>%strict%</i> Whether the comparison is done in strict form.
+ * @customKey <i>%date%</i> The reference date/time.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class EqualsValidator extends \Flikore\Validator\Validator
+class MaxDateTimeValidator extends AfterDateValidator
 {
 
     /**
      * The error message for this validator.
      * @var string The error message for this validator.
      */
-    protected $message = 'The %key% must be equal to "%compare%".';
-
-    /**
-     * The value to be compared to.
-     * @var mixed The value to be compared to.
-     */
-    protected $compare;
-
-    /**
-     * Whether the comparison should be done in strict form.
-     * @var boolean Whether the comparison should be done in strict form.
-     */
-    protected $strict;
-
-    /**
-     * Creates a new Equals Validator.
-     * @param mixed $compare The value to compare to.
-     * @param boolean $strict Whether the comparison should be strict.
-     */
-    public function __construct($compare, $strict = false)
-    {
-        $this->compare = $compare;
-        $this->strict = (bool) $strict;
-
-        $this->addKeyValue('compare', $compare);
-        $this->addKeyValue('strict', $strict ? 'true' : 'false');
-    }
+    protected $message = 'The %key% must be at most %date%.';
 
     /**
      * Executes the real validation so it can be reused.
+     * 
      * @param mixed $value The value to validate.
      * @return boolean Whether the value pass the validation.
      */
@@ -84,7 +58,17 @@ class EqualsValidator extends \Flikore\Validator\Validator
         {
             return true;
         }
-        return $this->strict ? ($value === $this->compare) : ($value == $this->compare);
+        $isDate = new DateValidator();
+        if(!$isDate->validate($value))
+        {
+            return false;
+        }
+        if(is_string($value))        
+        {
+            $value = new \DateTime($value);
+        }
+        
+        return $value <= $this->date;
     }
 
 }

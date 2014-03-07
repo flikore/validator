@@ -27,49 +27,44 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Validates if a value is equal to another.
+ * Validates that a number is lesser than a given value.
  * 
- * @customKey <i>%compare%</i> The value to be compared to.
- * @customKey <i>%strict%</i> Whether the comparison is done in strict form.
+ * @customKey <i>%max%</i> The exclusive upper boundary.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class EqualsValidator extends \Flikore\Validator\Validator
+class LessThanValidator extends \Flikore\Validator\Validator
 {
+
+    /**
+     * The exclusive upper boundary.
+     * @var int The exclusive upper boundary.
+     */
+    protected $max;
 
     /**
      * The error message for this validator.
      * @var string The error message for this validator.
      */
-    protected $message = 'The %key% must be equal to "%compare%".';
+    protected $message = 'The %key% must be lesser than %max%.';
 
     /**
-     * The value to be compared to.
-     * @var mixed The value to be compared to.
+     * Creates a new Less Than Validator.
+     * @param int $max The exclusive upper boundary.
      */
-    protected $compare;
-
-    /**
-     * Whether the comparison should be done in strict form.
-     * @var boolean Whether the comparison should be done in strict form.
-     */
-    protected $strict;
-
-    /**
-     * Creates a new Equals Validator.
-     * @param mixed $compare The value to compare to.
-     * @param boolean $strict Whether the comparison should be strict.
-     */
-    public function __construct($compare, $strict = false)
+    public function __construct($max)
     {
-        $this->compare = $compare;
-        $this->strict = (bool) $strict;
+        if (!is_int($max))
+        {
+            throw new \InvalidArgumentException(dgettext('Flikore.Validator','The limit must be a valid integer'));
+        }
 
-        $this->addKeyValue('compare', $compare);
-        $this->addKeyValue('strict', $strict ? 'true' : 'false');
+        $this->max = $max;
+
+        $this->addKeyValue('max', $max);
     }
 
     /**
@@ -84,7 +79,7 @@ class EqualsValidator extends \Flikore\Validator\Validator
         {
             return true;
         }
-        return $this->strict ? ($value === $this->compare) : ($value == $this->compare);
+        return ($value < $this->max);
     }
 
 }
