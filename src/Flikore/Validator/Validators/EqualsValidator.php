@@ -84,9 +84,6 @@ class EqualsValidator extends \Flikore\Validator\Validator
         {
             return true;
         }
-        $t1 = gettype($value);
-        $t2 = gettype($this->compare);
-        $comp = $t1 == $t2;
         return $this->strict ? ($value === $this->compare) : ($value == $this->compare);
     }
 
