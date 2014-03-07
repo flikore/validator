@@ -45,6 +45,7 @@ class OrValidatorTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertTrue($v->validate('654')); // numeric, ok
+        $this->assertTrue($v->validate(654)); // numeric, ok
         $this->assertTrue($v->validate('sda')); // alpha, ok
     }
 
