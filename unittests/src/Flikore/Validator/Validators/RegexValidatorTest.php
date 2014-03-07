@@ -54,6 +54,14 @@ class RegexValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($val->validate('8319 da9dua98s'));
         $this->assertFalse($val->validate(' '));
     }
+    
+    public function testValidateNotString()
+    {
+        $val = new RegexValidator('/^[0-9]+$/i');
+        
+        $this->assertFalse($val->validate(new \stdClass()));
+        $this->assertFalse($val->validate(2));
+    }
 
     /**
      * @expectedException \InvalidArgumentException
