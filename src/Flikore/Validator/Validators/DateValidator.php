@@ -27,12 +27,12 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * @deprecated since version 0.4.0
- * @see DateTimeValidator
- * 
  * Validates that the value is a valid date/time.
  * 
  * @customKey <i>%format%</i> The format specified to check the valid date/time.
+ * 
+ * @deprecated since version 0.4.0
+ * @see DateTimeValidator
  *
  * @author George Marques <george at georgemarques.com.br>
  * @version 0.4.0

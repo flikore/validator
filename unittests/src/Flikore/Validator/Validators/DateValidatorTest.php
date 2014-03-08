@@ -27,11 +27,11 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * @deprecated since version 0.4
- * @see DateTimeValidatorTest
- * 
  * Tests for DateValidator class.
  *
+ * @deprecated since version 0.4.0
+ * @see DateTimeValidatorTest
+ * 
  * @author George Marques <george at georgemarques.com.br>
  * @version 0.4.0
  * @since 0.2
