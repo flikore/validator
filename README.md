@@ -115,6 +115,44 @@ var_dump($combo->validate(''));       // bool(false)
 var_dump($combo->validate(null));     // bool(false)
 ```
 
+### Recursive validation
+
+To apply a validator to every element in an array, use the `RecursiveValidator` class. It receives one validator in the constructor and checks the elements with such validator.
+
+```php
+<?php
+
+use Flikore\Validator\Validators as v;
+
+// Recursive check every element in an array against a validator
+// Use the RecursiveValidator class.
+$v = new v\RecursiveValidator(new v\NotEmptyValidator);
+
+// Example array
+$ok = array(
+    'this',
+    'is',
+    'ok'
+);
+
+var_dump($v->validate($ok)); // bool(true)
+
+// Another example
+$notOk = array(
+    'this',
+    'is',
+    'not',
+    'ok',
+    'oops' => '', //<- this is empty
+);
+
+var_dump($v->validate($notOk)); // bool(false)
+
+// To get the key where there was an error, use the %arrKey% template
+$v->setErrorMessage('The key "%arrKey%" is empty.');
+echo $v->getErrorMessage(); // prints: The key "oops" is empty.
+```
+
 ### Usage with exceptions
 
 To throw an exception on a validation error, use the `assert` method instead of `validate`. It throws a `ValidationException` with a custom message for each validator.
