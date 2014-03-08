@@ -30,6 +30,7 @@ namespace Flikore\Validator\Validators;
  * Validates if a string contains only alphabetic and numeric characters (this ignore spaces).
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @version 0.4.0
  * @since 0.3
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
