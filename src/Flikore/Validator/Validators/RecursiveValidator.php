@@ -34,6 +34,7 @@ use Flikore\Validator\Validator;
  * @customKey <i>%arrKey%</i> The array key that failed the validation (only after validating).
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @since 0.4.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator

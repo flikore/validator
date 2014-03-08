@@ -33,6 +33,7 @@ namespace Flikore\Validator\Validators;
  * @customKey <i>%max%</i> The maximum valid value.
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @since 0.3
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator

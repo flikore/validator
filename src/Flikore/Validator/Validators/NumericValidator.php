@@ -30,6 +30,7 @@ namespace Flikore\Validator\Validators;
  * Validates that a given value is numeric.
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @since 0.3
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator

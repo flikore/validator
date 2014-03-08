@@ -32,6 +32,7 @@ namespace Flikore\Validator\Validators;
  * @customKey <i>%regex%</i> The regular expression to be matched.
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @since 0.2
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator

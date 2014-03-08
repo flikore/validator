@@ -27,7 +27,7 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * @deprecated since version 0.4
+ * @deprecated since version 0.4.0
  * @see DateTimeValidator
  * 
  * Validates that the value is a valid date/time.
@@ -35,6 +35,7 @@ namespace Flikore\Validator\Validators;
  * @customKey <i>%format%</i> The format specified to check the valid date/time.
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @since 0.2
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
