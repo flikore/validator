@@ -80,7 +80,7 @@ class MinAgeValidator extends \Flikore\Validator\Validator
         }
         
         // Validate the given value as a valid date.
-        $v = new DateValidator();
+        $v = new DateTimeValidator();
         if(!$v->validate($value))
         {
             return false;

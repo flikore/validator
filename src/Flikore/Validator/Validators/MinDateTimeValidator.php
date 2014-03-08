@@ -58,7 +58,7 @@ class MinDateTimeValidator extends AfterDateTimeValidator
         {
             return true;
         }
-        $isDate = new DateValidator();
+        $isDate = new DateTimeValidator();
         if(!$isDate->validate($value))
         {
             return false;

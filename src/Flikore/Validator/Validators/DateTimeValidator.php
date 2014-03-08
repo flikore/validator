@@ -27,51 +27,58 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Validates that a date/time is after a given reference.
+ * Validates that the value is a valid date/time.
  * 
- * @customKey <i>%date%</i> The reference date/time.
+ * @customKey <i>%format%</i> The format specified to check the valid date/time.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class AfterDateTimeValidator extends \Flikore\Validator\Validator
+class DateTimeValidator extends \Flikore\Validator\Validator
 {
 
     /**
-     * The reference date/time.
-     * @var \DateTime The reference date/time.
+     * The format of the date/time.
+     * @var string The format of the date/time.
      */
-    protected $date;
+    protected $format;
 
     /**
      * The error message for this validator.
      * @var string The error message for this validator.
      */
-    protected $message = 'The %key% must be after than %date%.';
+    protected $message = 'The %key% must be a valid date/time.';
 
     /**
-     * Creates a new After Date Time Validator.
-     * 
-     * @param \DateTime $date The reference date/time.
-     * @param string $format The format of the date to show in the error message.
+     * The alternative message used if there is a specified format.
+     * @var string The alternative message used if there is a specified format.
      */
-    public function __construct(\DateTime $date, $format = DATE_RFC3339)
-    {
-        if(!is_string($format))
-        {
-            throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The format argument must be a string.'));
-        }
-        
-        $this->date = $date;
+    protected $alt_message = 'The %key% must be a date/time in the format "%format%".';
 
-        $this->addKeyValue('date', $date->format($format));
+    /**
+     * Creates a new Date Validator.
+     * @param s $format The format of the date/time (if any).
+     */
+    public function __construct($format = null)
+    {
+        if (!is_null($format) && !is_string($format))
+        {
+            throw new \InvalidArgumentException('The format must be a string if not null.');
+        }
+
+        $this->format = $format;
+
+        if ($format !== null)
+        {
+            $this->addKeyValue('format', $format);
+            $this->setErrorMessage($this->alt_message);
+        }
     }
 
     /**
      * Executes the real validation so it can be reused.
-     * 
      * @param mixed $value The value to validate.
      * @return boolean Whether the value pass the validation.
      */
@@ -82,17 +89,20 @@ class AfterDateTimeValidator extends \Flikore\Validator\Validator
         {
             return true;
         }
-        $isDate = new DateTimeValidator();
-        if(!$isDate->validate($value))
+        if ($value instanceof \DateTime)
+        {
+            return true;
+        }
+        if (!is_string($value))
         {
             return false;
         }
-        if(is_string($value))        
+        if (is_null($this->format))
         {
-            $value = new \DateTime($value);
+            return (strtotime($value) !== false);
         }
-        
-        return $value > $this->date;
+        $date = \DateTime::createFromFormat($this->format, $value);
+        return $date && $value === date($this->format, $date->getTimestamp());
     }
 
 }

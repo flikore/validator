@@ -82,7 +82,7 @@ class BeforeDateTimeValidator extends \Flikore\Validator\Validator
         {
             return true;
         }
-        $isDate = new DateValidator();
+        $isDate = new DateTimeValidator();
         if(!$isDate->validate($value))
         {
             return false;
