@@ -7,7 +7,7 @@
 	<title>Class Flikore\Validator\Validators\UriValidator | Validator</title>
 
 	<script type="text/javascript" src="resources/combined.js?2575005269"></script>
-	<script type="text/javascript" src="elementlist.js?3354870788"></script>
+	<script type="text/javascript" src="elementlist.js?695282720"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -39,24 +39,34 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
+				<li><a href="class-Flikore.Validator.Validators.AfterDateTimeValidator.html">AfterDateTimeValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.AlphaNumericValidator.html">AlphaNumericValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.AlphaValidator.html">AlphaValidator</a></li>
-				<li><a href="class-Flikore.Validator.Validators.DateValidator.html">DateValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.BeforeDateTimeValidator.html">BeforeDateTimeValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.DateTimeValidator.html">DateTimeValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.DateValidator.html" class="deprecated">DateValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.EmailValidator.html">EmailValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.EqualsValidator.html">EqualsValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.ExactLengthValidator.html">ExactLengthValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.ExactValueValidator.html">ExactValueValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.GreaterThanValidator.html">GreaterThanValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.InstanceOfValidator.html">InstanceOfValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.IPv4Validator.html">IPv4Validator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.IPv6Validator.html">IPv6Validator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.LengthBetweenValidator.html">LengthBetweenValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.LessThanValidator.html">LessThanValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.MaxDateTimeValidator.html">MaxDateTimeValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MaxLengthValidator.html">MaxLengthValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MaxValueValidator.html">MaxValueValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MinAgeValidator.html">MinAgeValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.MinDateTimeValidator.html">MinDateTimeValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MinLengthValidator.html">MinLengthValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MinValueValidator.html">MinValueValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.NotEmptyValidator.html">NotEmptyValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.NotEqualsValidator.html">NotEqualsValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.NumericValidator.html">NumericValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.OrValidator.html">OrValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.RecursiveValidator.html">RecursiveValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.RegexValidator.html">RegexValidator</a></li>
 				<li class="active"><a href="class-Flikore.Validator.Validators.UriValidator.html">UriValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.ValueBetweenValidator.html">ValueBetweenValidator</a></li>
@@ -95,6 +105,9 @@
 		<ul>
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
 			</li>
 		</ul>
 		<ul>
@@ -145,9 +158,13 @@
 				<a href="http://opensource.org/licenses/MIT">MIT</a><br />
 				<b>Author:</b>
 				George Marques &lt;george at georgemarques.com.br&gt;<br />
+				<b>Version:</b>
+				0.4.0<br />
+				<b>Since:</b>
+				0.3<br />
 				<b>CustomKey:</b>
 				<i>%protocol%</i> The valid(s) protocol(s) set in the constructor.<br />
-		<b>Located at</b> <a href="source-class-Flikore.Validator.Validators.UriValidator.html#29-127" title="Go to source code">src/Flikore/Validator/Validators/UriValidator.php</a><br />
+		<b>Located at</b> <a href="source-class-Flikore.Validator.Validators.UriValidator.html#29-129" title="Go to source code">src/Flikore/Validator/Validators/UriValidator.php</a><br />
 	</div>
 
 
@@ -165,7 +182,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Flikore.Validator.Validators.UriValidator.html#60-80" title="Go to source code">__construct</a>( <span>mixed <var>$protocol</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Flikore.Validator.Validators.UriValidator.html#62-82" title="Go to source code">__construct</a>( <span>mixed <var>$protocol</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -203,7 +220,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_doValidate">#</a>
-		<code><a href="source-class-Flikore.Validator.Validators.UriValidator.html#82-125" title="Go to source code">doValidate</a>( <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-Flikore.Validator.Validators.UriValidator.html#84-127" title="Go to source code">doValidate</a>( <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -244,6 +261,7 @@
 			<a href="class-Flikore.Validator.Validator.html#_applyTemplate">applyTemplate()</a>, 
 			<a href="class-Flikore.Validator.Validator.html#_assert">assert()</a>, 
 			<a href="class-Flikore.Validator.Validator.html#_getErrorMessage">getErrorMessage()</a>, 
+			<a href="class-Flikore.Validator.Validator.html#_isEmpty">isEmpty()</a>, 
 			<a href="class-Flikore.Validator.Validator.html#_setErrorMessage">setErrorMessage()</a>, 
 			<a href="class-Flikore.Validator.Validator.html#_validate">validate()</a>
 		</code></td>
@@ -269,7 +287,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Flikore.Validator.Validators.UriValidator.html#42-46" title="Go to source code"><var>$message</var></a>
+				<a href="source-class-Flikore.Validator.Validators.UriValidator.html#44-48" title="Go to source code"><var>$message</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">'The %key% must be a valid URI.'</span></code></td>
 		<td class="description"><div>
@@ -296,7 +314,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Flikore.Validator.Validators.UriValidator.html#48-52" title="Go to source code"><var>$message_protocol</var></a>
+				<a href="source-class-Flikore.Validator.Validators.UriValidator.html#50-54" title="Go to source code"><var>$message_protocol</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">'The %key% must be a valid URI and use the %protocol% protocol.'</span></code></td>
 		<td class="description"><div>
@@ -325,7 +343,7 @@ set.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Flikore.Validator.Validators.UriValidator.html#54-58" title="Go to source code"><var>$protocol</var></a>
+				<a href="source-class-Flikore.Validator.Validators.UriValidator.html#56-60" title="Go to source code"><var>$protocol</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>

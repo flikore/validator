@@ -7,7 +7,7 @@
 	<title>Namespace Flikore\Validator\Validators | Validator</title>
 
 	<script type="text/javascript" src="resources/combined.js?2575005269"></script>
-	<script type="text/javascript" src="elementlist.js?3354870788"></script>
+	<script type="text/javascript" src="elementlist.js?695282720"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -39,24 +39,34 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
+				<li><a href="class-Flikore.Validator.Validators.AfterDateTimeValidator.html">AfterDateTimeValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.AlphaNumericValidator.html">AlphaNumericValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.AlphaValidator.html">AlphaValidator</a></li>
-				<li><a href="class-Flikore.Validator.Validators.DateValidator.html">DateValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.BeforeDateTimeValidator.html">BeforeDateTimeValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.DateTimeValidator.html">DateTimeValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.DateValidator.html" class="deprecated">DateValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.EmailValidator.html">EmailValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.EqualsValidator.html">EqualsValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.ExactLengthValidator.html">ExactLengthValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.ExactValueValidator.html">ExactValueValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.GreaterThanValidator.html">GreaterThanValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.InstanceOfValidator.html">InstanceOfValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.IPv4Validator.html">IPv4Validator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.IPv6Validator.html">IPv6Validator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.LengthBetweenValidator.html">LengthBetweenValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.LessThanValidator.html">LessThanValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.MaxDateTimeValidator.html">MaxDateTimeValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MaxLengthValidator.html">MaxLengthValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MaxValueValidator.html">MaxValueValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MinAgeValidator.html">MinAgeValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.MinDateTimeValidator.html">MinDateTimeValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MinLengthValidator.html">MinLengthValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MinValueValidator.html">MinValueValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.NotEmptyValidator.html">NotEmptyValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.NotEqualsValidator.html">NotEqualsValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.NumericValidator.html">NumericValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.OrValidator.html">OrValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.RecursiveValidator.html">RecursiveValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.RegexValidator.html">RegexValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.UriValidator.html">UriValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.ValueBetweenValidator.html">ValueBetweenValidator</a></li>
@@ -95,6 +105,9 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -108,6 +121,10 @@
 <table class="summary" id="classes">
 <caption>Classes summary</caption>
 <tr>
+	<td class="name"><a href="class-Flikore.Validator.Validators.AfterDateTimeValidator.html">AfterDateTimeValidator</a></td>
+	<td>Validates that a date/time is after a given reference.</td>
+</tr>
+<tr>
 	<td class="name"><a href="class-Flikore.Validator.Validators.AlphaNumericValidator.html">AlphaNumericValidator</a></td>
 	<td>Validates if a string contains only alphabetic and numeric characters (this
 ignore spaces).</td>
@@ -117,8 +134,16 @@ ignore spaces).</td>
 	<td>Validates if a string contains only alphabetic characters (this ignore spaces).</td>
 </tr>
 <tr>
-	<td class="name"><a href="class-Flikore.Validator.Validators.DateValidator.html">DateValidator</a></td>
-	<td>Validates that the value is a valid date.</td>
+	<td class="name"><a href="class-Flikore.Validator.Validators.BeforeDateTimeValidator.html">BeforeDateTimeValidator</a></td>
+	<td>Validates that a date/time is before a given reference.</td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Flikore.Validator.Validators.DateTimeValidator.html">DateTimeValidator</a></td>
+	<td>Validates that the value is a valid date/time.</td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Flikore.Validator.Validators.DateValidator.html" class="deprecated">DateValidator</a></td>
+	<td>Validates that the value is a valid date/time.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Flikore.Validator.Validators.EmailValidator.html">EmailValidator</a></td>
@@ -137,6 +162,10 @@ ignore spaces).</td>
 	<td>Validates that a number is exactly a certain value.</td>
 </tr>
 <tr>
+	<td class="name"><a href="class-Flikore.Validator.Validators.GreaterThanValidator.html">GreaterThanValidator</a></td>
+	<td>Validates that a number is greater than a given value.</td>
+</tr>
+<tr>
 	<td class="name"><a href="class-Flikore.Validator.Validators.InstanceOfValidator.html">InstanceOfValidator</a></td>
 	<td>Validates that the value is an instance of a certain class.</td>
 </tr>
@@ -153,6 +182,14 @@ ignore spaces).</td>
 	<td>Validates that the number of characters of the value is between a certain range.</td>
 </tr>
 <tr>
+	<td class="name"><a href="class-Flikore.Validator.Validators.LessThanValidator.html">LessThanValidator</a></td>
+	<td>Validates that a number is lesser than a given value.</td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Flikore.Validator.Validators.MaxDateTimeValidator.html">MaxDateTimeValidator</a></td>
+	<td>Validates that a date/time is equal or before given reference.</td>
+</tr>
+<tr>
 	<td class="name"><a href="class-Flikore.Validator.Validators.MaxLengthValidator.html">MaxLengthValidator</a></td>
 	<td>Validates that the number of characters of the value is at most a given amount.</td>
 </tr>
@@ -163,6 +200,10 @@ ignore spaces).</td>
 <tr>
 	<td class="name"><a href="class-Flikore.Validator.Validators.MinAgeValidator.html">MinAgeValidator</a></td>
 	<td>Validates that the given date is at least a certain number of years ago.</td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Flikore.Validator.Validators.MinDateTimeValidator.html">MinDateTimeValidator</a></td>
+	<td>Validates that a date/time is equal or after a given reference.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Flikore.Validator.Validators.MinLengthValidator.html">MinLengthValidator</a></td>
@@ -178,8 +219,20 @@ ignore spaces).</td>
 empty array.</td>
 </tr>
 <tr>
+	<td class="name"><a href="class-Flikore.Validator.Validators.NotEqualsValidator.html">NotEqualsValidator</a></td>
+	<td>Validates that a value is not equal to another.</td>
+</tr>
+<tr>
 	<td class="name"><a href="class-Flikore.Validator.Validators.NumericValidator.html">NumericValidator</a></td>
 	<td>Validates that a given value is numeric.</td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Flikore.Validator.Validators.OrValidator.html">OrValidator</a></td>
+	<td>Validates that the value pass in at least one of the given validators.</td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Flikore.Validator.Validators.RecursiveValidator.html">RecursiveValidator</a></td>
+	<td>Validates that each of the elements of an array pass a validator.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Flikore.Validator.Validators.RegexValidator.html">RegexValidator</a></td>
