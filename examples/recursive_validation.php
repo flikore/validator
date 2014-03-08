@@ -1,6 +1,6 @@
 <?php
 
-/*
+/* 
  * The MIT License
  *
  * Copyright 2014 George Marques <george at georgemarques.com.br>.
@@ -24,35 +24,36 @@
  * THE SOFTWARE.
  */
 
-namespace Flikore\Validator\Validators;
+namespace Flikore\Validator;
 
-/**
- * Validates that a value is not empty. An empty value is null, empty string or empty array.
- *
- * @author George Marques <george at georgemarques.com.br>
- * @version 0.4.0
- * @since 0.2
- * @license http://opensource.org/licenses/MIT MIT
- * @copyright (c) 2014, George Marques
- * @package Flikore\Validator
- */
-class NotEmptyValidator extends \Flikore\Validator\Validator
-{
+require '../autoload.php';
 
-    /**
-     * The error message for this validator.
-     * @var string The error message for this validator.
-     */
-    protected $message = 'The %key% must not be empty.';
+use Flikore\Validator\Validators as v;
 
-    /**
-     * Executes the real validation so it can be reused.
-     * @param mixed $value The value to validate.
-     * @return boolean Whether the value pass the validation.
-     */
-    protected function doValidate($value)
-    {
-        return !($value === null || $value === '' || (is_array($value) && empty($value)));
-    }
+// Recursive check every element in an array against a validator
+// Use the RecursiveValidator class.
+$v = new v\RecursiveValidator(new v\NotEmptyValidator);
 
-}
+// Example array
+$ok = array(
+    'this',
+    'is',
+    'ok'
+);
+
+var_dump($v->validate($ok)); // bool(true)
+
+// Another example
+$notOk = array(
+    'this',
+    'is',
+    'not',
+    'ok',
+    'oops' => '', //<- this is empty
+);
+
+var_dump($v->validate($notOk)); // bool(false)
+
+// To get the key where there was an error, use the %arrKey% template
+$v->setErrorMessage('The key "%arrKey%" is empty.');
+echo $v->getErrorMessage(); // prints: The key "oops" is empty.

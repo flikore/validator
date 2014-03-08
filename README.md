@@ -3,7 +3,7 @@
 *A simple validation library*.
 
 [![Build Status](https://travis-ci.org/flikore/validator.png)](https://travis-ci.org/flikore/validator)
-[![Coverage Status](https://coveralls.io/repos/flikore/validator/badge.png?branch=develop)](https://coveralls.io/r/flikore/validator?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/flikore/validator/badge.png?branch=master)](https://coveralls.io/r/flikore/validator?branch=master)
 
 Flikore validator is a validation library for PHP aimed to be simple and extensible.
 
@@ -113,6 +113,44 @@ var_dump($combo->validate('1234'));   // bool(false)
 var_dump($combo->validate('123456')); // bool(false)
 var_dump($combo->validate(''));       // bool(false)
 var_dump($combo->validate(null));     // bool(false)
+```
+
+### Recursive validation
+
+To apply a validator to every element in an array, use the `RecursiveValidator` class. It receives one validator in the constructor and checks the elements with such validator.
+
+```php
+<?php
+
+use Flikore\Validator\Validators as v;
+
+// Recursive check every element in an array against a validator
+// Use the RecursiveValidator class.
+$v = new v\RecursiveValidator(new v\NotEmptyValidator);
+
+// Example array
+$ok = array(
+    'this',
+    'is',
+    'ok'
+);
+
+var_dump($v->validate($ok)); // bool(true)
+
+// Another example
+$notOk = array(
+    'this',
+    'is',
+    'not',
+    'ok',
+    'oops' => '', //<- this is empty
+);
+
+var_dump($v->validate($notOk)); // bool(false)
+
+// To get the key where there was an error, use the %arrKey% template
+$v->setErrorMessage('The key "%arrKey%" is empty.');
+echo $v->getErrorMessage(); // prints: The key "oops" is empty.
 ```
 
 ### Usage with exceptions
@@ -311,11 +349,12 @@ catch (Flikore\Validator\Exception\ValidatorException $e)
 
 Currently, there are the following validator classes:
 
-* `AfterDateValidator`
+* `AfterDateTimeValidator`
 * `AlphaNumericValidator`
 * `AlphaValidator`
-* `BeforeDateValidator`
-* `DateValidator`
+* `BeforeDateTimeValidator`
+* `DateTimeValidator`
+* `DateValidator` *(deprecated)*
 * `EmailValidator`
 * `EqualsValidator`
 * `ExactLengthValidator`
@@ -337,6 +376,7 @@ Currently, there are the following validator classes:
 * `NotEqualsValidator`
 * `NumericValidator`
 * `OrValidator`
+* `RecursiveValidator`
 * `RegexValidator`
 * `UriValidator`
 * `ValueBetweenValidator`
