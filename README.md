@@ -3,7 +3,7 @@
 *A simple validation library*.
 
 [![Build Status](https://travis-ci.org/flikore/validator.png)](https://travis-ci.org/flikore/validator)
-[![Coverage Status](https://coveralls.io/repos/flikore/validator/badge.png?branch=develop)](https://coveralls.io/r/flikore/validator?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/flikore/validator/badge.png?branch=master)](https://coveralls.io/r/flikore/validator?branch=master)
 
 Flikore validator is a validation library for PHP aimed to be simple and extensible.
 
@@ -311,11 +311,12 @@ catch (Flikore\Validator\Exception\ValidatorException $e)
 
 Currently, there are the following validator classes:
 
-* `AfterDateValidator`
+* `AfterDateTimeValidator`
 * `AlphaNumericValidator`
 * `AlphaValidator`
-* `BeforeDateValidator`
-* `DateValidator`
+* `BeforeDateTimeValidator`
+* `DateTimeValidator`
+* `DateValidator` *(deprecated)*
 * `EmailValidator`
 * `EqualsValidator`
 * `ExactLengthValidator`
@@ -337,6 +338,7 @@ Currently, there are the following validator classes:
 * `NotEqualsValidator`
 * `NumericValidator`
 * `OrValidator`
+* `RecursiveValidator`
 * `RegexValidator`
 * `UriValidator`
 * `ValueBetweenValidator`
