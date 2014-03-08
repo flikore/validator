@@ -37,12 +37,36 @@
 <p><em>A simple validation library</em>.</p>
 
 <p><a href="https://travis-ci.org/flikore/validator"><img src="https://travis-ci.org/flikore/validator.png" alt="Build Status"></a>
-<a href="https://coveralls.io/r/flikore/validator"><img src="https://coveralls.io/repos/flikore/validator/badge.png" alt="Coverage Status"></a></p>
+<a href="https://coveralls.io/r/flikore/validator?branch=master"><img src="https://coveralls.io/repos/flikore/validator/badge.png?branch=master" alt="Coverage Status"></a></p>
 
 <p>Flikore validator is a validation library for PHP aimed to be simple and extensible.</p>
 
 <h2>
 <a name="instalation" class="anchor" href="#instalation"><span class="octicon octicon-link"></span></a>Instalation</h2>
+
+<h3>
+<a name="composer" class="anchor" href="#composer"><span class="octicon octicon-link"></span></a>Composer</h3>
+
+<p><a href="http://getcomposer.org">Composer</a> is the preferred method to install this validator. Simply add to your <code>composer.json</code>:</p>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"require"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"flikore/validator"</span><span class="p">:</span> <span class="s2">"dev-develop"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Run <code>composer install</code>, then include the autoload file in your project:</p>
+
+<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">require_once</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="c1">// Do validation stuff</span>
+</pre></div>
+
+<h3>
+<a name="installing-with-git" class="anchor" href="#installing-with-git"><span class="octicon octicon-link"></span></a>Installing with Git</h3>
 
 <ul>
 <li>Clone this repository in a folder on your project:</li>
@@ -54,12 +78,19 @@
 </ul><div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
 
 <span class="k">require_once</span> <span class="s1">'vendor/flikore/validator/autoload.php'</span><span class="p">;</span>
+
+<span class="c1">// Do validation stuff</span>
 </pre></div>
 
 <p>An alternative is to create a submodule instead of cloning the repository. This way you don't need to push this library to your own repository and can also update it more easily:</p>
 
 <pre><code>git submodule add https://github.com/flikore/validator.git vendor/flikore/validator
 </code></pre>
+
+<h3>
+<a name="download" class="anchor" href="#download"><span class="octicon octicon-link"></span></a>Download</h3>
+
+<p>You can also download the <a href="https://github.com/flikore/validator/tarball/master" title="tarball">tarball</a> (or the <a href="https://github.com/flikore/validator/zipball/master" title="zipball">zipball</a>) and set it up in one of your project folders.</p>
 
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
@@ -115,7 +146,44 @@
 <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$combo</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="s1">'123456'</span><span class="p">));</span> <span class="c1">// bool(false)</span>
 <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$combo</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="s1">''</span><span class="p">));</span>       <span class="c1">// bool(false)</span>
 <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$combo</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">null</span><span class="p">));</span>     <span class="c1">// bool(false)</span>
-<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$combo</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="s1">''</span><span class="p">));</span>       <span class="c1">// bool(false)</span>
+</pre></div>
+
+<h3>
+<a name="recursive-validation" class="anchor" href="#recursive-validation"><span class="octicon octicon-link"></span></a>Recursive validation</h3>
+
+<p>To apply a validator to every element in an array, use the <code>RecursiveValidator</code> class. It receives one validator in the constructor and checks the elements with such validator.</p>
+
+<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">use</span> <span class="nx">Flikore\Validator\Validators</span> <span class="k">as</span> <span class="nx">v</span><span class="p">;</span>
+
+<span class="c1">// Recursive check every element in an array against a validator</span>
+<span class="c1">// Use the RecursiveValidator class.</span>
+<span class="nv">$v</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">v\RecursiveValidator</span><span class="p">(</span><span class="k">new</span> <span class="nx">v\NotEmptyValidator</span><span class="p">);</span>
+
+<span class="c1">// Example array</span>
+<span class="nv">$ok</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'this'</span><span class="p">,</span>
+    <span class="s1">'is'</span><span class="p">,</span>
+    <span class="s1">'ok'</span>
+<span class="p">);</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$v</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="nv">$ok</span><span class="p">));</span> <span class="c1">// bool(true)</span>
+
+<span class="c1">// Another example</span>
+<span class="nv">$notOk</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'this'</span><span class="p">,</span>
+    <span class="s1">'is'</span><span class="p">,</span>
+    <span class="s1">'not'</span><span class="p">,</span>
+    <span class="s1">'ok'</span><span class="p">,</span>
+    <span class="s1">'oops'</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span> <span class="c1">//&lt;- this is empty</span>
+<span class="p">);</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$v</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="nv">$notOk</span><span class="p">));</span> <span class="c1">// bool(false)</span>
+
+<span class="c1">// To get the key where there was an error, use the %arrKey% template</span>
+<span class="nv">$v</span><span class="o">-&gt;</span><span class="na">setErrorMessage</span><span class="p">(</span><span class="s1">'The key "%arrKey%" is empty.'</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$v</span><span class="o">-&gt;</span><span class="na">getErrorMessage</span><span class="p">();</span> <span class="c1">// prints: The key "oops" is empty.</span>
 </pre></div>
 
 <h3>
@@ -207,15 +275,72 @@
     <span class="s1">'age'</span>  <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">v\MinValueValidator</span><span class="p">(</span><span class="mi">13</span><span class="p">),</span>
 <span class="p">));</span>
 
-<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$set</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'this is ok'</span><span class="p">,</span> <span class="s1">'age'</span> <span class="o">=&gt;</span> <span class="mi">14</span><span class="p">)));</span> <span class="c1">// bool(true)</span>
-<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$set</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'oops'</span><span class="p">,</span>       <span class="s1">'age'</span> <span class="o">=&gt;</span> <span class="mi">14</span><span class="p">)));</span> <span class="c1">// bool(false)</span>
-<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$set</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'this is ok'</span><span class="p">,</span> <span class="s1">'age'</span> <span class="o">=&gt;</span> <span class="mi">12</span><span class="p">)));</span> <span class="c1">// bool(false)</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$set</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'this is ok'</span><span class="p">,</span>          <span class="s1">'age'</span> <span class="o">=&gt;</span> <span class="mi">14</span><span class="p">)));</span> <span class="c1">// bool(true)</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$set</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'oops'</span><span class="p">,</span>                <span class="s1">'age'</span> <span class="o">=&gt;</span> <span class="mi">14</span><span class="p">)));</span> <span class="c1">// bool(false)</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$set</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'the age is not good'</span><span class="p">,</span> <span class="s1">'age'</span> <span class="o">=&gt;</span> <span class="mi">12</span><span class="p">)));</span> <span class="c1">// bool(false)</span>
 </pre></div>
+
+<h4>
+<a name="comparing-with-other-keys" class="anchor" href="#comparing-with-other-keys"><span class="octicon octicon-link"></span></a>Comparing with other keys</h4>
+
+<p>It's also possible to use another key or attribute as the input value for a validator (e.g. validate if one field is equal to another). To do that, you need to use two other classes combined: <code>ValidationValue</code> and <code>ValidationKey</code>.</p>
+
+<p><code>ValidationValue</code> should be included in a set as it were a validator. Its constructor requires a validator as the first argument (can be a string with a FQCN or a dummy validator object) and the arguments to the validator constructor must follow it. To use a field from the validated object in the constructor, pass it as a <code>ValidationKey</code> object with it's key property being the name of the attribute or key you want to grab from the value being validated.</p>
+
+<p>Let's make that clear with and example. To make sure the value of <code>key1</code> is strictly equal to the value of <code>key2</code> inside the same array, do like the following code:</p>
+
+<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">use</span> <span class="nx">Flikore\Validator\ValidationKey</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Flikore\Validator\ValidationSet</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Flikore\Validator\ValidationValue</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Flikore\Validator\Validators</span> <span class="k">as</span> <span class="nx">v</span><span class="p">;</span>
+
+<span class="nv">$set</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ValidationSet</span><span class="p">();</span>
+
+<span class="nv">$set</span><span class="o">-&gt;</span><span class="na">addRule</span><span class="p">(</span><span class="s1">'key1'</span><span class="p">,</span>
+        <span class="c1">// The first argument is a dummy object (can also be a FQCN string).</span>
+        <span class="k">new</span> <span class="nx">ValidationValue</span><span class="p">(</span><span class="k">new</span> <span class="nx">v\EqualsValidator</span><span class="p">(</span><span class="s1">'dummy'</span><span class="p">),</span>
+        <span class="c1">// The second argument is the first for the EqualsValidator constructor.</span>
+        <span class="c1">// In this case, we want to grab the value of "key2", so we create a new</span>
+        <span class="c1">// ValidationKey and specify "key2" as its key.</span>
+        <span class="k">new</span> <span class="nx">ValidationKey</span><span class="p">(</span><span class="s1">'key2'</span><span class="p">),</span>
+        <span class="c1">// This is the third argument of ValidationValue, which will be passed as</span>
+        <span class="c1">// the second argument to EqualsValidator constructor. This is "true", because</span>
+        <span class="c1">// we want the comparison to be strict.</span>
+        <span class="k">true</span><span class="p">)</span>
+<span class="p">);</span> <span class="c1">// end addRule)</span>
+
+<span class="nv">$ok</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'key1'</span> <span class="o">=&gt;</span> <span class="s1">'equal'</span><span class="p">,</span>
+    <span class="s1">'key2'</span> <span class="o">=&gt;</span> <span class="s1">'equal'</span><span class="p">,</span>
+<span class="p">);</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$set</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="nv">$ok</span><span class="p">));</span> <span class="c1">// bool(true)</span>
+
+<span class="nv">$notOk</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'key1'</span> <span class="o">=&gt;</span> <span class="s1">'equal'</span><span class="p">,</span>
+    <span class="s1">'key2'</span> <span class="o">=&gt;</span> <span class="s1">'not equal'</span><span class="p">,</span>
+<span class="p">);</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$set</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="nv">$notOk</span><span class="p">));</span> <span class="c1">// bool(false)</span>
+
+<span class="nv">$notStrict</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'key1'</span> <span class="o">=&gt;</span>  <span class="mi">5</span><span class="p">,</span>
+    <span class="s1">'key2'</span> <span class="o">=&gt;</span> <span class="s1">'5'</span><span class="p">,</span>
+<span class="p">);</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$set</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="nv">$notStrict</span><span class="p">));</span> <span class="c1">// bool(false)</span>
+</pre></div>
+
+<p>Keep in mind that the values that are passed to the validator are not checked in the <code>ValidationValue</code> constructor. So if there's something wrong, it'll only cause an error when the validation is taking place and the real <code>Validator</code> is constructed.</p>
+
+<p><strong>Note</strong>: this doesn't work with <code>ValidationCombo</code>, but since you can add multiple rules to the same key, this should not be a problem.</p>
 
 <h4>
 <a name="sets-and-exceptions" class="anchor" href="#sets-and-exceptions"><span class="octicon octicon-link"></span></a>Sets and exceptions</h4>
 
-<p>With a <code>ValidationSet</code>, exception messages work in a different way. The main exception has no message attached, but it contains an array of errors with the keys being the validated array keys (or object properties) and the values being the child validator exception.</p>
+<p>With a <code>ValidationSet</code>, exception messages work in a different way than with a <code>Validator</code>. The main exception has no message attached, but it contains an array of errors with the keys being the validated array keys (or object properties) and the values being the child validator exception.</p>
 
 <p>Also, the key name you add to the set is also setted as the <code>%key%</code> template value in the error messages. To change that to another value, use the third argument of <code>addRule</code> and <code>addRules</code> methods with the value you want). This can be used if you want to change the language of the message or to specify a more user friendly form label.</p>
 
@@ -244,9 +369,9 @@
 <span class="p">}</span>
 <span class="k">catch</span> <span class="p">(</span><span class="nx">Flikore\Validator\Exception\ValidatorException</span> <span class="nv">$e</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getErrors</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getErrors</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$innerException</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="k">echo</span> <span class="nv">$key</span> <span class="o">.</span> <span class="s1">': '</span> <span class="o">.</span> <span class="nv">$value</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
+        <span class="k">echo</span> <span class="nv">$key</span> <span class="o">.</span> <span class="s1">': '</span> <span class="o">.</span> <span class="nv">$innerException</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span> <span class="o">.</span> <span class="nx">PHP_EOL</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="c1">// Output:</span>
     <span class="c1">// user_name: The Name must have at least 5 characters.</span>
@@ -260,24 +385,36 @@
 <p>Currently, there are the following validator classes:</p>
 
 <ul>
+<li><code>AfterDateTimeValidator</code></li>
 <li><code>AlphaNumericValidator</code></li>
 <li><code>AlphaValidator</code></li>
-<li><code>DateValidator</code></li>
+<li><code>BeforeDateTimeValidator</code></li>
+<li><code>DateTimeValidator</code></li>
+<li>
+<code>DateValidator</code> <em>(deprecated)</em>
+</li>
 <li><code>EmailValidator</code></li>
 <li><code>EqualsValidator</code></li>
 <li><code>ExactLengthValidator</code></li>
 <li><code>ExactValueValidator</code></li>
+<li><code>GreaterThanValidator</code></li>
 <li><code>IPv4Validator</code></li>
 <li><code>IPv6Validator</code></li>
 <li><code>InstanceOfValidator</code></li>
 <li><code>LengthBetweenValidator</code></li>
+<li><code>LessThanValidator</code></li>
+<li><code>MaxDateTimeValidator</code></li>
 <li><code>MaxLengthValidator</code></li>
 <li><code>MaxValueValidator</code></li>
 <li><code>MinAgeValidator</code></li>
+<li><code>MinDateTimeValidator</code></li>
 <li><code>MinLengthValidator</code></li>
 <li><code>MinValueValidator</code></li>
 <li><code>NotEmptyValidator</code></li>
+<li><code>NotEqualsValidator</code></li>
 <li><code>NumericValidator</code></li>
+<li><code>OrValidator</code></li>
+<li><code>RecursiveValidator</code></li>
 <li><code>RegexValidator</code></li>
 <li><code>UriValidator</code></li>
 <li><code>ValueBetweenValidator</code></li>
@@ -285,6 +422,8 @@
 <a name="reference" class="anchor" href="#reference"><span class="octicon octicon-link"></span></a>Reference</h2>
 
 <p>The documentation reference for all classes (including the validators) can be found at <a href="http://flikore.github.io/validator/docs/index.html" title="http://flikore.github.io/validator/docs/index.html">http://flikore.github.io/validator/docs/index.html</a>.</p>
+
+<p>The <code>examples</code> folder contains examples that can be executed. Also, check the <code>unittests</code> folder for examples of every validator class being used.</p>
 
 <h2>
 <a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
@@ -298,8 +437,13 @@
 <li>Change or add new code to conform your tests.</li>
 <li>Commit the modifications.</li>
 <li>Repeat 3-5 until you're done (you can create as many commits as you want).</li>
-<li>Send a pull request (with your feature branch last commit).</li>
-</ol><p>Remember that anything in this repository is licensed with the MIT license.</p>
+<li>Send a pull request (with your feature branch's last commit).</li>
+</ol><p>Remember that anything in this repository is licensed with the <a href="http://opensource.org/licenses/MIT">MIT</a> license.</p>
+
+<h3>
+<a name="bug-report" class="anchor" href="#bug-report"><span class="octicon octicon-link"></span></a>Bug report</h3>
+
+<p>Send problems and suggestions to the <a href="https://github.com/flikore/validator/issues">GitHub repository issue tracker</a>.</p>
         </section>
 
         <footer>
