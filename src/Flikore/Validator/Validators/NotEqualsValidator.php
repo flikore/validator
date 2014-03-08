@@ -64,7 +64,7 @@ class NotEqualsValidator extends \Flikore\Validator\Validators\EqualsValidator
     protected function doValidate($value)
     {
         // ignore empty values
-        if (is_null($value) || $value === '')
+        if ($this->isEmpty($value))
         {
             return true;
         }

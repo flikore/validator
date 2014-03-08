@@ -88,8 +88,8 @@ class LengthBetweenValidator extends \Flikore\Validator\Validator
      */
     protected function doValidate($value)
     {
-// ignore empty values
-        if (is_null($value) || $value === '')
+        // ignore empty values
+        if ($this->isEmpty($value))
         {
             return true;
         }

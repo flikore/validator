@@ -78,7 +78,7 @@ class BeforeDateValidator extends \Flikore\Validator\Validator
     protected function doValidate($value)
     {
         // ignore empty values
-        if (is_null($value) || $value === '')
+        if ($this->isEmpty($value))
         {
             return true;
         }
