@@ -130,4 +130,23 @@ abstract class Validator
      * @return boolean Whether the value pass the validation.
      */
     protected abstract function doValidate($value);
+    
+    /**
+     * Checks if a value is considered empty, so the derived 
+     * validators can have a standard.
+     * 
+     * @param mixed $value The value to check.
+     * @return boolean Whether it is empty or not.
+     */
+    protected function isEmpty($value)
+    {
+        if (is_null($value) || $value === '')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
