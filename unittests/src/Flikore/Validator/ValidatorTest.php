@@ -30,6 +30,8 @@ namespace Flikore\Validator;
  * Tests for Validator class.
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @version 0.4.0
+ * @since 0.1
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
@@ -50,18 +52,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->object = $this->getMockForAbstractClass('Flikore\Validator\Validator');
     }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
-
-        /**
-     * 
-     */
+    
     public function testGetErrorMessage()
     {
         $msg = 'Test';

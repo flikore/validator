@@ -32,6 +32,8 @@ namespace Flikore\Validator\Validators;
  * @customKey <i>%minAge%</i> The minimum valid age.
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @version 0.4.0
+ * @since 0.3
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
@@ -74,13 +76,13 @@ class MinAgeValidator extends \Flikore\Validator\Validator
     protected function doValidate($value)
     {
         //ignore empty values
-        if (is_null($value) || $value === '')
+        if ($this->isEmpty($value))
         {
             return true;
         }
         
         // Validate the given value as a valid date.
-        $v = new DateValidator();
+        $v = new DateTimeValidator();
         if(!$v->validate($value))
         {
             return false;

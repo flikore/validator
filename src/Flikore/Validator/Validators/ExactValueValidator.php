@@ -32,6 +32,8 @@ namespace Flikore\Validator\Validators;
  * @customKey <i>%value%</i> The exact valid value.
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @version 0.4.0
+ * @since 0.3
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
@@ -75,7 +77,7 @@ class ExactValueValidator extends \Flikore\Validator\Validator
     protected function doValidate($value)
     {
         // ignore empty values
-        if (is_null($value) || $value === '')
+        if ($this->isEmpty($value))
         {
             return true;
         }

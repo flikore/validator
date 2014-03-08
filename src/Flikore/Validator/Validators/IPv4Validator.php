@@ -30,6 +30,8 @@ namespace Flikore\Validator\Validators;
  * Validates if a string is a valid IPv4 address.
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @version 0.4.0
+ * @since 0.3
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
@@ -51,7 +53,7 @@ class IPv4Validator extends \Flikore\Validator\Validator
     protected function doValidate($value)
     {
         // ignore empty values
-        if (is_null($value) || $value === '')
+        if ($this->isEmpty($value))
         {
             return true;
         }

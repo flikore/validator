@@ -33,6 +33,8 @@ namespace Flikore\Validator\Validators;
  * @customKey <i>%max%</i> The maximum valid length.
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @version 0.4.0
+ * @since 0.2
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
@@ -88,8 +90,8 @@ class LengthBetweenValidator extends \Flikore\Validator\Validator
      */
     protected function doValidate($value)
     {
-// ignore empty values
-        if (is_null($value) || $value === '')
+        // ignore empty values
+        if ($this->isEmpty($value))
         {
             return true;
         }

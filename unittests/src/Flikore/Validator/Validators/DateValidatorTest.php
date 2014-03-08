@@ -29,7 +29,12 @@ namespace Flikore\Validator\Validators;
 /**
  * Tests for DateValidator class.
  *
+ * @deprecated since version 0.4.0
+ * @see DateTimeValidatorTest
+ * 
  * @author George Marques <george at georgemarques.com.br>
+ * @version 0.4.0
+ * @since 0.2
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
@@ -67,6 +72,7 @@ class DateValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($val->validate('aaa'));
         $this->assertFalse($val->validate(25));
         $this->assertFalse($val->validate(0));
+        $this->assertFalse($val->validate(new \stdClass));
     }
 
     public function testValidateFailWithFormat()

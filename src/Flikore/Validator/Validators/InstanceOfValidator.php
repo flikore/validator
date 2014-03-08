@@ -32,6 +32,8 @@ namespace Flikore\Validator\Validators;
  * @customKey <i>%class%</i> The name of the valid class.
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @version 0.4.0
+ * @since 0.2
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
@@ -49,7 +51,7 @@ class InstanceOfValidator extends \Flikore\Validator\Validator
      * The error message for this validator.
      * @var string The error message for this validator.
      */
-    protected $message = 'The %key% must be an instance of %class%.';
+    protected $message = 'The %key% must be an instance of "%class%".';
 
     /**
      * Creates a new Instance Of Validator.
@@ -75,7 +77,7 @@ class InstanceOfValidator extends \Flikore\Validator\Validator
     protected function doValidate($value)
     {
         // ignore empty values
-        if (is_null($value) || $value === '')
+        if ($this->isEmpty($value))
         {
             return true;
         }

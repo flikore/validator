@@ -30,6 +30,8 @@ namespace Flikore\Validator;
  * The base for validation classes.
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @version 0.4.0
+ * @since 0.1
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
@@ -97,6 +99,7 @@ abstract class Validator
     /**
      * Adds a new key-value pair to be replaced by the templating engine.
      * This does not check if it's replacing a specific validator value.
+     * 
      * @param string $key The key to replace (in the template as "%key%")
      * @param string $value The value to be inserted instead of the key.
      */
@@ -129,4 +132,23 @@ abstract class Validator
      * @return boolean Whether the value pass the validation.
      */
     protected abstract function doValidate($value);
+    
+    /**
+     * Checks if a value is considered empty, so the derived 
+     * validators can have a standard.
+     * 
+     * @param mixed $value The value to check.
+     * @return boolean Whether it is empty or not.
+     */
+    protected function isEmpty($value)
+    {
+        if (is_null($value) || $value === '')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

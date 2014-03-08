@@ -33,6 +33,8 @@ namespace Flikore\Validator\Validators;
  * @customKey <i>%strict%</i> Whether the comparison is done in strict form.
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @version 0.4.0
+ * @since 0.3
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
@@ -44,7 +46,7 @@ class EqualsValidator extends \Flikore\Validator\Validator
      * The error message for this validator.
      * @var string The error message for this validator.
      */
-    protected $message = 'The %key% must be equal to %compare%.';
+    protected $message = 'The %key% must be equal to "%compare%".';
 
     /**
      * The value to be compared to.
@@ -80,13 +82,10 @@ class EqualsValidator extends \Flikore\Validator\Validator
     protected function doValidate($value)
     {
         // ignore empty values
-        if (is_null($value) || $value === '')
+        if ($this->isEmpty($value))
         {
             return true;
         }
-        $t1 = gettype($value);
-        $t2 = gettype($this->compare);
-        $comp = $t1 == $t2;
         return $this->strict ? ($value === $this->compare) : ($value == $this->compare);
     }
 

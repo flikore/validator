@@ -30,6 +30,8 @@ namespace Flikore\Validator\Validators;
  * Tests for ExactLengthValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @version 0.4.0
+ * @since 0.2
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
@@ -63,7 +65,9 @@ class ExactLengthValidatorTest extends \PHPUnit_Framework_TestCase
     public function testValidateEmptyValue()
     {
         $val = new ExactLengthValidator(2);
+        
         $this->assertTrue($val->validate(''));
+        $this->assertTrue($val->validate(null));
     }
 
 }

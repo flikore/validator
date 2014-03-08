@@ -30,6 +30,8 @@ namespace Flikore\Validator\Validators;
  * Tests for RegexValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
+ * @version 0.4.0
+ * @since 0.2
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
@@ -53,6 +55,14 @@ class RegexValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($val->validate('asd d'));
         $this->assertFalse($val->validate('8319 da9dua98s'));
         $this->assertFalse($val->validate(' '));
+    }
+    
+    public function testValidateNotString()
+    {
+        $val = new RegexValidator('/^[0-9]+$/i');
+        
+        $this->assertFalse($val->validate(new \stdClass()));
+        $this->assertFalse($val->validate(2));
     }
 
     /**
