@@ -97,6 +97,7 @@ class InstanceOfValidatorTest extends \PHPUnit_Framework_TestCase
 
         $v = new InstanceOfValidator($a);
 
+        $this->assertTrue($v->validate(''));
         $this->assertTrue($v->validate(null));
     }
 
