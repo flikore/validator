@@ -50,18 +50,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->object = $this->getMockForAbstractClass('Flikore\Validator\Validator');
     }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
-
-        /**
-     * 
-     */
+    
     public function testGetErrorMessage()
     {
         $msg = 'Test';
