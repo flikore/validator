@@ -36,7 +36,7 @@ namespace Flikore\Validator\Validators;
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class MinDateTimeValidator extends AfterDateValidator
+class MinDateTimeValidator extends AfterDateTimeValidator
 {
 
     /**

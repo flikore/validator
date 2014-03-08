@@ -27,21 +27,21 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Validates that a date is after a given reference.
+ * Validates that a date/time is after a given reference.
  * 
- * @customKey <i>%date%</i> The reference date.
+ * @customKey <i>%date%</i> The reference date/time.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class AfterDateValidator extends \Flikore\Validator\Validator
+class AfterDateTimeValidator extends \Flikore\Validator\Validator
 {
 
     /**
-     * The reference date.
-     * @var \DateTime The reference date.
+     * The reference date/time.
+     * @var \DateTime The reference date/time.
      */
     protected $date;
 
@@ -52,9 +52,9 @@ class AfterDateValidator extends \Flikore\Validator\Validator
     protected $message = 'The %key% must be after than %date%.';
 
     /**
-     * Creates a new After Date Validator.
+     * Creates a new After Date Time Validator.
      * 
-     * @param \DateTime $date The reference date.
+     * @param \DateTime $date The reference date/time.
      * @param string $format The format of the date to show in the error message.
      */
     public function __construct(\DateTime $date, $format = DATE_RFC3339)

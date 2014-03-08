@@ -27,7 +27,7 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Tests for BeforeDateValidator class.
+ * Tests for BeforeDateTimeValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
@@ -40,12 +40,12 @@ class BeforeDateValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testValidatePass()
     {
-        $val = new BeforeDateValidator(new \DateTime);
+        $val = new BeforeDateTimeValidator(new \DateTime);
         
         $this->assertTrue($val->validate(new \DateTime('-1 second')));
         $this->assertTrue($val->validate(new \DateTime('-1 day')));
         
-        $val = new BeforeDateValidator(new \DateTime('2014-03-05'));
+        $val = new BeforeDateTimeValidator(new \DateTime('2014-03-05'));
         
         $this->assertTrue($val->validate('2014-03-04'));
         $this->assertTrue($val->validate('2014-02-20'));
@@ -53,13 +53,13 @@ class BeforeDateValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testValidateFail()
     {
-        $val = new BeforeDateValidator(new \DateTime);
+        $val = new BeforeDateTimeValidator(new \DateTime);
         
         $this->assertFalse($val->validate(new \DateTime));
         $this->assertFalse($val->validate(new \DateTime('+1 second')));
         $this->assertFalse($val->validate(new \DateTime('+1 day')));
         
-        $val = new BeforeDateValidator(new \DateTime('2014-03-05'));
+        $val = new BeforeDateTimeValidator(new \DateTime('2014-03-05'));
         $this->assertFalse($val->validate(new \DateTime('2014-03-05')));
         $this->assertFalse($val->validate('2014-03-05'));
     }
@@ -69,12 +69,12 @@ class BeforeDateValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongFormatArgument()
     {
-        new BeforeDateValidator(new \DateTime, 234);
+        new BeforeDateTimeValidator(new \DateTime, 234);
     }
 
     public function testValidateEmptyValue()
     {
-        $val = new BeforeDateValidator(new \DateTime);
+        $val = new BeforeDateTimeValidator(new \DateTime);
         
         $this->assertTrue($val->validate(''));
         $this->assertTrue($val->validate(null));
@@ -82,7 +82,7 @@ class BeforeDateValidatorTest extends \PHPUnit_Framework_TestCase
     
     public function testValidateFailNotADate()
     {
-        $val = new BeforeDateValidator(new \DateTime);
+        $val = new BeforeDateTimeValidator(new \DateTime);
         
         $this->assertFalse($val->validate('aaa'));
         $this->assertFalse($val->validate(25));

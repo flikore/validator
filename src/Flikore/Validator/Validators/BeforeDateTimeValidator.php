@@ -27,21 +27,21 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Validates that a date is before a given reference.
+ * Validates that a date/time is before a given reference.
  * 
- * @customKey <i>%date%</i> The reference date.
+ * @customKey <i>%date%</i> The reference date/time.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class BeforeDateValidator extends \Flikore\Validator\Validator
+class BeforeDateTimeValidator extends \Flikore\Validator\Validator
 {
 
     /**
-     * The reference date.
-     * @var \DateTime The reference date.
+     * The reference date/time.
+     * @var \DateTime The reference date/time.
      */
     protected $date;
 
@@ -54,7 +54,7 @@ class BeforeDateValidator extends \Flikore\Validator\Validator
     /**
      * Creates a new Before Date Validator.
      * 
-     * @param \DateTime $date The reference date.
+     * @param \DateTime $date The reference date/time.
      * @param string $format The format of the date to show in the error message.
      */
     public function __construct(\DateTime $date, $format = DATE_RFC3339)
