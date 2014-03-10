@@ -38,7 +38,7 @@ use Flikore\Validator\Exception\ValidatorException;
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class ValidationSet
+class ValidationSet implements Interfaces\IValidator
 {
 
     /**
@@ -173,6 +173,18 @@ class ValidationSet
             $e->setErrors($exceptions);
             throw $e;
         }
+    }
+    
+    /**
+     * Adds a new key-value pair to be replaced by the templating engine.
+     * This does not check if it's replacing a specific validator value.
+     * 
+     * @param string $key The key to replace (in the template as "%key%")
+     * @param string $value The value to be inserted instead of the key.
+     */
+    public function addKeyValue($key, $value)
+    {
+        
     }
 
     /**

@@ -36,7 +36,7 @@ namespace Flikore\Validator;
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-abstract class Validator
+abstract class Validator implements Interfaces\IValidator
 {
 
     /**
