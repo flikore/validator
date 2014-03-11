@@ -26,6 +26,8 @@
 
 namespace Flikore\Validator;
 
+use Flikore\Validator\Interfaces\IValidator;
+
 /**
  * This class can be used as a validation rule in a set to use the fields from the object
  * being validate as an input to the constructor of a validator. This delegates the proper
@@ -74,8 +76,8 @@ class ValidationValue
     /**
      * Creates a new validation value for a validation set.
      * 
-     * @param string|Validator $validator The validator to build be it a class name (fully qualified)
-     *                                    or a dummy validator object.
+     * @param string|IValidator $validator The validator to build be it a class name (fully qualified)
+     *                                     or a dummy validator object.
      * @param mixed ...$params The parameters to the validator. To use a field from the validated
      *                         object, set these as ValidationKey objects.
      */
@@ -83,9 +85,9 @@ class ValidationValue
     {
         if (is_object($validator))
         {
-            if (!($validator instanceof Validator))
+            if (!($validator instanceof IValidator))
             {
-                throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The validator object must be a subclass of Validator'));
+                throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The validator object must be a implementation of IValidator'));
             }
             else
             {
@@ -94,9 +96,9 @@ class ValidationValue
         }
         elseif (is_string($validator))
         {
-            if (!is_subclass_of($validator, 'Flikore\Validator\Validator'))
+            if (!is_subclass_of($validator, 'Flikore\Validator\Interfaces\IValidator'))
             {
-                throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The validator object must be a subclass of Validator'));
+                throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The validator object must be a implementation of IValidator'));
             }
             else
             {
@@ -105,7 +107,7 @@ class ValidationValue
         }
         else
         {
-            throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The validator object must be a subclass of Validator'));
+            throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The validator object must be a implementation of IValidator'));
         }
 
         $params = func_get_args();

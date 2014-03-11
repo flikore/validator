@@ -26,7 +26,7 @@
 
 namespace Flikore\Validator\Validators;
 
-use Flikore\Validator\Validator;
+use Flikore\Validator\Interfaces\IValidator;
 
 /**
  * Validates that each of the elements of an array pass a validator.
@@ -40,11 +40,11 @@ use Flikore\Validator\Validator;
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class RecursiveValidator extends Validator
+class RecursiveValidator extends \Flikore\Validator\Validator
 {
     /**
      * Stores the validator used to check the values.
-     * @var Validator Stores the validator used to check the values.
+     * @var IValidator Stores the validator used to check the values.
      */
     protected $validator;
 
@@ -57,9 +57,9 @@ class RecursiveValidator extends Validator
     /**
      * Creates a new Recursive Validator.
      * 
-     * @param Validator $validator The validator to use when checking.
+     * @param IValidator $validator The validator to use when checking.
      */
-    public function __construct(Validator $validator)
+    public function __construct(IValidator $validator)
     {
         $this->validator = $validator;
         $this->addKeyValue('arrKey', null);
