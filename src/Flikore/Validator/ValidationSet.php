@@ -48,6 +48,12 @@ class ValidationSet implements Interfaces\IValidator
     protected $validators;
 
     /**
+     * Stores the key-value pairs for the inner validators.
+     * @var array Stores the key-value pairs for the inner validators.
+     */
+    protected $values = array();
+
+    /**
      * Creates a new validation set.
      * @param array $rules An array of rules with the key being the name of the attribute
      *                     and the value being a Validator instance.
@@ -83,6 +89,7 @@ class ValidationSet implements Interfaces\IValidator
         }
         $rule->addKeyValue('key', $label);
         $this->validators[$name][] = $rule;
+        $this->updateSingleKeyValue($rule);
     }
 
     /**
@@ -174,7 +181,7 @@ class ValidationSet implements Interfaces\IValidator
             throw $e;
         }
     }
-    
+
     /**
      * Adds a new key-value pair to be replaced by the templating engine.
      * This does not check if it's replacing a specific validator value.
@@ -184,7 +191,12 @@ class ValidationSet implements Interfaces\IValidator
      */
     public function addKeyValue($key, $value)
     {
-        
+        if (is_object($value) && !method_exists($value, '__toString'))
+        {
+            $value = get_class($value);
+        }
+        $this->values[$key] = (string) $value;
+        $this->updateKeyValues();
     }
 
     /**
@@ -242,6 +254,36 @@ class ValidationSet implements Interfaces\IValidator
             $values[$key] = $this->getKeyValue($object, $key);
         }
         return $validationValue->createRule($values);
+    }
+
+    /**
+     * Updates the inner key-value pairs to reflect this object's values.
+     */
+    protected function updateKeyValues()
+    {
+        if (!empty($this->validators))
+        {
+            foreach ($this->validators as $rules)
+            {
+                foreach ($rules as $rule)
+                {
+                    $this->updateSingleKeyValue($rule);
+                }
+            }
+        }
+    }
+
+    /**
+     * Updates a single validator to have the same key-values added to the set.
+     * 
+     * @param Interfaces\IValidator $rule The rule to update
+     */
+    protected function updateSingleKeyValue($rule)
+    {
+        foreach ($this->values as $key => $value)
+        {
+            $rule->addKeyValue($key, $value);
+        }
     }
 
 }
