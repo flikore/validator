@@ -105,6 +105,17 @@ class ValidationSet implements Interfaces\IValidator
             $this->addRule($name, $rule, $label);
         }
     }
+    
+    /**
+     * Gets the set of rules prepared for a given key.
+     * 
+     * @param string $key The key to get.
+     * @return array The array with the rules (may be emtpy).
+     */
+    public function getRulesFor($key)
+    {
+        return isset($this->validators[$key]) ? $this->validators[$key] : array();
+    }
 
     /**
      * Checks if the object or array passes all the validation tests.

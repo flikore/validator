@@ -318,4 +318,20 @@ class ValidationSetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('this is test', $r1->getErrorMessage());
         $this->assertEquals('this is test', $r2->getErrorMessage());
     }
+    
+    public function testGetRuleFor()
+    {
+        $r1 = new Validators\NotEmptyValidator();
+        $r2 = new Validators\NumericValidator();
+        
+        $this->assertTrue(is_array($this->object->getRulesFor('field', array($r1, $r2))));
+        $this->assertEmpty($this->object->getRulesFor('field', array($r1, $r2)));
+        
+        $this->object->addRules('field', array($r1, $r2));
+        
+        $rules = $this->object->getRulesFor('field');
+        
+        $this->assertSame($r1, $rules[0]);
+        $this->assertSame($r2, $rules[1]);
+    }
 }
