@@ -266,4 +266,56 @@ class ValidationSetTest extends \PHPUnit_Framework_TestCase
         $this->object->assert($value);
         $this->object->assert($value2);
     }
+    
+    public function testAddKeyValue()
+    {
+        $r = new Validators\NotEmptyValidator();
+
+        $this->object->addRule('notEmpty', $r);
+        
+        $this->object->addKeyValue('test', 'this is test');
+        $r->setErrorMessage('%test%');
+
+        $this->assertEquals('this is test', $r->getErrorMessage());
+    }
+    
+    public function testAddKeyValueWithObject()
+    {
+        $r = new Validators\NotEmptyValidator();
+
+        $this->object->addRule('notEmpty', $r);
+        
+        $this->object->addKeyValue('test', new \stdClass());
+        $r->setErrorMessage('%test%');
+
+        $this->assertEquals('stdClass', $r->getErrorMessage());
+    }
+    
+    public function testKeyValueAddingRule()
+    {
+        $r = new Validators\NotEmptyValidator();
+
+        $this->object->addKeyValue('test', 'this is test');
+        
+        $this->object->addRule('notEmpty', $r);
+        $r->setErrorMessage('%test%');
+
+        $this->assertEquals('this is test', $r->getErrorMessage());
+    }
+    
+    public function testKeyValueAddingRules()
+    {
+        $r1 = new Validators\NotEmptyValidator();
+        $r2 = new Validators\NumericValidator();
+
+        $this->object->addKeyValue('test', 'this is test');
+        
+        $this->object->addRules('field', array($r1, $r2));
+        
+        $r1->setErrorMessage('%test%');
+        $r2->setErrorMessage('%test%');
+
+        $this->assertEquals('this is test', $r1->getErrorMessage());
+        $this->assertEquals('this is test', $r2->getErrorMessage());
+    }
 }

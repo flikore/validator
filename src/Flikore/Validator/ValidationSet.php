@@ -38,7 +38,7 @@ use Flikore\Validator\Exception\ValidatorException;
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class ValidationSet
+class ValidationSet implements Interfaces\IValidator
 {
 
     /**
@@ -46,6 +46,12 @@ class ValidationSet
      * @var Validator[][] An array of validation objects.
      */
     protected $validators;
+
+    /**
+     * Stores the key-value pairs for the inner validators.
+     * @var array Stores the key-value pairs for the inner validators.
+     */
+    protected $values = array();
 
     /**
      * Creates a new validation set.
@@ -83,6 +89,7 @@ class ValidationSet
         }
         $rule->addKeyValue('key', $label);
         $this->validators[$name][] = $rule;
+        $this->updateSingleKeyValue($rule);
     }
 
     /**
@@ -176,6 +183,23 @@ class ValidationSet
     }
 
     /**
+     * Adds a new key-value pair to be replaced by the templating engine.
+     * This does not check if it's replacing a specific validator value.
+     * 
+     * @param string $key The key to replace (in the template as "%key%")
+     * @param string $value The value to be inserted instead of the key.
+     */
+    public function addKeyValue($key, $value)
+    {
+        if (is_object($value) && !method_exists($value, '__toString'))
+        {
+            $value = get_class($value);
+        }
+        $this->values[$key] = (string) $value;
+        $this->updateKeyValues();
+    }
+
+    /**
      * Gets a value for a given key in an object or array.
      * @param mixed $object The object or array.
      * @param string $key The name of the key or property.
@@ -230,6 +254,36 @@ class ValidationSet
             $values[$key] = $this->getKeyValue($object, $key);
         }
         return $validationValue->createRule($values);
+    }
+
+    /**
+     * Updates the inner key-value pairs to reflect this object's values.
+     */
+    protected function updateKeyValues()
+    {
+        if (!empty($this->validators))
+        {
+            foreach ($this->validators as $rules)
+            {
+                foreach ($rules as $rule)
+                {
+                    $this->updateSingleKeyValue($rule);
+                }
+            }
+        }
+    }
+
+    /**
+     * Updates a single validator to have the same key-values added to the set.
+     * 
+     * @param Interfaces\IValidator $rule The rule to update
+     */
+    protected function updateSingleKeyValue($rule)
+    {
+        foreach ($this->values as $key => $value)
+        {
+            $rule->addKeyValue($key, $value);
+        }
     }
 
 }
