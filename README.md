@@ -345,6 +345,43 @@ catch (Flikore\Validator\Exception\ValidatorException $e)
 }
 ```
 
+#### Nested arrays
+
+To validate arrays inside arrays, it is possible to nest `ValidationSet` as a rule. So, in theory, there's no limit to how much levels you can nest.
+
+**Example**:
+
+```php
+<?php
+
+use Flikore\Validator\Validators as v;
+use Flikore\Validator\ValidationSet;
+
+// To validate arrays inside arrays, the validation sets can be nested.
+$v = new ValidationSet();
+
+// You may add a ValidationSet as a rule to some field.
+// Here, let's create a set to validate the user name and email
+$inner = new ValidationSet();
+// And add the rules
+$inner->addRule('name', new v\AlphaValidator);
+$inner->addRule('email', new v\EmailValidator);
+
+// Then, use this as the rule for the main set.
+$v->addRule('user', $inner);
+
+// Now, take this array:
+$value = array(
+    'user' => array(
+        'name' => 'Ok name',
+        'email' =>'this_is_ok@example.com',
+    )
+);
+
+// And validate it
+var_dump($v->validate($value)); //bool(true)
+```
+
 ## Available validators
 
 Currently, there are the following validator classes:
