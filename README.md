@@ -246,6 +246,41 @@ var_dump($set->validate(array('name' => 'oops',                'age' => 14))); /
 var_dump($set->validate(array('name' => 'the age is not good', 'age' => 12))); // bool(false)
 ```
 
+If you need to validate only a subset of fields (for, say, using in the `onBlur` event of an input element, without need to validate the whole form), set the second argument of `validate` (or `assert`) to the field or list of fields you want to actually validate. If there's no rules for a given field, it'll just be ignored.
+
+**Example**:
+
+```php
+<?php
+
+// Create a set of rules.
+$set = new ValidationSet(array(
+    'name'  => array(
+        new v\NotEmptyValidator(),
+        new v\MinLengthValidator(5),
+    ),
+    'age'   => new v\MinValueValidator(13),
+    'email' => new v\EmailValidator(),
+));
+
+// Creating a value
+$value = array(
+    'name'    => 'this is ok',
+    'age'     => 12, // not ok
+    'email'   => 'this_is_ok@example.com',
+    'no_rule' => 'whatever',
+);
+
+// Validates only the name, so it's ok
+var_dump($set->validate($value, 'name')); // bool(true)
+// Validates the name and email
+var_dump($set->validate($value, array('name', 'email'))); // bool(true)
+// Validates the no_rule
+var_dump($set->validate($value, 'no_rule')); // bool(true)
+// Validates the name and age, so there's error
+var_dump($set->validate($value, array('name', 'age'))); // bool(false)
+```
+
 #### Comparing with other keys
 
 It's also possible to use another key or attribute as the input value for a validator (e.g. validate if one field is equal to another). To do that, you need to use two other classes combined: `ValidationValue` and `ValidationKey`.
