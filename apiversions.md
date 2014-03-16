@@ -7,7 +7,7 @@ apiversions: true
 
 ## Latest release version
 
-* [v0.5.0](/api/v0.5.0)
+* [master](/api/master) ([permalink to v0.4.0](/api/v0.4.0))
 
 ## Latest development version
 
@@ -15,7 +15,6 @@ apiversions: true
 
 ## Older versions
 
-* [v0.4.0](/api/v0.4.0)
 * [v0.3.0](/api/v0.3.0)
 * [v0.2.0](/api/v0.2.0)
 * [v0.1.2](/api/v0.1.2)
