@@ -334,4 +334,89 @@ class ValidationSetTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($r1, $rules[0]);
         $this->assertSame($r2, $rules[1]);
     }
+    
+    public function testPartialValidationSuccess()
+    {
+        $r1 = new Validators\NumericValidator();
+        $r2 = new Validators\NotEmptyValidator();
+        
+        $this->object->addRule('field1', $r1);
+        $this->object->addRule('field2', $r2);
+        
+        $tst = array(
+            'field1' => 2,
+        );
+        
+        $this->assertTrue($this->object->validate($tst, 'field1'));        // string
+        $this->assertTrue($this->object->validate($tst, array('field1'))); // array        
+    }
+    
+    public function testPartialValidationFail()
+    {
+        $r1 = new Validators\NumericValidator();
+        $r2 = new Validators\NotEmptyValidator();
+        
+        $this->object->addRule('field1', $r1);
+        $this->object->addRule('field2', $r2);
+        
+        $tst = array(
+            'field1' => 'not numeric',
+        );
+        
+        $this->assertFalse($this->object->validate($tst, 'field1'));        // string
+        $this->assertFalse($this->object->validate($tst, array('field1'))); // array        
+    }
+    
+    public function testPartialAssertionSuccess()
+    {
+        $r1 = new Validators\NumericValidator();
+        $r2 = new Validators\NotEmptyValidator();
+        
+        $this->object->addRule('field1', $r1);
+        $this->object->addRule('field2', $r2);
+        
+        $tst = array(
+            'field1' => 2,
+        );
+        
+        // ok as long as there's no exeception
+        $this->object->assert($tst, 'field1');        // string
+        $this->object->assert($tst, array('field1')); // array        
+    }
+    
+    /**
+     * @expectedException Flikore\Validator\Exception\ValidatorException
+     */
+    public function testPartialAssertionFailString()
+    {
+        $r1 = new Validators\NumericValidator();
+        $r2 = new Validators\NotEmptyValidator();
+        
+        $this->object->addRule('field1', $r1);
+        $this->object->addRule('field2', $r2);
+        
+        $tst = array(
+            'field1' => 'not numeric',
+        );
+        
+        $this->object->assert($tst, 'field1');
+    }
+    
+    /**
+     * @expectedException Flikore\Validator\Exception\ValidatorException
+     */
+    public function testPartialAssertionFailArray()
+    {
+        $r1 = new Validators\NumericValidator();
+        $r2 = new Validators\NotEmptyValidator();
+        
+        $this->object->addRule('field1', $r1);
+        $this->object->addRule('field2', $r2);
+        
+        $tst = array(
+            'field1' => 'not numeric',
+        );
+        
+        $this->object->assert($tst, array('field1'));
+    }
 }

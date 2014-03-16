@@ -105,7 +105,7 @@ class ValidationSet implements Interfaces\IValidator
             $this->addRule($name, $rule, $label);
         }
     }
-    
+
     /**
      * Gets the set of rules prepared for a given key.
      * 
@@ -119,21 +119,27 @@ class ValidationSet implements Interfaces\IValidator
 
     /**
      * Checks if the object or array passes all the validation tests.
+     * 
      * @param mixed $object The object or array to test.
+     * @param array $fields A list of fields to check, ignoring the others.
      * @return boolean Whether it passes the tests or not.
+     * @throws \InvalidArgumentException If the fields parameter is not string nor array.
+     * @throws \OutOfBoundsException If there's a rule for a key that is not set.
      */
-    public function validate($object)
+    public function validate($object, $fields = null)
     {
-        $values = array();
+        $fields = $this->getFields($fields);
 
-        foreach (array_keys($this->validators) as $key)
+        foreach ($fields as $att)
         {
-            $values[$key] = $this->getKeyValue($object, $key);
-        }
-
-        foreach ($this->validators as $att => $rules)
-        {
-            $value = $values[$att];
+            // This ignores the input fields that haven't any rules.
+            if(! isset($this->validators[$att]))
+            {
+                continue;
+            }
+            
+            $rules = $this->validators[$att];            
+            $value = $this->getKeyValue($object, $att);
 
             foreach ($rules as $rule)
             {
@@ -152,22 +158,29 @@ class ValidationSet implements Interfaces\IValidator
 
     /**
      * Tests whether the given object or array pass all the given rules.
+     * 
      * @param mixed $object The object or array to test.
+     * @param array $fields A list of fields to check, ignoring the others.
+     * @throws ValidatorException If there's a validation error.
+     * @throws \OutOfBoundsException If there's a rule for a key that is not set.
+     * @throws \InvalidArgumentException If the fields parameter is not string nor array.
      */
-    public function assert($object)
+    public function assert($object, $fields = null)
     {
-        $values = array();
-
-        foreach (array_keys($this->validators) as $key)
-        {
-            $values[$key] = $this->getKeyValue($object, $key);
-        }
+        $fields = $this->getFields($fields);
 
         $exceptions = array();
-        foreach ($this->validators as $att => $rules)
+        foreach ($fields as $att)
         {
-            $value = $values[$att];
-
+            // This ignores the input fields that haven't any rules.
+            if(! isset($this->validators[$att]))
+            {
+                continue;
+            }
+            
+            $value = $this->getKeyValue($object, $att);
+            $rules = $this->validators[$att];
+            
             foreach ($rules as $rule)
             {
                 if ($rule instanceof ValidationValue)
@@ -295,6 +308,31 @@ class ValidationSet implements Interfaces\IValidator
         {
             $rule->addKeyValue($key, $value);
         }
+    }
+    
+    /**
+     * Gets the fields from the input. As function to avoid repeat on validate and assert.
+     * 
+     * @param string|array $fields The input fields.
+     * @throws \InvalidArgumentException If the fields parameter is not string nor array.
+     */
+    protected function getFields($fields)
+    {
+        if ($fields === null)
+        {
+            $fields = array_keys($this->validators);
+        }
+        elseif (is_string($fields))
+        {
+            $fields = array($fields);
+        }
+        elseif (!is_array($fields))
+        {
+            throw new \InvalidArgumentException(sprintf(
+                    dgettext('Flikore.Validator', 'The argument "%s" must be either %s or %s.'), 
+                    'fields', dgettext('Flikore.Validator','a string'), dgettext('Flikore.Validator','an array')));
+        }
+        return $fields;
     }
 
 }
