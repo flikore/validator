@@ -1,0 +1,12 @@
+{% include header.html %}
+
+<div class="{% if page.menu %}col-md-6{% else %}col-md-8{% endif %} col-md-offset-2" id="main" role="main">
+    {{ content }}
+</div>
+{% if page.menu %}
+    <div class="col-md-2">
+        <div id="toc" data-spy="affix"></div>
+    </div>
+{% endif %}
+
+{% include footer.html %}

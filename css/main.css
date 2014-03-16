@@ -1,0 +1,10 @@
+#ulmenu .nav > li > .nav {
+    padding-left: 20px;
+    font-size: 85%;
+}
+
+#ulmenu li.active > a {
+    border-left-width: 2px;
+    border-left-color: white;
+    border-left-style: solid;
+}
