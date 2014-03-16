@@ -322,15 +322,15 @@ class ValidationSet implements Interfaces\IValidator
         {
             $fields = array_keys($this->validators);
         }
-        elseif (is_string($fields))
+        elseif (is_string($fields) || is_int($fields))
         {
             $fields = array($fields);
         }
         elseif (!is_array($fields))
         {
             throw new \InvalidArgumentException(sprintf(
-                    dgettext('Flikore.Validator', 'The argument "%s" must be either %s or %s.'), 
-                    'fields', dgettext('Flikore.Validator','a string'), dgettext('Flikore.Validator','an array')));
+                    dgettext('Flikore.Validator', 'The argument "%s" must be either %s, %s or %s.'), 
+                    'fields', dgettext('Flikore.Validator','a string'), dgettext('Flikore.Validator','an array'), dgettext('Flikore.Validator','an integer')));
         }
         return $fields;
     }
