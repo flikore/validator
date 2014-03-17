@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Flikore\Validator\Validators\ValueBetweenValidator | Flikore Validator</title>
+
+	<script type="text/javascript" src="resources/combined.js?160735027"></script>
+	<script type="text/javascript" src="elementlist.js?2111964932"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/bootstrap.min.css?260161822" />
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?2015443609" />
+
+</head>
+
+<body>
+	<div id="navigation" class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a href="../../" class="brand">Flikore Validator</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+                                            <li><a href="index.html" class="primary">Flikore Validator</a></li>
+						<li>
+							<a href="namespace-Flikore.Validator.Validators.html" title="Summary of Flikore\Validator\Validators"><span>Namespace</span></a>
+						</li>
+						<li class="active">
+<span>Class</span>						</li>
+
+						<li class="divider-vertical"></li>
+
+						<li>
+							<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+						</li>
+						<li>
+							<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+						</li>
+
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="left">
+	<div id="menu">
+		<form id="search" class="form-search">
+			<input type="hidden" name="cx" value="" />
+			<input type="hidden" name="ie" value="UTF-8" />
+			<input type="text" name="q" class="search-query" placeholder="Search" />
+		</form>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-Flikore.html">Flikore<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Flikore.Validator.html">Validator<span></span></a>
+						<ul>
+				<li><a href="namespace-Flikore.Validator.Exception.html">Exception</a>
+						</li>
+				<li class="active"><a href="namespace-Flikore.Validator.Validators.html">Validators</a>
+						</li>
+							</ul></li></ul></li>
+			</ul>
+		</div>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Flikore.Validator.Validators.AfterDateTimeValidator.html">AfterDateTimeValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.AlphaNumericValidator.html">AlphaNumericValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.AlphaValidator.html">AlphaValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.BeforeDateTimeValidator.html">BeforeDateTimeValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.DateTimeValidator.html">DateTimeValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.DateValidator.html" class="deprecated">DateValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.EmailValidator.html">EmailValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.EqualsValidator.html">EqualsValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.ExactLengthValidator.html">ExactLengthValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.ExactValueValidator.html">ExactValueValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.GreaterThanValidator.html">GreaterThanValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.InstanceOfValidator.html">InstanceOfValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.IPv4Validator.html">IPv4Validator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.IPv6Validator.html">IPv6Validator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.LengthBetweenValidator.html">LengthBetweenValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.LessThanValidator.html">LessThanValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.MaxDateTimeValidator.html">MaxDateTimeValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.MaxLengthValidator.html">MaxLengthValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.MaxValueValidator.html">MaxValueValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.MinAgeValidator.html">MinAgeValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.MinDateTimeValidator.html">MinDateTimeValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.MinLengthValidator.html">MinLengthValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.MinValueValidator.html">MinValueValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.NotEmptyValidator.html">NotEmptyValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.NotEqualsValidator.html">NotEqualsValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.NumericValidator.html">NumericValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.OrValidator.html">OrValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.RecursiveValidator.html">RecursiveValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.RegexValidator.html">RegexValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.UriValidator.html">UriValidator</a></li>
+				<li class="active"><a href="class-Flikore.Validator.Validators.ValueBetweenValidator.html">ValueBetweenValidator</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+	<div id="rightInner">
+<div id="content" class="class">
+	<h1>Class ValueBetweenValidator</h1>
+
+
+	<div class="description">
+	
+<p>Validates that the value is between a certain range.</p>
+
+	</div>
+
+	<dl class="tree well">
+		<dd style="padding-left:0px">
+			<a href="class-Flikore.Validator.Validator.html"><span>Flikore\Validator\Validator</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Flikore\Validator\Validators\ValueBetweenValidator</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="alert alert-info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Flikore.html">Flikore</a>\<a href="namespace-Flikore.Validator.html">Validator</a>\<a href="namespace-Flikore.Validator.Validators.html">Validators</a><br />
+		<b>Package:</b> Flikore\Validator<br />
+
+				<b>Copyright:</b>
+				(c) 2014, George Marques<br />
+				<b>License:</b>
+				<a href="http://opensource.org/licenses/MIT">MIT</a><br />
+				<b>Author:</b>
+				George Marques &lt;george at georgemarques.com.br&gt;<br />
+				<b>Version:</b>
+				0.4.0<br />
+				<b>Since:</b>
+				0.3<br />
+				<b>CustomKey:</b>
+				<i>%min%</i> The minimum valid value.<br />
+				<b>CustomKey:</b>
+				<i>%max%</i> The maximum valid value.<br />
+		<b>Located at</b> <a href="source-class-Flikore.Validator.Validators.ValueBetweenValidator.html#29-101" title="Go to source code">Flikore/Validator/Validators/ValueBetweenValidator.php</a><br />
+	</div>
+
+
+
+		<h2>Methods summary</h2>
+		<table class="summary table table-bordered table-striped" id="methods">
+		<tr data-order="__construct" id="___construct">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___construct">#</a>
+			<code><a href="source-class-Flikore.Validator.Validators.ValueBetweenValidator.html#63-84" title="Go to source code">__construct</a>( <span>integer <var>$min</var></span>, <span>integer <var>$max</var></span> )</code>
+
+			<div class="description short">
+				
+<p>Creates a new Value Between Validator.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Creates a new Value Between Validator.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$min</var></dt>
+						<dd><code>integer</code><br>$min The minimum valid value.</dd>
+						<dt><var>$max</var></dt>
+						<dd><code>integer</code><br>$max The maximum valid value.</dd>
+					</dl></div>
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="doValidate" id="_doValidate">
+
+			<td class="attributes"><code>
+				 protected 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_doValidate">#</a>
+			<code><a href="source-class-Flikore.Validator.Validators.ValueBetweenValidator.html#86-99" title="Go to source code">doValidate</a>( <span>mixed <var>$value</var></span> )</code>
+
+			<div class="description short">
+				
+<p>Executes the real validation so it can be reused.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Executes the real validation so it can be reused.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$value</var></dt>
+						<dd><code>mixed</code><br>$value The value to validate.</dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code>boolean</code><br>Whether the value pass the validation.<br />
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		</table>
+
+		<h3>Methods inherited from <a href="class-Flikore.Validator.Validator.html#methods">Flikore\Validator\Validator</a></h3>
+		<p class="elementList">
+			<code><a href="class-Flikore.Validator.Validator.html#_addKeyValue">addKeyValue()</a></code>, 
+			<code><a href="class-Flikore.Validator.Validator.html#_applyTemplate">applyTemplate()</a></code>, 
+			<code><a href="class-Flikore.Validator.Validator.html#_assert">assert()</a></code>, 
+			<code><a href="class-Flikore.Validator.Validator.html#_getErrorMessage">getErrorMessage()</a></code>, 
+			<code><a href="class-Flikore.Validator.Validator.html#_isEmpty">isEmpty()</a></code>, 
+			<code><a href="class-Flikore.Validator.Validator.html#_setErrorMessage">setErrorMessage()</a></code>, 
+			<code><a href="class-Flikore.Validator.Validator.html#_validate">validate()</a></code>
+		</p>
+
+
+		<h3>Magic methods summary</h3>
+
+
+
+
+
+
+
+
+		<h2>Properties summary</h2>
+		<table class="summary table table-bordered table-striped" id="properties">
+		<tr data-order="min" id="$min">
+			<td class="attributes"><code>
+				protected  
+				integer
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-Flikore.Validator.Validators.ValueBetweenValidator.html#45-49" title="Go to source code"><var>$min</var></a>
+			</td>
+			<td class="description"><div>
+				<a href="#$min" class="anchor">#</a>
+
+				<div class="description short">
+					
+<p>The minimum valid value.</p>
+
+				</div>
+
+				<div class="description detailed hidden">
+					
+<p>The minimum valid value.</p>
+
+
+				</div>
+			</div></td>
+		</tr>
+		<tr data-order="max" id="$max">
+			<td class="attributes"><code>
+				protected  
+				integer
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-Flikore.Validator.Validators.ValueBetweenValidator.html#51-55" title="Go to source code"><var>$max</var></a>
+			</td>
+			<td class="description"><div>
+				<a href="#$max" class="anchor">#</a>
+
+				<div class="description short">
+					
+<p>The maximum valid value.</p>
+
+				</div>
+
+				<div class="description detailed hidden">
+					
+<p>The maximum valid value.</p>
+
+
+				</div>
+			</div></td>
+		</tr>
+		<tr data-order="message" id="$message">
+			<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-Flikore.Validator.Validators.ValueBetweenValidator.html#57-61" title="Go to source code"><var>$message</var></a>
+			</td>
+			<td class="description"><div>
+				<a href="#$message" class="anchor">#</a>
+
+				<div class="description short">
+					
+<p>The error message for this validator.</p>
+
+				</div>
+
+				<div class="description detailed hidden">
+					
+<p>The error message for this validator.</p>
+
+
+				</div>
+			</div></td>
+		</tr>
+		</table>
+
+		<h3>Properties inherited from <a href="class-Flikore.Validator.Validator.html#properties">Flikore\Validator\Validator</a></h3>
+		<p class="elementList">
+			<code><a href="class-Flikore.Validator.Validator.html#$values"><var>$values</var></a></code>
+		</p>
+
+
+
+
+
+</div>
+	</div>
+
+	<div id="footer">
+		Flikore Validator API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</body>
+</html>
