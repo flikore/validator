@@ -1,8 +1,3 @@
-(function ($){
-    
-    console.log('ok');
-})( jQuery );
-
 function generateList(element)
 {
     var html='<div id="ulmenu"><ul class="nav nav-list">';
@@ -26,9 +21,8 @@ function generateList(element)
             html +='</ul></li>\n';
         }
                 
-        html += '<li><a href="#' + $(value).attr('id') + '" class="level-'+ thisLevel +'">'+ $(value).html() + '</a>';      
+        html += '<li><a href="#' + $(value).attr('id') + '" class="level-'+ thisLevel +'">'+ $(value).html() + '</a>';
         
-        console.log(lastLevel, thisLevel, $(value).html());
         lastLevel = thisLevel;
     });
     

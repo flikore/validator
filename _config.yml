@@ -5,3 +5,4 @@ highlighter: pygments
 source: .
 destination: _site
 encoding: utf-8
+baseurl: http://flikore.github.io/validator

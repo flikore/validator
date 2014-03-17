@@ -7,14 +7,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ site.url }}">Validator</a>
+            <a class="navbar-brand" href="{{ site.baseurl }}">Validator</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="{% if page.overview %}active{% endif %}"><a href="{{ site.url }}/">Overview</a></li>
-                <li class="{% if page.usage %}active{% endif %}"><a href="{{ site.url}}/usage.html">Usage</a></li>
-                <li class="{% if page.validators %}active{% endif %}"><a href="{{ site.url}}/validators.html">Validators</a></li>
+                <li class="{% if page.overview %}active{% endif %}"><a href="{{ site.baseurl }}/">Overview</a></li>
+                <li class="{% if page.usage %}active{% endif %}"><a href="{{ site.baseurl}}/usage.html">Usage</a></li>
+                <li class="{% if page.validators %}active{% endif %}"><a href="{{ site.baseurl}}/validators.html">Validators</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown"><a href="#" data-toggle="dropdown">API Documentation <b class="caret"></b></a>
