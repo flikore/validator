@@ -7,16 +7,16 @@ apiversions: true
 
 ## Latest release version
 
-* [master](/api/master) ([permalink to v0.4.0](/api/v0.4.0))
+* [master]({{ site.baseurl }}/api/master) ([permalink to v0.4.0]({{ site.baseurl }}/api/v0.4.0))
 
 ## Latest development version
 
-* [develop](/api/develop)
+* [develop]({{ site.baseurl }}/api/develop)
 
 ## Older versions
 
-* [v0.3.0](/api/v0.3.0)
-* [v0.2.0](/api/v0.2.0)
-* [v0.1.2](/api/v0.1.2)
-* [v0.1.1](/api/v0.1.1)
-* [v0.1.0](/api/v0.1.0)
+* [v0.3.0]({{ site.baseurl }}/api/v0.3.0)
+* [v0.2.0]({{ site.baseurl }}/api/v0.2.0)
+* [v0.1.2]({{ site.baseurl }}/api/v0.1.2)
+* [v0.1.1]({{ site.baseurl }}/api/v0.1.1)
+* [v0.1.0]({{ site.baseurl }}/api/v0.1.0)
