@@ -30,7 +30,7 @@ namespace Flikore\Validator\Validators;
  * Tests for RecursiveValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.4.0
+ * @version 0.5.0
  * @since 0.4.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -82,5 +82,26 @@ class RecursiveValidatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('notOk', $v->getErrorMessage());
     }
-
+    
+    public function testNestedSet()
+    {
+        $set = new \Flikore\Validator\ValidationSet();
+        $set->addRule('name', new NotEmptyValidator());
+        
+        $v = new RecursiveValidator($set);
+        
+        $testOk = array(
+            array('name' => 'not empty'),
+            array('name' => 'also not empty'),
+        );
+        
+        $this->assertTrue($v->validate($testOk));
+        
+        $testNotOk = array(
+            array('name' => 'not empty'),
+            array('name' => ''),
+        );
+        
+        $this->assertFalse($v->validate($testNotOk));
+    }
 }

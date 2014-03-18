@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * The MIT License
  *
  * Copyright 2014 George Marques <george at georgemarques.com.br>.
@@ -26,13 +26,15 @@
 
 namespace Flikore\Validator\Validators;
 
+use Flikore\Validator\Intl;
+
 /**
  * Validates that a date/time is before a given reference.
  * 
  * @customKey <i>%date%</i> The reference date/time.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.4.0
+ * @version 0.5.0
  * @since 0.4.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -63,7 +65,7 @@ class BeforeDateTimeValidator extends \Flikore\Validator\Validator
     {
         if(!is_string($format))
         {
-            throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The format argument must be a string.'));
+            throw new \InvalidArgumentException(Intl\GetText::_d('Flikore.Validator', 'The format argument must be a string.'));
         }
         
         $this->date = $date;

@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * The MIT License
  *
  * Copyright 2014 George Marques <george at georgemarques.com.br>.
@@ -32,13 +32,13 @@ use Flikore\Validator\Exception\ValidatorException;
  * A set of validation rules to be checked at the same input set.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.4.0
+ * @version 0.5.0
  * @since 0.1
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class ValidationSet
+class ValidationSet implements Interfaces\IValidator
 {
 
     /**
@@ -46,6 +46,12 @@ class ValidationSet
      * @var Validator[][] An array of validation objects.
      */
     protected $validators;
+
+    /**
+     * Stores the key-value pairs for the inner validators.
+     * @var array Stores the key-value pairs for the inner validators.
+     */
+    protected $values = array();
 
     /**
      * Creates a new validation set.
@@ -83,6 +89,7 @@ class ValidationSet
         }
         $rule->addKeyValue('key', $label);
         $this->validators[$name][] = $rule;
+        $this->updateSingleKeyValue($rule);
     }
 
     /**
@@ -100,22 +107,49 @@ class ValidationSet
     }
 
     /**
-     * Checks if the object or array passes all the validation tests.
-     * @param mixed $object The object or array to test.
-     * @return boolean Whether it passes the tests or not.
+     * Gets the set of rules prepared for a given key.
+     * 
+     * @param string $key The key to get.
+     * @return array The array with the rules (may be emtpy).
      */
-    public function validate($object)
+    public function getRulesFor($key)
     {
-        $values = array();
+        return isset($this->validators[$key]) ? $this->validators[$key] : array();
+    }
+    
+    /**
+     * Gets all the rules in this set.
+     * 
+     * @return array The collection of rules by fields.
+     */
+    public function getAllRules()
+    {
+        return $this->validators;
+    }
 
-        foreach (array_keys($this->validators) as $key)
-        {
-            $values[$key] = $this->getKeyValue($object, $key);
-        }
+    /**
+     * Checks if the object or array passes all the validation tests.
+     * 
+     * @param mixed $object The object or array to test.
+     * @param array $fields A list of fields to check, ignoring the others.
+     * @return boolean Whether it passes the tests or not.
+     * @throws \InvalidArgumentException If the fields parameter is not string nor array.
+     * @throws \OutOfBoundsException If there's a rule for a key that is not set.
+     */
+    public function validate($object, $fields = null)
+    {
+        $fields = $this->getFields($fields);
 
-        foreach ($this->validators as $att => $rules)
+        foreach ($fields as $att)
         {
-            $value = $values[$att];
+            // This ignores the input fields that haven't any rules.
+            if(! isset($this->validators[$att]))
+            {
+                continue;
+            }
+            
+            $rules = $this->validators[$att];            
+            $value = $this->getKeyValue($object, $att);
 
             foreach ($rules as $rule)
             {
@@ -134,22 +168,29 @@ class ValidationSet
 
     /**
      * Tests whether the given object or array pass all the given rules.
+     * 
      * @param mixed $object The object or array to test.
+     * @param array $fields A list of fields to check, ignoring the others.
+     * @throws ValidatorException If there's a validation error.
+     * @throws \OutOfBoundsException If there's a rule for a key that is not set.
+     * @throws \InvalidArgumentException If the fields parameter is not string nor array.
      */
-    public function assert($object)
+    public function assert($object, $fields = null)
     {
-        $values = array();
-
-        foreach (array_keys($this->validators) as $key)
-        {
-            $values[$key] = $this->getKeyValue($object, $key);
-        }
+        $fields = $this->getFields($fields);
 
         $exceptions = array();
-        foreach ($this->validators as $att => $rules)
+        foreach ($fields as $att)
         {
-            $value = $values[$att];
-
+            // This ignores the input fields that haven't any rules.
+            if(! isset($this->validators[$att]))
+            {
+                continue;
+            }
+            
+            $value = $this->getKeyValue($object, $att);
+            $rules = $this->validators[$att];
+            
             foreach ($rules as $rule)
             {
                 if ($rule instanceof ValidationValue)
@@ -176,6 +217,23 @@ class ValidationSet
     }
 
     /**
+     * Adds a new key-value pair to be replaced by the templating engine.
+     * This does not check if it's replacing a specific validator value.
+     * 
+     * @param string $key The key to replace (in the template as "%key%")
+     * @param string $value The value to be inserted instead of the key.
+     */
+    public function addKeyValue($key, $value)
+    {
+        if (is_object($value) && !method_exists($value, '__toString'))
+        {
+            $value = get_class($value);
+        }
+        $this->values[$key] = (string) $value;
+        $this->updateKeyValues();
+    }
+
+    /**
      * Gets a value for a given key in an object or array.
      * @param mixed $object The object or array.
      * @param string $key The name of the key or property.
@@ -190,7 +248,7 @@ class ValidationSet
             {
                 if (!($object instanceof \ArrayAccess))
                 {
-                    throw new \OutOfBoundsException(sprintf(dgettext('Flikore.Validator', 'The key %s does not exist.'), $key));
+                    throw new \OutOfBoundsException(sprintf(Intl\GetText::_d('Flikore.Validator', 'The key %s does not exist.'), $key));
                 }
             }
             else
@@ -207,7 +265,7 @@ class ValidationSet
             }
             catch (\ReflectionException $e)
             {
-                throw new \OutOfBoundsException(sprintf(dgettext('Flikore.Validator', 'The property %s does not exist.'), $key), 0, $e);
+                throw new \OutOfBoundsException(sprintf(Intl\GetText::_d('Flikore.Validator', 'The property %s does not exist.'), $key), 0, $e);
             }
             $prop->setAccessible(true);
             return $prop->getValue($object);
@@ -230,6 +288,61 @@ class ValidationSet
             $values[$key] = $this->getKeyValue($object, $key);
         }
         return $validationValue->createRule($values);
+    }
+
+    /**
+     * Updates the inner key-value pairs to reflect this object's values.
+     */
+    protected function updateKeyValues()
+    {
+        if (!empty($this->validators))
+        {
+            foreach ($this->validators as $rules)
+            {
+                foreach ($rules as $rule)
+                {
+                    $this->updateSingleKeyValue($rule);
+                }
+            }
+        }
+    }
+
+    /**
+     * Updates a single validator to have the same key-values added to the set.
+     * 
+     * @param Interfaces\IValidator $rule The rule to update
+     */
+    protected function updateSingleKeyValue($rule)
+    {
+        foreach ($this->values as $key => $value)
+        {
+            $rule->addKeyValue($key, $value);
+        }
+    }
+    
+    /**
+     * Gets the fields from the input. As function to avoid repeat on validate and assert.
+     * 
+     * @param string|array $fields The input fields.
+     * @throws \InvalidArgumentException If the fields parameter is not string nor array.
+     */
+    protected function getFields($fields)
+    {
+        if ($fields === null)
+        {
+            $fields = array_keys($this->validators);
+        }
+        elseif (is_string($fields) || is_int($fields))
+        {
+            $fields = array($fields);
+        }
+        elseif (!is_array($fields))
+        {
+            throw new \InvalidArgumentException(sprintf(
+                    Intl\GetText::_d('Flikore.Validator', 'The argument "%s" must be either %s, %s or %s.'), 
+                    'fields', Intl\GetText::_d('Flikore.Validator','a string'), Intl\GetText::_d('Flikore.Validator','an array'), Intl\GetText::_d('Flikore.Validator','an integer')));
+        }
+        return $fields;
     }
 
 }

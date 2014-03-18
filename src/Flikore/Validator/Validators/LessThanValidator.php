@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * The MIT License
  *
  * Copyright 2014 George Marques <george at georgemarques.com.br>.
@@ -26,13 +26,15 @@
 
 namespace Flikore\Validator\Validators;
 
+use Flikore\Validator\Intl;
+
 /**
  * Validates that a number is lesser than a given value.
  * 
  * @customKey <i>%max%</i> The exclusive upper boundary.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.4.0
+ * @version 0.5.0
  * @since 0.4.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -61,7 +63,7 @@ class LessThanValidator extends \Flikore\Validator\Validator
     {
         if (!is_int($max))
         {
-            throw new \InvalidArgumentException(dgettext('Flikore.Validator','The limit must be a valid integer'));
+            throw new \InvalidArgumentException(Intl\GetText::_d('Flikore.Validator','The limit must be a valid integer'));
         }
 
         $this->max = $max;

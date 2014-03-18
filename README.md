@@ -16,7 +16,7 @@ Flikore validator is a validation library for PHP aimed to be simple and extensi
 ```json
 {
     "require": {
-        "flikore/validator": "dev-develop"
+        "flikore/validator": "dev-master"
     }
 }
 ```
@@ -202,6 +202,8 @@ catch (Flikore\Validator\Exception\ValidatorException $e)
 }
 ```
 
+To get all messages of a set as an array, use the `ValidatorException::getMessages()` function.
+
 ### Validating arrays and objects
 
 The `ValidationSet` class can be used as a shortcut to test all the values in an array or the properties of an object all at once. The usage is pretty straightforward:
@@ -244,6 +246,41 @@ $set = new \Flikore\Validator\ValidationSet(array(
 var_dump($set->validate(array('name' => 'this is ok',          'age' => 14))); // bool(true)
 var_dump($set->validate(array('name' => 'oops',                'age' => 14))); // bool(false)
 var_dump($set->validate(array('name' => 'the age is not good', 'age' => 12))); // bool(false)
+```
+
+If you need to validate only a subset of fields (for, say, using in the `onBlur` event of an input element, without need to validate the whole form), set the second argument of `validate` (or `assert`) to the field or list of fields you want to actually validate. If there's no rules for a given field, it'll just be ignored.
+
+**Example**:
+
+```php
+<?php
+
+// Create a set of rules.
+$set = new ValidationSet(array(
+    'name'  => array(
+        new v\NotEmptyValidator(),
+        new v\MinLengthValidator(5),
+    ),
+    'age'   => new v\MinValueValidator(13),
+    'email' => new v\EmailValidator(),
+));
+
+// Creating a value
+$value = array(
+    'name'    => 'this is ok',
+    'age'     => 12, // not ok
+    'email'   => 'this_is_ok@example.com',
+    'no_rule' => 'whatever',
+);
+
+// Validates only the name, so it's ok
+var_dump($set->validate($value, 'name')); // bool(true)
+// Validates the name and email
+var_dump($set->validate($value, array('name', 'email'))); // bool(true)
+// Validates the no_rule
+var_dump($set->validate($value, 'no_rule')); // bool(true)
+// Validates the name and age, so there's error
+var_dump($set->validate($value, array('name', 'age'))); // bool(false)
 ```
 
 #### Comparing with other keys
@@ -345,6 +382,43 @@ catch (Flikore\Validator\Exception\ValidatorException $e)
 }
 ```
 
+#### Nested arrays
+
+To validate arrays inside arrays, it is possible to nest `ValidationSet` as a rule. So, in theory, there's no limit to how much levels you can nest.
+
+**Example**:
+
+```php
+<?php
+
+use Flikore\Validator\Validators as v;
+use Flikore\Validator\ValidationSet;
+
+// To validate arrays inside arrays, the validation sets can be nested.
+$v = new ValidationSet();
+
+// You may add a ValidationSet as a rule to some field.
+// Here, let's create a set to validate the user name and email
+$inner = new ValidationSet();
+// And add the rules
+$inner->addRule('name', new v\AlphaValidator);
+$inner->addRule('email', new v\EmailValidator);
+
+// Then, use this as the rule for the main set.
+$v->addRule('user', $inner);
+
+// Now, take this array:
+$value = array(
+    'user' => array(
+        'name' => 'Ok name',
+        'email' =>'this_is_ok@example.com',
+    )
+);
+
+// And validate it
+var_dump($v->validate($value)); //bool(true)
+```
+
 ## Available validators
 
 Currently, there are the following validator classes:
@@ -365,6 +439,8 @@ Currently, there are the following validator classes:
 * `InstanceOfValidator`
 * `LengthBetweenValidator`
 * `LessThanValidator`
+* `LetterNumericValidator`
+* `LetterValidator`
 * `MaxDateTimeValidator`
 * `MaxLengthValidator`
 * `MaxValueValidator`
@@ -372,6 +448,7 @@ Currently, there are the following validator classes:
 * `MinDateTimeValidator`
 * `MinLengthValidator`
 * `MinValueValidator`
+* `NoSpaceValidator`
 * `NotEmptyValidator`
 * `NotEqualsValidator`
 * `NumericValidator`
@@ -383,7 +460,7 @@ Currently, there are the following validator classes:
 
 ## Reference
 
-The documentation reference for all classes (including the validators) can be found at [http://flikore.github.io/validator/docs/index.html](http://flikore.github.io/validator/docs/index.html "http://flikore.github.io/validator/docs/index.html").
+The documentation reference for all classes (including the validators) can be found at [http://flikore.github.io/validator/api/masterl](http://flikore.github.io/validator/api/master "http://flikore.github.io/validator/api/master").
 
 The `examples` folder contains examples that can be executed. Also, check the `unittests` folder for examples of every validator class being used.
 

@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * The MIT License
  *
  * Copyright 2014 George Marques <george at georgemarques.com.br>.
@@ -30,7 +30,7 @@ namespace Flikore\Validator\Validators;
  * Validates that a value is not empty. An empty value is null, empty string or empty array.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.4.0
+ * @version 0.5.0
  * @since 0.2
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques

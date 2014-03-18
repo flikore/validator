@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * The MIT License
  *
  * Copyright 2014 George Marques <george at georgemarques.com.br>.
@@ -26,13 +26,15 @@
 
 namespace Flikore\Validator;
 
+use Flikore\Validator\Interfaces\IValidator;
+
 /**
  * This class can be used as a validation rule in a set to use the fields from the object
  * being validate as an input to the constructor of a validator. This delegates the proper
  * construction of the validation until there are an object to validate.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.4.0
+ * @version 0.5.0
  * @since 0.4.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -74,8 +76,8 @@ class ValidationValue
     /**
      * Creates a new validation value for a validation set.
      * 
-     * @param string|Validator $validator The validator to build be it a class name (fully qualified)
-     *                                    or a dummy validator object.
+     * @param string|IValidator $validator The validator to build be it a class name (fully qualified)
+     *                                     or a dummy validator object.
      * @param mixed ...$params The parameters to the validator. To use a field from the validated
      *                         object, set these as ValidationKey objects.
      */
@@ -83,9 +85,9 @@ class ValidationValue
     {
         if (is_object($validator))
         {
-            if (!($validator instanceof Validator))
+            if (!($validator instanceof IValidator))
             {
-                throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The validator object must be a subclass of Validator'));
+                throw new \InvalidArgumentException(Intl\GetText::_d('Flikore.Validator', 'The validator object must be a implementation of IValidator'));
             }
             else
             {
@@ -94,9 +96,9 @@ class ValidationValue
         }
         elseif (is_string($validator))
         {
-            if (!is_subclass_of($validator, 'Flikore\Validator\Validator'))
+            if (!is_subclass_of($validator, 'Flikore\Validator\Interfaces\IValidator'))
             {
-                throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The validator object must be a subclass of Validator'));
+                throw new \InvalidArgumentException(Intl\GetText::_d('Flikore.Validator', 'The validator object must be a implementation of IValidator'));
             }
             else
             {
@@ -105,7 +107,7 @@ class ValidationValue
         }
         else
         {
-            throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The validator object must be a subclass of Validator'));
+            throw new \InvalidArgumentException(Intl\GetText::_d('Flikore.Validator', 'The validator object must be a implementation of IValidator'));
         }
 
         $params = func_get_args();
@@ -162,7 +164,7 @@ class ValidationValue
                 $key = $arg->getKey();
                 if (!isset($fields[$key]))
                 {
-                    throw new \OutOfBoundsException(dgettext('Flikore.Validator', sprintf('The "%s" key is missing in the input', $key)));
+                    throw new \OutOfBoundsException(sprintf(Intl\GetText::_d('Flikore.Validator', 'The "%s" key is missing in the input'), $key));
                 }
                 $params[$i] = $fields[$key];
             }

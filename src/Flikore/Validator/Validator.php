@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * The MIT License
  *
  * Copyright 2014 George Marques <george at georgemarques.com.br>.
@@ -30,13 +30,13 @@ namespace Flikore\Validator;
  * The base for validation classes.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.4.0
+ * @version 0.5.0
  * @since 0.1
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-abstract class Validator
+abstract class Validator implements Interfaces\IValidator
 {
 
     /**
@@ -118,10 +118,10 @@ abstract class Validator
      */
     protected function applyTemplate()
     {
-        $message = dgettext('Flikore.Validator', $this->message);
+        $message = Intl\GetText::_d('Flikore.Validator', $this->message);
         foreach ($this->values as $key => $value)
         {
-            $message = str_replace("%$key%", dgettext('Flikore.Validator', $value), $message);
+            $message = str_replace("%$key%", Intl\GetText::_d('Flikore.Validator', $value), $message);
         }
         return $message;
     }

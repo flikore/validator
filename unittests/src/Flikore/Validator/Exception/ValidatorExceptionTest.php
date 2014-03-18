@@ -30,7 +30,7 @@ namespace Flikore\Validator\Exception;
  * Tests for ValidationException class.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.4.0
+ * @version 0.5.0
  * @since 0.1
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -86,4 +86,40 @@ class ValidatorExceptionTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEquals($errB, $this->object->getError('aa'));
     }
 
+    public function testGetMessages()
+    {
+        $errA = new ValidatorException('aamsg');
+        $errB = new ValidatorException('bbmsg');
+        $errC = new ValidatorException('ccmsg');
+        $errD = new ValidatorException('ddmsg');
+        $errE = new ValidatorException('eemsg');
+        
+        $errC->setErrors(array('ddkey' => $errD, 'eekey' => $errE));
+        
+        $this->object->setErrors(array(
+            'aakey' => $errA,
+            'bbkey' => $errB,
+            'cckey' => $errC,
+        ));
+        
+        $expected = array(
+            'aakey' => 'aamsg',
+            'bbkey' => 'bbmsg',
+            'cckey' => array(
+                'ddkey' => 'ddmsg',
+                'eekey' => 'eemsg',
+            ),
+        );
+        
+        $this->assertEquals($expected, $this->object->getMessages());
+    }
+    
+    public function testGetMessagesNoRecursion()
+    {
+        $err = new ValidatorException('errmsg');
+        
+        $expected = array(0 => 'errmsg');
+        
+        $this->assertEquals($expected, $err->getMessages());
+    }
 }

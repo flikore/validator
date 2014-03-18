@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * The MIT License
  *
  * Copyright 2014 George Marques <george at georgemarques.com.br>.
@@ -32,7 +32,7 @@ namespace Flikore\Validator;
  * of the validator that went wrong.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.4.0
+ * @version 0.5.0
  * @since 0.2
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -51,15 +51,7 @@ class ValidationCombo extends Validator
      * A collection of all validators.
      * @var Validator[] A collection of all validators.
      */
-    protected $validators;
-
-    /**
-     * Creates a Validation Combo.
-     */
-    public function __construct()
-    {
-        $this->validators = new \SplDoublyLinkedList();
-    }
+    protected $validators = array();
 
     /**
      * Adds a new validator to the combo.
@@ -68,7 +60,7 @@ class ValidationCombo extends Validator
     public function addValidator(Validator $validator)
     {
         $validator->addKeyValue('key', $this->values['key']);
-        $this->validators->push($validator);
+        array_push($this->validators, $validator);
     }
 
     /**
