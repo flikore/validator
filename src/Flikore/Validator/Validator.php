@@ -118,10 +118,10 @@ abstract class Validator implements Interfaces\IValidator
      */
     protected function applyTemplate()
     {
-        $message = dgettext('Flikore.Validator', $this->message);
+        $message = Intl\GetText::_d('Flikore.Validator', $this->message);
         foreach ($this->values as $key => $value)
         {
-            $message = str_replace("%$key%", dgettext('Flikore.Validator', $value), $message);
+            $message = str_replace("%$key%", Intl\GetText::_d('Flikore.Validator', $value), $message);
         }
         return $message;
     }

@@ -69,7 +69,7 @@ class ValidationChoice extends Validator
         {
             if (!$arg instanceof Validator)
             {
-                throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The arguments must be intances of validators'));
+                throw new \InvalidArgumentException(Intl\GetText::_d('Flikore.Validator', 'The arguments must be intances of validators'));
             }
             $this->validators[] = $arg;
             $this->addKeyValue('v' . $i++, $arg->getErrorMessage());

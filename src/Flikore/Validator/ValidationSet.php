@@ -248,7 +248,7 @@ class ValidationSet implements Interfaces\IValidator
             {
                 if (!($object instanceof \ArrayAccess))
                 {
-                    throw new \OutOfBoundsException(sprintf(dgettext('Flikore.Validator', 'The key %s does not exist.'), $key));
+                    throw new \OutOfBoundsException(sprintf(Intl\GetText::_d('Flikore.Validator', 'The key %s does not exist.'), $key));
                 }
             }
             else
@@ -265,7 +265,7 @@ class ValidationSet implements Interfaces\IValidator
             }
             catch (\ReflectionException $e)
             {
-                throw new \OutOfBoundsException(sprintf(dgettext('Flikore.Validator', 'The property %s does not exist.'), $key), 0, $e);
+                throw new \OutOfBoundsException(sprintf(Intl\GetText::_d('Flikore.Validator', 'The property %s does not exist.'), $key), 0, $e);
             }
             $prop->setAccessible(true);
             return $prop->getValue($object);
@@ -339,8 +339,8 @@ class ValidationSet implements Interfaces\IValidator
         elseif (!is_array($fields))
         {
             throw new \InvalidArgumentException(sprintf(
-                    dgettext('Flikore.Validator', 'The argument "%s" must be either %s, %s or %s.'), 
-                    'fields', dgettext('Flikore.Validator','a string'), dgettext('Flikore.Validator','an array'), dgettext('Flikore.Validator','an integer')));
+                    Intl\GetText::_d('Flikore.Validator', 'The argument "%s" must be either %s, %s or %s.'), 
+                    'fields', Intl\GetText::_d('Flikore.Validator','a string'), Intl\GetText::_d('Flikore.Validator','an array'), Intl\GetText::_d('Flikore.Validator','an integer')));
         }
         return $fields;
     }

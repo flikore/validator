@@ -26,6 +26,8 @@
 
 namespace Flikore\Validator\Validators;
 
+use Flikore\Validator\Intl;
+
 /**
  * Validates that a date/time is after a given reference.
  * 
@@ -63,7 +65,7 @@ class AfterDateTimeValidator extends \Flikore\Validator\Validator
     {
         if(!is_string($format))
         {
-            throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The format argument must be a string.'));
+            throw new \InvalidArgumentException(Intl\GetText::_d('Flikore.Validator', 'The format argument must be a string.'));
         }
         
         $this->date = $date;

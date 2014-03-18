@@ -26,6 +26,8 @@
 
 namespace Flikore\Validator\Validators;
 
+use Flikore\Validator\Intl;
+
 /**
  * Validates that a number is lesser than a given value.
  * 
@@ -61,7 +63,7 @@ class LessThanValidator extends \Flikore\Validator\Validator
     {
         if (!is_int($max))
         {
-            throw new \InvalidArgumentException(dgettext('Flikore.Validator','The limit must be a valid integer'));
+            throw new \InvalidArgumentException(Intl\GetText::_d('Flikore.Validator','The limit must be a valid integer'));
         }
 
         $this->max = $max;

@@ -87,7 +87,7 @@ class ValidationValue
         {
             if (!($validator instanceof IValidator))
             {
-                throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The validator object must be a implementation of IValidator'));
+                throw new \InvalidArgumentException(Intl\GetText::_d('Flikore.Validator', 'The validator object must be a implementation of IValidator'));
             }
             else
             {
@@ -98,7 +98,7 @@ class ValidationValue
         {
             if (!is_subclass_of($validator, 'Flikore\Validator\Interfaces\IValidator'))
             {
-                throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The validator object must be a implementation of IValidator'));
+                throw new \InvalidArgumentException(Intl\GetText::_d('Flikore.Validator', 'The validator object must be a implementation of IValidator'));
             }
             else
             {
@@ -107,7 +107,7 @@ class ValidationValue
         }
         else
         {
-            throw new \InvalidArgumentException(dgettext('Flikore.Validator', 'The validator object must be a implementation of IValidator'));
+            throw new \InvalidArgumentException(Intl\GetText::_d('Flikore.Validator', 'The validator object must be a implementation of IValidator'));
         }
 
         $params = func_get_args();
@@ -164,7 +164,7 @@ class ValidationValue
                 $key = $arg->getKey();
                 if (!isset($fields[$key]))
                 {
-                    throw new \OutOfBoundsException(dgettext('Flikore.Validator', sprintf('The "%s" key is missing in the input', $key)));
+                    throw new \OutOfBoundsException(sprintf(Intl\GetText::_d('Flikore.Validator', 'The "%s" key is missing in the input'), $key));
                 }
                 $params[$i] = $fields[$key];
             }
