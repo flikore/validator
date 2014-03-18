@@ -116,6 +116,16 @@ class ValidationSet implements Interfaces\IValidator
     {
         return isset($this->validators[$key]) ? $this->validators[$key] : array();
     }
+    
+    /**
+     * Gets all the rules in this set.
+     * 
+     * @return array The collection of rules by fields.
+     */
+    public function getAllRules()
+    {
+        return $this->validators;
+    }
 
     /**
      * Checks if the object or array passes all the validation tests.

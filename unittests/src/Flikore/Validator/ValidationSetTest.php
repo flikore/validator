@@ -470,5 +470,27 @@ class ValidationSetTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->object->validate($tst, 0));        // string
         $this->assertTrue($this->object->validate($tst, array(0))); // array        
     }
+    
+    public function testGetAllRules()
+    {
+        $rules = array(
+            'field1' => array(
+                new Validators\NotEmptyValidator(),
+                new Validators\NumericValidator(),
+            ),
+            'field2' => array(
+                new Validators\MaxLengthValidator(3),
+            ),
+        );
+        
+        $v = new ValidationSet($rules);
+        
+        $gotRules = $v->getAllRules();
+        foreach ($rules as $key => $value)
+        {
+            $this->assertArrayHasKey($key, $gotRules);
+            $this->assertEquals($value, $gotRules[$key]);
+        }
+    }
 
 }
