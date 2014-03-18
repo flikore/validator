@@ -3,7 +3,7 @@
 *A simple validation library*.
 
 [![Build Status](https://travis-ci.org/flikore/validator.png)](https://travis-ci.org/flikore/validator)
-[![Coverage Status](https://coveralls.io/repos/flikore/validator/badge.png?branch=develop)](https://coveralls.io/r/flikore/validator?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/flikore/validator/badge.png?branch=master)](https://coveralls.io/r/flikore/validator?branch=master)
 
 Flikore validator is a validation library for PHP aimed to be simple and extensible.
 
@@ -16,7 +16,7 @@ Flikore validator is a validation library for PHP aimed to be simple and extensi
 ```json
 {
     "require": {
-        "flikore/validator": "dev-develop"
+        "flikore/validator": "dev-master"
     }
 }
 ```
@@ -201,6 +201,8 @@ catch (Flikore\Validator\Exception\ValidatorException $e)
     echo $e->getMessage(); // Shows "The input is not 5 characters long as it should be."
 }
 ```
+
+To get all messages of a set as an array, use the `ValidatorException::getMessages()` function.
 
 ### Validating arrays and objects
 
@@ -458,7 +460,7 @@ Currently, there are the following validator classes:
 
 ## Reference
 
-The documentation reference for all classes (including the validators) can be found at [http://flikore.github.io/validator/docs/index.html](http://flikore.github.io/validator/docs/index.html "http://flikore.github.io/validator/docs/index.html").
+The documentation reference for all classes (including the validators) can be found at [http://flikore.github.io/validator/api/masterl](http://flikore.github.io/validator/api/master "http://flikore.github.io/validator/api/master").
 
 The `examples` folder contains examples that can be executed. Also, check the `unittests` folder for examples of every validator class being used.
 

@@ -32,7 +32,7 @@ namespace Flikore\Validator\Validators;
  * @customKey <i>%format%</i> The format specified to check the valid date/time.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.4.0
+ * @version 0.5.0
  * @since 0.4.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques

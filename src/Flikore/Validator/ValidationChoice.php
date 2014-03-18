@@ -34,8 +34,8 @@ use Flikore\Validator\Validator;
  * @customKey <i>%vN%</i> The message of the Nth validator (1-index).
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.4.0
- * @since ???
+ * @version 0.5.0
+ * @since 0.5.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
