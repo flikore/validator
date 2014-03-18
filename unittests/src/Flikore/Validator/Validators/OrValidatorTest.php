@@ -34,7 +34,7 @@ use Flikore\Validator\ValidationChoiceTest;
  * @author George Marques <george at georgemarques.com.br>
  * @deprecated since version ???
  * @see ValidationChoiceTest
- * @version 0.4.0
+ * @version 0.5.0
  * @since 0.4.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
