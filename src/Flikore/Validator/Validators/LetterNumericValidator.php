@@ -27,7 +27,7 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Validates that a string contains only letters (including foreign ones). This ignores spaces.
+ * Validates that a string contains only letters (including foreign ones) and numbers. This ignores spaces.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @version 0.4.0
@@ -36,14 +36,14 @@ namespace Flikore\Validator\Validators;
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class LetterValidator extends \Flikore\Validator\Validator
+class LetterNumericValidator extends \Flikore\Validator\Validator
 {
 
     /**
      * The error message for this validator.
      * @var string The error message for this validator.
      */
-    protected $message = 'The %key% must contain only letters.';
+    protected $message = 'The %key% must contain only letters and numbers.';
     
     /**
      * Executes the real validation so it can be reused.
@@ -57,7 +57,7 @@ class LetterValidator extends \Flikore\Validator\Validator
             return true;
         }
         
-        return (bool)(preg_match('/^[\pL\s]+$/uD', $value));
+        return (bool)(preg_match('/^[\pL\s\pN]+$/uD', $value));
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * The MIT License
  *
  * Copyright 2014 George Marques <george at georgemarques.com.br>.
@@ -27,7 +27,7 @@
 namespace Flikore\Validator\Validators;
 
 /**
- * Validates that a string contains only letters (including foreign ones). This ignores spaces.
+ * Tests for LetterNumericValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @version 0.4.0
@@ -35,29 +35,38 @@ namespace Flikore\Validator\Validators;
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
+ * @category Tests
  */
-class LetterValidator extends \Flikore\Validator\Validator
+class LetterNumericValidatorTest extends \PHPUnit_Framework_TestCase
 {
 
-    /**
-     * The error message for this validator.
-     * @var string The error message for this validator.
-     */
-    protected $message = 'The %key% must contain only letters.';
-    
-    /**
-     * Executes the real validation so it can be reused.
-     * @param mixed $value The value to validate.
-     * @return boolean Whether the value pass the validation.
-     */
-    protected function doValidate($value)
+    public function testValidatePass()
     {
-        if($this->isEmpty($value))
-        {
-            return true;
-        }
+        $v = new LetterNumericValidator();
         
-        return (bool)(preg_match('/^[\pL\s]+$/uD', $value));
+        $this->assertTrue($v->validate('valid'));
+        $this->assertTrue($v->validate('valid with spaces'));
+        $this->assertTrue($v->validate('válido e são'));
+        $this->assertTrue($v->validate('MAIÚSCULAS'));
+        $this->assertTrue($v->validate('áéíóúãõêâôç'));
+        $this->assertTrue($v->validate('números 12312'));
+        $this->assertTrue($v->validate('    '));
+    }
+
+    public function testValidateFail()
+    {
+        $v = new LetterNumericValidator();
+        
+        $this->assertFalse($v->validate('strange characters:¬¬'));
+        $this->assertFalse($v->validate('%%&&'));
+    }
+
+    public function testValidateEmptyValue()
+    {
+        $v = new LetterNumericValidator();
+
+        $this->assertTrue($v->validate(''));
+        $this->assertTrue($v->validate(null));
     }
 
 }
