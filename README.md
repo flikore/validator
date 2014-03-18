@@ -437,6 +437,8 @@ Currently, there are the following validator classes:
 * `InstanceOfValidator`
 * `LengthBetweenValidator`
 * `LessThanValidator`
+* `LetterNumericValidator`
+* `LetterValidator`
 * `MaxDateTimeValidator`
 * `MaxLengthValidator`
 * `MaxValueValidator`
@@ -444,6 +446,7 @@ Currently, there are the following validator classes:
 * `MinDateTimeValidator`
 * `MinLengthValidator`
 * `MinValueValidator`
+* `NoSpaceValidator`
 * `NotEmptyValidator`
 * `NotEqualsValidator`
 * `NumericValidator`
