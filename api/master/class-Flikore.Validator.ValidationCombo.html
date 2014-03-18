@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Flikore\Validator\ValidationCombo | Flikore Validator</title>
+	<title>Class Flikore\Validator\ValidationCombo | Overview</title>
 
 	<script type="text/javascript" src="resources/combined.js?160735027"></script>
-	<script type="text/javascript" src="elementlist.js?2111964932"></script>
+	<script type="text/javascript" src="elementlist.js?1021678331"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/bootstrap.min.css?260161822" />
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?2015443609" />
 
@@ -17,10 +17,10 @@
 	<div id="navigation" class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a href="../../" class="brand">Flikore Validator</a>
+				<a href="../../" class="brand">Overview</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-                                            <li><a href="index.html" class="primary">Flikore Validator</a></li>
+                                            <li><a href="index.html" class="primary">Overview</a></li>
 						<li>
 							<a href="namespace-Flikore.Validator.html" title="Summary of Flikore\Validator"><span>Namespace</span></a>
 						</li>
@@ -61,6 +61,10 @@
 						<ul>
 				<li><a href="namespace-Flikore.Validator.Exception.html">Exception</a>
 						</li>
+				<li><a href="namespace-Flikore.Validator.Interfaces.html">Interfaces</a>
+						</li>
+				<li><a href="namespace-Flikore.Validator.Intl.html">Intl</a>
+						</li>
 				<li><a href="namespace-Flikore.Validator.Validators.html">Validators</a>
 						</li>
 							</ul></li></ul></li>
@@ -71,6 +75,7 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
+				<li><a href="class-Flikore.Validator.ValidationChoice.html">ValidationChoice</a></li>
 				<li class="active"><a href="class-Flikore.Validator.ValidationCombo.html">ValidationCombo</a></li>
 				<li><a href="class-Flikore.Validator.ValidationKey.html">ValidationKey</a></li>
 				<li><a href="class-Flikore.Validator.ValidationSet.html">ValidationSet</a></li>
@@ -106,6 +111,8 @@ validator that went wrong.</p>
 		<dd style="padding-left:0px">
 			<a href="class-Flikore.Validator.Validator.html"><span>Flikore\Validator\Validator</span></a>
 			
+			 implements 
+				<a href="class-Flikore.Validator.Interfaces.IValidator.html"><span>Flikore\Validator\Interfaces\IValidator</span></a>
 			
 			
 		</dd>
@@ -137,49 +144,16 @@ validator that went wrong.</p>
 				<b>Author:</b>
 				George Marques &lt;george at georgemarques.com.br&gt;<br />
 				<b>Version:</b>
-				0.4.0<br />
+				0.5.0<br />
 				<b>Since:</b>
 				0.2<br />
-		<b>Located at</b> <a href="source-class-Flikore.Validator.ValidationCombo.html#29-106" title="Go to source code">Flikore/Validator/ValidationCombo.php</a><br />
+		<b>Located at</b> <a href="source-class-Flikore.Validator.ValidationCombo.html#29-98" title="Go to source code">Flikore/Validator/ValidationCombo.php</a><br />
 	</div>
 
 
 
 		<h2>Methods summary</h2>
 		<table class="summary table table-bordered table-striped" id="methods">
-		<tr data-order="__construct" id="___construct">
-
-			<td class="attributes"><code>
-				 public 
-				
-				
-				</code>
-			</td>
-
-			<td class="name"><div>
-			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-Flikore.Validator.ValidationCombo.html#56-62" title="Go to source code">__construct</a>( )</code>
-
-			<div class="description short">
-				
-<p>Creates a Validation Combo.</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>Creates a Validation Combo.</p>
-
-
-
-
-
-
-
-
-			</div>
-			</div></td>
-		</tr>
 		<tr data-order="addValidator" id="_addValidator">
 
 			<td class="attributes"><code>
@@ -191,7 +165,7 @@ validator that went wrong.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_addValidator">#</a>
-			<code><a href="source-class-Flikore.Validator.ValidationCombo.html#64-72" title="Go to source code">addValidator</a>( <span><code><a href="class-Flikore.Validator.Validator.html">Flikore\Validator\Validator</a></code> <var>$validator</var></span> )</code>
+			<code><a href="source-class-Flikore.Validator.ValidationCombo.html#56-64" title="Go to source code">addValidator</a>( <span><code><a href="class-Flikore.Validator.Validator.html">Flikore\Validator\Validator</a></code> <var>$validator</var></span> )</code>
 
 			<div class="description short">
 				
@@ -229,7 +203,7 @@ validator that went wrong.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_doValidate">#</a>
-			<code><a href="source-class-Flikore.Validator.ValidationCombo.html#74-90" title="Go to source code">doValidate</a>( <span>mixed <var>$value</var></span> )</code>
+			<code><a href="source-class-Flikore.Validator.ValidationCombo.html#66-82" title="Go to source code">doValidate</a>( <span>mixed <var>$value</var></span> )</code>
 
 			<div class="description short">
 				
@@ -271,7 +245,7 @@ validator that went wrong.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_addKeyValue">#</a>
-			<code><a href="source-class-Flikore.Validator.ValidationCombo.html#92-104" title="Go to source code">addKeyValue</a>( <span>string <var>$key</var></span>, <span>string <var>$value</var></span> )</code>
+			<code><a href="source-class-Flikore.Validator.ValidationCombo.html#84-96" title="Go to source code">addKeyValue</a>( <span>string <var>$key</var></span>, <span>string <var>$value</var></span> )</code>
 
 			<div class="description short">
 				
@@ -395,7 +369,7 @@ not check if it's replacing a specific validator value.</p>
 	</div>
 
 	<div id="footer">
-		Flikore Validator API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Overview API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </body>

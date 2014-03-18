@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Namespace Flikore\Validator\Validators | Flikore Validator</title>
+	<title>Namespace Flikore\Validator\Validators | Overview</title>
 
 	<script type="text/javascript" src="resources/combined.js?160735027"></script>
-	<script type="text/javascript" src="elementlist.js?2111964932"></script>
+	<script type="text/javascript" src="elementlist.js?1021678331"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/bootstrap.min.css?260161822" />
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?2015443609" />
 
@@ -17,10 +17,10 @@
 	<div id="navigation" class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a href="../../" class="brand">Flikore Validator</a>
+				<a href="../../" class="brand">Overview</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-                                            <li><a href="index.html" class="primary">Flikore Validator</a></li>
+                                            <li><a href="index.html" class="primary">Overview</a></li>
 						<li class="active">
 <span>Namespace</span>						</li>
 						<li>
@@ -60,6 +60,10 @@
 						<ul>
 				<li><a href="namespace-Flikore.Validator.Exception.html">Exception</a>
 						</li>
+				<li><a href="namespace-Flikore.Validator.Interfaces.html">Interfaces</a>
+						</li>
+				<li><a href="namespace-Flikore.Validator.Intl.html">Intl</a>
+						</li>
 				<li class="active"><a href="namespace-Flikore.Validator.Validators.html">Validators</a>
 						</li>
 							</ul></li></ul></li>
@@ -86,6 +90,8 @@
 				<li><a href="class-Flikore.Validator.Validators.IPv6Validator.html">IPv6Validator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.LengthBetweenValidator.html">LengthBetweenValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.LessThanValidator.html">LessThanValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.LetterNumericValidator.html">LetterNumericValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.LetterValidator.html">LetterValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MaxDateTimeValidator.html">MaxDateTimeValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MaxLengthValidator.html">MaxLengthValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MaxValueValidator.html">MaxValueValidator</a></li>
@@ -93,10 +99,11 @@
 				<li><a href="class-Flikore.Validator.Validators.MinDateTimeValidator.html">MinDateTimeValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MinLengthValidator.html">MinLengthValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MinValueValidator.html">MinValueValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.NoSpaceValidator.html">NoSpaceValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.NotEmptyValidator.html">NotEmptyValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.NotEqualsValidator.html">NotEqualsValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.NumericValidator.html">NumericValidator</a></li>
-				<li><a href="class-Flikore.Validator.Validators.OrValidator.html">OrValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.OrValidator.html" class="deprecated">OrValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.RecursiveValidator.html">RecursiveValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.RegexValidator.html">RegexValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.UriValidator.html">UriValidator</a></li>
@@ -188,6 +195,16 @@ ignore spaces).</td>
 	<td>Validates that a number is lesser than a given value.</td>
 </tr>
 <tr>
+	<td class="name"><a href="class-Flikore.Validator.Validators.LetterNumericValidator.html">LetterNumericValidator</a></td>
+	<td>Validates that a string contains only letters (including foreign ones) and
+numbers. This ignores spaces.</td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Flikore.Validator.Validators.LetterValidator.html">LetterValidator</a></td>
+	<td>Validates that a string contains only letters (including foreign ones). This
+ignores spaces.</td>
+</tr>
+<tr>
 	<td class="name"><a href="class-Flikore.Validator.Validators.MaxDateTimeValidator.html">MaxDateTimeValidator</a></td>
 	<td>Validates that a date/time is equal or before given reference.</td>
 </tr>
@@ -216,6 +233,10 @@ ignore spaces).</td>
 	<td>Validates that a number is equal or greater than a given value.</td>
 </tr>
 <tr>
+	<td class="name"><a href="class-Flikore.Validator.Validators.NoSpaceValidator.html">NoSpaceValidator</a></td>
+	<td>Validates that a string contains no spaces (this includes tabs and new lines).</td>
+</tr>
+<tr>
 	<td class="name"><a href="class-Flikore.Validator.Validators.NotEmptyValidator.html">NotEmptyValidator</a></td>
 	<td>Validates that a value is not empty. An empty value is null, empty string or
 empty array.</td>
@@ -229,7 +250,7 @@ empty array.</td>
 	<td>Validates that a given value is numeric.</td>
 </tr>
 <tr>
-	<td class="name"><a href="class-Flikore.Validator.Validators.OrValidator.html">OrValidator</a></td>
+	<td class="name"><a href="class-Flikore.Validator.Validators.OrValidator.html" class="deprecated">OrValidator</a></td>
 	<td>Validates that the value pass in at least one of the given validators.</td>
 </tr>
 <tr>
@@ -258,7 +279,7 @@ empty array.</td>
 	</div>
 
 	<div id="footer">
-		Flikore Validator API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Overview API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </body>

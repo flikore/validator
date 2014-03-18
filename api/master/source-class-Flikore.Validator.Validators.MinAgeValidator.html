@@ -5,10 +5,10 @@
 	<meta name="generator" content="ApiGen 2.8.0" />
 	<meta name="robots" content="noindex" />
 
-	<title>File Flikore/Validator/Validators/MinAgeValidator.php | Flikore Validator</title>
+	<title>File Flikore/Validator/Validators/MinAgeValidator.php | Overview</title>
 
 	<script type="text/javascript" src="resources/combined.js?160735027"></script>
-	<script type="text/javascript" src="elementlist.js?2111964932"></script>
+	<script type="text/javascript" src="elementlist.js?1021678331"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/bootstrap.min.css?260161822" />
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?2015443609" />
 
@@ -18,10 +18,10 @@
 	<div id="navigation" class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a href="../../" class="brand">Flikore Validator</a>
+				<a href="../../" class="brand">Overview</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-                                            <li><a href="index.html" class="primary">Flikore Validator</a></li>
+                                            <li><a href="index.html" class="primary">Overview</a></li>
 						<li>
 							<a href="namespace-Flikore.Validator.Validators.html" title="Summary of Flikore\Validator\Validators"><span>Namespace</span></a>
 						</li>
@@ -63,6 +63,10 @@
 						<ul>
 				<li><a href="namespace-Flikore.Validator.Exception.html">Exception</a>
 						</li>
+				<li><a href="namespace-Flikore.Validator.Interfaces.html">Interfaces</a>
+						</li>
+				<li><a href="namespace-Flikore.Validator.Intl.html">Intl</a>
+						</li>
 				<li class="active"><a href="namespace-Flikore.Validator.Validators.html">Validators</a>
 						</li>
 							</ul></li></ul></li>
@@ -89,6 +93,8 @@
 				<li><a href="class-Flikore.Validator.Validators.IPv6Validator.html">IPv6Validator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.LengthBetweenValidator.html">LengthBetweenValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.LessThanValidator.html">LessThanValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.LetterNumericValidator.html">LetterNumericValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.LetterValidator.html">LetterValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MaxDateTimeValidator.html">MaxDateTimeValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MaxLengthValidator.html">MaxLengthValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MaxValueValidator.html">MaxValueValidator</a></li>
@@ -96,10 +102,11 @@
 				<li><a href="class-Flikore.Validator.Validators.MinDateTimeValidator.html">MinDateTimeValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MinLengthValidator.html">MinLengthValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.MinValueValidator.html">MinValueValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.NoSpaceValidator.html">NoSpaceValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.NotEmptyValidator.html">NotEmptyValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.NotEqualsValidator.html">NotEqualsValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.NumericValidator.html">NumericValidator</a></li>
-				<li><a href="class-Flikore.Validator.Validators.OrValidator.html">OrValidator</a></li>
+				<li><a href="class-Flikore.Validator.Validators.OrValidator.html" class="deprecated">OrValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.RecursiveValidator.html">RecursiveValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.RegexValidator.html">RegexValidator</a></li>
 				<li><a href="class-Flikore.Validator.Validators.UriValidator.html">UriValidator</a></li>
@@ -120,7 +127,7 @@
 	<div id="rightInner">
 <pre id="source"><code><span id="1" class="l"><a class="l" href="#1">  1 </a><span class="xlang">&lt;?php</span>
 </span><span id="2" class="l"><a class="l" href="#2">  2 </a>
-</span><span id="3" class="l"><a class="l" href="#3">  3 </a><span class="php-comment">/*
+</span><span id="3" class="l"><a class="l" href="#3">  3 </a><span class="php-comment">/**
 </span></span><span id="4" class="l"><a class="l" href="#4">  4 </a><span class="php-comment"> * The MIT License
 </span></span><span id="5" class="l"><a class="l" href="#5">  5 </a><span class="php-comment"> *
 </span></span><span id="6" class="l"><a class="l" href="#6">  6 </a><span class="php-comment"> * Copyright 2014 George Marques &lt;george at georgemarques.com.br&gt;.
@@ -152,7 +159,7 @@
 </span></span><span id="32" class="l"><a class="l" href="#32"> 32 </a><span class="php-comment"> * @customKey &lt;i&gt;%minAge%&lt;/i&gt; The minimum valid age.
 </span></span><span id="33" class="l"><a class="l" href="#33"> 33 </a><span class="php-comment"> *
 </span></span><span id="34" class="l"><a class="l" href="#34"> 34 </a><span class="php-comment"> * @author George Marques &lt;george at georgemarques.com.br&gt;
-</span></span><span id="35" class="l"><a class="l" href="#35"> 35 </a><span class="php-comment"> * @version 0.4.0
+</span></span><span id="35" class="l"><a class="l" href="#35"> 35 </a><span class="php-comment"> * @version 0.5.0
 </span></span><span id="36" class="l"><a class="l" href="#36"> 36 </a><span class="php-comment"> * @since 0.3
 </span></span><span id="37" class="l"><a class="l" href="#37"> 37 </a><span class="php-comment"> * @license http://opensource.org/licenses/MIT MIT
 </span></span><span id="38" class="l"><a class="l" href="#38"> 38 </a><span class="php-comment"> * @copyright (c) 2014, George Marques
@@ -224,7 +231,7 @@
 	</div>
 
 	<div id="footer">
-		Flikore Validator API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Overview API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </body>
