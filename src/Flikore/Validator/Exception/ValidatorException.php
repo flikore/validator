@@ -44,7 +44,7 @@ class ValidatorException extends \Exception
      * The inner exceptions.
      * @var ValidatorException[] The inner exceptions.
      */
-    protected $errors;
+    protected $errors = array();
 
     /**
      * Gets the inner exceptions from a set of validators.
@@ -83,5 +83,37 @@ class ValidatorException extends \Exception
     {
         $this->errors[$key] = $error;
     }
-
+    
+    /**
+     * Gets all the messages as an array. If there's no inner exceptions (i.e. this is not a set error), then
+     * an array will be returned with the message being in the key 0. If the inner exceptions are also from a
+     * set, then there'll be an array of messages set to that key (i.e. this will be a nested array of messages).
+     * 
+     * @return array The collection of messages.
+     */
+    public function getMessages()
+    {
+        $errors = $this->getErrors();
+        
+        if(empty($errors))
+        {
+            return array(0 => $this->getMessage());
+        }
+        
+        $result = array();
+        
+        foreach ($errors as $key => $err)
+        {
+            $innerErrors = $err->getErrors();
+            if(empty($innerErrors))
+            {
+                $result[$key] = $err->getMessage();
+            }
+            else
+            {
+                $result[$key] = $err->getMessages();
+            }
+        }
+        return $result;
+    }
 }
