@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * The MIT License
  *
  * Copyright 2014 George Marques <george at georgemarques.com.br>.
@@ -24,66 +24,40 @@
  * THE SOFTWARE.
  */
 
-namespace Flikore\Validator\Validators;
-
-use Flikore\Validator\Intl;
+namespace Flikore\Validator\Intl;
 
 /**
- * Validates that a number is lesser than a given value.
- * 
- * @customKey <i>%max%</i> The exclusive upper boundary.
+ * Wrapper for gettext functions to avoid problems with missing extension.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @version 0.4.0
- * @since 0.4.0
+ * @since ???
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
  */
-class LessThanValidator extends \Flikore\Validator\Validator
+final class GetText
 {
-
     /**
-     * The exclusive upper boundary.
-     * @var int The exclusive upper boundary.
+     * Gets the string from the translation tables of the current domain.
+     * 
+     * @param string $string The string to get.
+     * @return string The translated string, if there's such message.
      */
-    protected $max;
-
-    /**
-     * The error message for this validator.
-     * @var string The error message for this validator.
-     */
-    protected $message = 'The %key% must be lesser than %max%.';
-
-    /**
-     * Creates a new Less Than Validator.
-     * @param int $max The exclusive upper boundary.
-     */
-    public function __construct($max)
+    public static function _($string)
     {
-        if (!is_int($max))
-        {
-            throw new \InvalidArgumentException(Intl\GetText::_d('Flikore.Validator','The limit must be a valid integer'));
-        }
-
-        $this->max = $max;
-
-        $this->addKeyValue('max', $max);
+        return function_exists('gettext') ? gettext($string) : $string;
     }
-
+    
     /**
-     * Executes the real validation so it can be reused.
-     * @param mixed $value The value to validate.
-     * @return boolean Whether the value pass the validation.
+     * Gets the string from the translation tables of a specific domain.
+     * 
+     * @param string $domain The translation domain.
+     * @param string $string The string to get.
+     * @return string The translated string, if there's such message.
      */
-    protected function doValidate($value)
+    public static function _d($domain, $string)
     {
-        // ignore empty values
-        if ($this->isEmpty($value))
-        {
-            return true;
-        }
-        return ($value < $this->max);
+        return function_exists('dgettext') ? dgettext($domain, $string) : $string;
     }
-
 }

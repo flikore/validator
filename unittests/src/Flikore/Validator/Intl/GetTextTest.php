@@ -24,66 +24,53 @@
  * THE SOFTWARE.
  */
 
-namespace Flikore\Validator\Validators;
-
-use Flikore\Validator\Intl;
+namespace Flikore\Validator\Intl;
 
 /**
- * Validates that a number is lesser than a given value.
- * 
- * @customKey <i>%max%</i> The exclusive upper boundary.
+ * Tests for GetText class.
  *
  * @author George Marques <george at georgemarques.com.br>
  * @version 0.4.0
- * @since 0.4.0
+ * @since ???
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
+ * @category Tests
  */
-class LessThanValidator extends \Flikore\Validator\Validator
+class GetTextTest extends \PHPUnit_Framework_TestCase
 {
-
-    /**
-     * The exclusive upper boundary.
-     * @var int The exclusive upper boundary.
-     */
-    protected $max;
-
-    /**
-     * The error message for this validator.
-     * @var string The error message for this validator.
-     */
-    protected $message = 'The %key% must be lesser than %max%.';
-
-    /**
-     * Creates a new Less Than Validator.
-     * @param int $max The exclusive upper boundary.
-     */
-    public function __construct($max)
+    
+    public function testDgettext()
     {
-        if (!is_int($max))
+        $string = 'this is string';
+        $domain = 'Flikore.Validator';
+        
+        if(function_exists('dgettext'))
         {
-            throw new \InvalidArgumentException(Intl\GetText::_d('Flikore.Validator','The limit must be a valid integer'));
+            $this->assertEquals(dgettext($domain, $string), GetText::_d($domain, $string));
         }
-
-        $this->max = $max;
-
-        $this->addKeyValue('max', $max);
+        else
+        {
+            $this->assertEquals($string, GetText::_d($domain, $string));
+        }
     }
-
-    /**
-     * Executes the real validation so it can be reused.
-     * @param mixed $value The value to validate.
-     * @return boolean Whether the value pass the validation.
-     */
-    protected function doValidate($value)
+    
+    public function testGettext()
     {
-        // ignore empty values
-        if ($this->isEmpty($value))
+        $string = 'this is string';
+        
+        if(function_exists('gettext'))
         {
-            return true;
+            $original = textdomain(null);
+            textdomain('Flikore.Validator');
+            
+            $this->assertEquals(gettext($string), GetText::_($string));
+            
+            textdomain($original);
         }
-        return ($value < $this->max);
+        else
+        {
+            $this->assertEquals($string, GetText::_($string));
+        }
     }
-
 }
