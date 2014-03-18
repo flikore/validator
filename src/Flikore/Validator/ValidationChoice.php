@@ -35,7 +35,7 @@ use Flikore\Validator\Validator;
  *
  * @author George Marques <george at georgemarques.com.br>
  * @version 0.5.0
- * @since ???
+ * @since 0.5.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
  * @package Flikore\Validator
