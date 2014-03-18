@@ -51,15 +51,7 @@ class ValidationCombo extends Validator
      * A collection of all validators.
      * @var Validator[] A collection of all validators.
      */
-    protected $validators;
-
-    /**
-     * Creates a Validation Combo.
-     */
-    public function __construct()
-    {
-        $this->validators = new \SplDoublyLinkedList();
-    }
+    protected $validators = array();
 
     /**
      * Adds a new validator to the combo.
@@ -68,7 +60,7 @@ class ValidationCombo extends Validator
     public function addValidator(Validator $validator)
     {
         $validator->addKeyValue('key', $this->values['key']);
-        $this->validators->push($validator);
+        array_push($this->validators, $validator);
     }
 
     /**
