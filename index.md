@@ -9,12 +9,12 @@ overview: true
 
 <h2>A simple validation library</h2>
 
-<p><em>Flikore Validator</em> is a validation library for PHP aimed to be simple, powerful, object oriented and extensible. It also focus on code and objects reuse both on the library and on the projects that rely on the Validator.</p>
-<p><a href="{{ site.baseurl }}/download.html" class="btn btn-primary" title="Download">Get it now</a></p>
+<p><em>Flikore Validator</em> is a validation library for PHP aimed to be simple, powerful, object oriented and extensible. It also focus on code and objects reuse, both in the library itself and in the projects that rely on the Validator.</p>
+<p><a href="{{ site.baseurl }}/download.html" class="btn btn-primary" title="Download">Get it now!</a></p>
 
 </div>
 
-There are many others validators for PHP, of course. [Respect/Validation](https://github.com/Respect/Validation), for example, is very thorough and has a lot of validators ready to be used. The system for error messages, however, is problematic and was one of the reasons for Flikore Validator to arise. [Valitron](https://github.com/vlucas/valitron) is very simple and minimalistic, but it validate only arrays (not single values) and doesn't work with objects like Respect and Flikore do.
+There are many others validators for PHP, of course. [Respect/Validation](https://github.com/Respect/Validation), for example, is very thorough and has a lot of validators ready to be used. The system for error messages, however, is problematic and was one of the reasons for Flikore Validator to arise. [Valitron](https://github.com/vlucas/valitron) is very simple and minimalistic, but it validates only arrays (not single values) and doesn't work with objects like Respect and Flikore do.
 
 ### How to use
 
@@ -59,7 +59,8 @@ class PerfectSquareValidator extends Flikore\Validator\Validator
 {
     protected function doValidate($value)
     {
-        return is_numeric($value) && (floor(sqrt($value)) * floor(sqrt($value)) == ((int)$value));
+        return is_numeric($value) && (floor(sqrt($value)) * floor(sqrt($value)) 
+                == ((int)$value));
     }
 
 }
@@ -78,4 +79,4 @@ Flikore Validator is an open source project and, for now, maintained by a single
 
 The easiest way is to open an [issue on GitHub](https://github.com/flikore/validator/issues). It'll be checked soon and updated within reason. There are some personal goals to this project, so not all suggestions can be achieved.
 
-If you are a developer and want to contribute with code, first understand that this project follows the TDD practice, so you need to ship your code with the unittests. After that, just send a [pull request on GitHub](https://github.com/flikore/validator/pulls) and it'll be looked.
+If you are a developer and want to contribute with code, first understand that this project follows the [TDD](http://en.wikipedia.org/wiki/Test-driven_development "Test-driven development") practice, so you need to ship your code with the unit tests. After that, just send a [pull request on GitHub](https://github.com/flikore/validator/pulls) and it'll be looked.
