@@ -12,3 +12,27 @@
 code {
     color: #A025C7;
 }
+
+.affix {
+    
+    top: 22px;
+    position: fixed;
+}
+
+.affix-top {
+    position: relative;
+    width: auto;
+    min-width: 250px;
+}
+
+.affix-bottom {
+    position: absolute;
+}
+
+@media(max-width:991px){
+   .affix {
+     position: static;
+     width: auto;
+     top: 0;
+    }
+}

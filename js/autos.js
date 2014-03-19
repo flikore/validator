@@ -32,13 +32,22 @@ function generateList(element)
     {
         html +='</ul></li>\n';
     }
-    html += '</ul></div>';
+    
+    html += '</ul>';
+    html += '<a href="#top">Back to top</a>';
+    html += '</div>';
 
     return html;
 }
 
 $(document).ready(function(){
-    $('#toc').html(generateList($('#main')));
+    $('#toc')
+        .html(generateList($('#main')))
+        .affix({
+                offset: {
+                    top: 50,
+                    bottom: $('#bottom').outerHeight(true)
+        }});
     
     $('[data-spy="scroll"]').each(function () {
       var $spy = $(this).scrollspy('refresh')
