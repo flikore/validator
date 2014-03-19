@@ -3,65 +3,79 @@ layout: default
 overview: true
 ---
 
-# Flikore Validator
+<div class="jumbotron">
 
-*A simple validation library*.
+<h1>Flikore Validator</h1>
 
-[![Build Status](https://travis-ci.org/flikore/validator.png)](https://travis-ci.org/flikore/validator)
-[![Coverage Status](https://coveralls.io/repos/flikore/validator/badge.png?branch=develop)](https://coveralls.io/r/flikore/validator?branch=develop)
+<h2>A simple validation library</h2>
 
-Flikore validator is a validation library for PHP aimed to be simple and extensible.
+<p><em>Flikore Validator</em> is a validation library for PHP aimed to be simple, powerful, object oriented and extensible. It also focus on code and objects reuse both on the library and on the projects that rely on the Validator.</p>
+<p><a href="{{ site.baseurl }}/download.html" class="btn btn-primary" title="Download">Get it now</a></p>
 
-See the [basic usage page](/usage.html) for practical examples.
+</div>
 
-## Instalation
+There are many others validators for PHP, of course. [Respect/Validation](https://github.com/Respect/Validation), for example, is very thorough and has a lot of validators ready to be used. The system for error messages, however, is problematic and was one of the reasons for Flikore Validator to arise. [Valitron](https://github.com/vlucas/valitron) is very simple and minimalistic, but it validate only arrays (not single values) and doesn't work with objects like Respect and Flikore do.
 
-### Composer
+### How to use
 
-[Composer](http://getcomposer.org) is the preferred method to install this validator. Simply add to your `composer.json`:
+To show how simple it is to use, see the following example:
 
-{% highlight json %}
+{% highlight php %}
+<?php
+
+require 'autoload.php';
+
+use Flikore\Validator\Validators as v;
+
+// Instantiate an existing validator
+$v = new v\ExactValueValidator(5);
+
+// Use the "validate" method to check if a value is valid
+var_dump($v->validate(5));    // bool(true)
+
+// And you can use the same validator object as many times as you want
+var_dump($v->validate(4));    // bool(false)
+var_dump($v->validate(0));    // bool(false)
+{% endhighlight %}
+
+For more examples and information, see the [usage page]({{ site.baseurl }}/usage.html).
+
+### How to install
+
+For information about download and installation, please check the [download page]({{ site.baseurl }}/download.html).
+
+### Extensibility
+
+New validators can be added simply by extending the base class.
+
+{% highlight php %}
+<?php
+
+require 'autoload.php';
+
+use Flikore\Validator\Validators as v;
+
+class PerfectSquareValidator extends Flikore\Validator\Validator
 {
-    "require": {
-        "flikore/validator": "dev-develop"
+    protected function doValidate($value)
+    {
+        return is_numeric($value) && (floor(sqrt($value)) * floor(sqrt($value)) == ((int)$value));
     }
+
 }
+
+$v = new PerfectSquareValidator();
+
+var_dump($v->validate(25));   // bool(true)
+var_dump($v->validate(30));   // bool(false)
+var_dump($v->validate('36')); // bool(true)
+
 {% endhighlight %}
 
-Run `composer install`, then include the autoload file in your project:
+## Contributing
 
-{% highlight php %}
-<?php
+Flikore Validator is an open source project and, for now, maintained by a single person ([George Marques](https://github.com/vnen)). If you want to help, there are many ways to do so.
 
-require_once 'vendor/autoload.php';
+The easiest way is to open an [issue on GitHub](https://github.com/flikore/validator/issues). It'll be checked soon and updated within reason. There are some personal goals to this project, so not all suggestions can be achieved.
 
-// Do validation stuff
-{% endhighlight %}
-
-### Installing with Git
-
-* Clone this repository in a folder on your project:
-
-{% highlight bash %}
-git clone https://github.com/flikore/validator.git vendor/flikore/validator
-{% endhighlight %}
-
-* Include the `autoload.php` file in the bootstrap for your project:
-
-{% highlight php %}
-<?php
-    
-require_once 'vendor/flikore/validator/autoload.php';
-
-// Do validation stuff
-{% endhighlight %}
-
-An alternative is to create a submodule instead of cloning the repository. This way you don't need to push this library to your own repository and can also update it more easily:
-
-{% highlight bash %}
-git submodule add https://github.com/flikore/validator.git vendor/flikore/validator
-{% endhighlight %}
-
-### Download
-
-You can also download the [tarball](https://github.com/flikore/validator/tarball/master "tarball") (or the [zipball](https://github.com/flikore/validator/zipball/master "zipball")) and set it up in one of your project folders.
+If you are a developer and want to contribute with code, first understand that this project follows the TDD practice, so you need to ship your code with the unittests. After that, just send a [pull request on GitHub](https://github.com/flikore/validator/pulls) and it'll be looked.
