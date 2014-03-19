@@ -2,10 +2,10 @@
 layout: default
 menu: true
 usage: true
-title: Basic usage
+title: Usage
 ---
 
-# Basic usage
+# Usage
 
 ## Basic value validation
 
@@ -25,7 +25,7 @@ var_dump($v->validate(null)); // bool(true)
 var_dump($v->validate(''));   // bool(true)
 {% endhighlight %}
 
-The validators ignores null values and empty strings. If you like to make sure a value is not empty, use the NotEmptyValidator.
+The validators ignores null values and empty strings. If you like to make sure a value is not empty, use the [`NotEmptyValidator`]({{ site.baseurl }}/api/master/class-Flikore.Validator.Validators.NotEmptyValidator.html "NotEmptyValidator").
 
 {% highlight php %}
 <?php
@@ -42,7 +42,9 @@ var_dump($v->validate(0));       // bool(true)
 
 ## Multiple validators
 
-If you want to check if multiple conditions apply, use the `ValidatorCombo` class. It can join any number and validators and act as a validator itself (so it can also be use in other `ValidationCombo`).
+### All must be true
+
+If you want to check if multiple conditions apply, use the [`ValidationCombo`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationCombo.html "ValidationCombo") class. It can join any number and validators and act as a validator itself (so it can also be use in other [`ValidationCombo`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationCombo.html "ValidationCombo")).
 
 {% highlight php %}
 <?php
@@ -61,9 +63,35 @@ var_dump($combo->validate(''));       // bool(false)
 var_dump($combo->validate(null));     // bool(false)
 {% endhighlight %}
 
+### Only one need to pass
+
+If only one of validators is enough for the value to be valid, you may use the [`ValidationChoice`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationChoice.html "ValidationChoice") class instead.
+
+{% highlight php %}
+<?php
+
+use Flikore\Validator\Validators as v;
+
+// Use the ValidationChoice class to reunite validators with an "Or" condition.
+$choice = new ValidationChoice(
+  new v\NumericValidator(),
+  new v\AlphaValidator()
+  // May have any number of arguments
+);
+
+// First condition met (numeric)
+var_dump($choice->validate('12345'));  // bool(true)
+// Second condition met (alpha)
+var_dump($choice->validate('abcdef')); // bool(true)
+// None of them matches (mixed value)
+var_dump($choice->validate('abc123')); // bool(false)
+// Empty (ok as with any validator)
+var_dump($choice->validate(''));       // bool(true)
+{% endhighlight %}
+
 ## Recursive validation
 
-To apply a validator to every element in an array, use the `RecursiveValidator` class. It receives one validator in the constructor and checks the elements with such validator.
+To apply a validator to every element in an array, use the [`RecursiveValidator`]({{ site.baseurl }}/api/master/class-Flikore.Validator.Validators.RecursiveValidator.html "RecursiveValidator") class. It receives one validator in the constructor and checks the elements with such validator.
 
 {% highlight php %}
 <?php
@@ -101,7 +129,7 @@ echo $v->getErrorMessage(); // prints: The key "oops" is empty.
 
 ## Usage with exceptions
 
-To throw an exception on a validation error, use the `assert` method instead of `validate`. It throws a `ValidationException` with a custom message for each validator.
+To throw an exception on a validation error, use the [`assert`]({{ site.baseurl }}/api/master/class-Flikore.Validator.Interfaces.IValidator.html#_assert "assert") method instead of [`validate`]({{ site.baseurl }}/api/master/class-Flikore.Validator.Interfaces.IValidator.html#_validate "validate"). It throws a [`ValidatorException`]({{ site.baseurl }}/api/master/class-Flikore.Validator.Exception.ValidatorException.html "ValidatorException") with a custom message for each validator.
 
 {% highlight php %}
 <?php
@@ -110,16 +138,16 @@ use Flikore\Validator\Validators as v;
 
 $v = new v\ExactValueValidator(5);
 
-// Throws a ValidationException with the message:
+// Throws a ValidatorException with the message:
 // "The value must be exactly 5."
 $v->assert(2);
 {% endhighlight %}
 
 ### Custom messages
 
-The message of the exception can be set on the validator using the method `setErrorMessage()`. If the validator is a Combo, then the message setted with this method will be the message shown to any validation error (to avoid this behavior, set the messages of the validators *inside* the combo).
+The message of the exception can be set on the validator using the method [`setErrorMessage()`]({{ site.baseurl }}/api/master/class-Flikore.Validator.Validator.html#_setErrorMessage "setErrorMessage()"). If the validator is a Combo, then the message setted with this method will be the message shown to any validation error (to avoid this behavior, set the messages of the validators *inside* the combo).
 
-Each validator has a set of values that can be used in the message. The value named `key` exists in all validator and defaults to `"value"`. Those keys replace the sequence `%key%` inside the message. To override a default value of a key, use the `addKeyValue` method (this can be used to set the `key` as the name of the form field, for example).
+Each validator has a set of values that can be used in the message. The value named `key` exists in all validator and defaults to `"value"`. Those keys replace the sequence `%key%` inside the message. To override a default value of a key, use the [`addKeyValue`]({{ site.baseurl }}/api/master/class-Flikore.Validator.Validator.html#_addKeyValue "addKeyValue()") method (this can be used to set the `key` as the name of the form field, for example).
 
 **Example**:
 {% highlight php %}
@@ -148,9 +176,13 @@ catch (Flikore\Validator\Exception\ValidatorException $e)
 }
 {% endhighlight %}
 
+To get all messages of a set as an array, use the `ValidatorException::getMessages()` method.
+
 ## Validating arrays and objects
 
-The `ValidationSet` class can be used as a shortcut to test all the values in an array or the properties of an object all at once. The usage is pretty straightforward:
+### Standard usage
+
+The [`ValidationSet`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationSet.html "ValidationSet") class can be used as a shortcut to test all the values in an array or the properties of an object all at once. The usage is pretty straightforward:
 
 {% highlight php %}
 <?php
@@ -192,7 +224,9 @@ var_dump($set->validate(array('name' => 'oops',                'age' => 14))); /
 var_dump($set->validate(array('name' => 'the age is not good', 'age' => 12))); // bool(false)
 {% endhighlight %}
 
-If you need to validate only a subset of fields (for, say, using in the `onBlur` event of an input element, without need to validate the whole form), set the second argument of `validate` (or `assert`) to the field or list of fields you want to actually validate. If there's no rules for a given field, it'll just be ignored.
+### Partial validation
+
+If you need to validate only a subset of fields (for, say, using in the `onBlur` event of an input element, without need to validate the whole form), set the second argument of [`validate`]({{ site.baseurl }}/api/master/class-Flikore.Validator.Interfaces.IValidator.html#_validate "validate") (or [`assert`]({{ site.baseurl }}/api/master/class-Flikore.Validator.Interfaces.IValidator.html#_assert "assert")) to the field or list of fields you want to actually validate. If there's no rules for a given field, it'll just be ignored.
 
 **Example**:
 
@@ -227,11 +261,13 @@ var_dump($set->validate($value, 'no_rule')); // bool(true)
 var_dump($set->validate($value, array('name', 'age'))); // bool(false)
 {% endhighlight %}
 
+You may also get the rules for external validation using the methods [`getAllRules()`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationSet.html#_getAllRules) and [`getRulesFor($field)`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationSet.html#_getRulesFor).
+
 ### Comparing with other keys
 
-It's also possible to use another key or attribute as the input value for a validator (e.g. validate if one field is equal to another). To do that, you need to use two other classes combined: `ValidationValue` and `ValidationKey`.
+It's also possible to use another key or attribute as the input value for a validator (e.g. validate if one field is equal to another). To do that, you need to use two other classes combined: [`ValidationValue`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationValue.html "ValidationValue") and [`ValidationKey`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationKey.html "ValidationKey").
 
-`ValidationValue` should be included in a set as it were a validator. Its constructor requires a validator as the first argument (can be a string with a FQCN or a dummy validator object) and the arguments to the validator constructor must follow it. To use a field from the validated object in the constructor, pass it as a `ValidationKey` object with it's key property being the name of the attribute or key you want to grab from the value being validated.
+[`ValidationValue`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationValue.html "ValidationValue") should be included in a set as it were a validator. Its constructor requires a validator as the first argument (can be a string with a FQCN or a dummy validator object) and the arguments to the validator constructor must follow it. To use a field from the validated object in the constructor, pass it as a [`ValidationKey`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationKey.html "ValidationKey") object with it's key property being the name of the attribute or key you want to grab from the value being validated.
 
 Let's make that clear with and example. To make sure the value of `key1` is strictly equal to the value of `key2` inside the same array, do like the following code:
 
@@ -280,15 +316,15 @@ $notStrict = array(
 var_dump($set->validate($notStrict)); // bool(false)
 {% endhighlight %}
 
-Keep in mind that the values that are passed to the validator are not checked in the `ValidationValue` constructor. So if there's something wrong, it'll only cause an error when the validation is taking place and the real `Validator` is constructed.
+Keep in mind that the values that are passed to the validator are not checked in the [`ValidationValue`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationValue.html "ValidationValue") constructor. So if there's something wrong, it'll only cause an error when the validation is taking place and the real [`Validator`]({{ site.baseurl }}/api/master/class-Flikore.Validator.Validator.html "Validator") is constructed.
 
-**Note**: this doesn't work with `ValidationCombo`, but since you can add multiple rules to the same key, this should not be a problem.
+**Note**: this doesn't work with [`ValidationCombo`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationCombo.html "ValidationCombo"), but since you can add multiple rules to the same key, this should not be a problem.
 
 ### Sets and exceptions
 
-With a `ValidationSet`, exception messages work in a different way than with a `Validator`. The main exception has no message attached, but it contains an array of errors with the keys being the validated array keys (or object properties) and the values being the child validator exception.
+With a [`ValidationSet`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationSet.html "ValidationSet"), exception messages work in a different way than with a [`Validator`]({{ site.baseurl }}/api/master/class-Flikore.Validator.Validator.html "Validator"). The main exception has no message attached, but it contains an array of errors with the keys being the validated array keys (or object properties) and the values being the child validator exception.
 
-Also, the key name you add to the set is also setted as the `%key%` template value in the error messages. To change that to another value, use the third argument of `addRule` and `addRules` methods with the value you want). This can be used if you want to change the language of the message or to specify a more user friendly form label.
+Also, the key name you add to the set is also setted as the `%key%` template value in the error messages. To change that to another value, use the third argument of [`addRule()`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationSet.html#_addRule "addRule()") and [`addRules()`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationSet.html#_addRules "addRules()") methods with the value you want). This can be used if you want to change the language of the message or to specify a more user friendly form label.
 
 **Example**:
 
@@ -328,7 +364,7 @@ catch (Flikore\Validator\Exception\ValidatorException $e)
 
 ### Nested arrays
 
-To validate arrays inside arrays, it is possible to nest `ValidationSet` as a rule. So, in theory, there's no limit to how much levels you can nest.
+To validate arrays inside arrays, it is possible to nest [`ValidationSet`]({{ site.baseurl }}/api/master/class-Flikore.Validator.ValidationSet.html "ValidationSet") as a rule. So, in theory, there's no limit to how much levels you can nest.
 
 **Example**:
 
@@ -362,3 +398,7 @@ $value = array(
 // And validate it
 var_dump($v->validate($value)); //bool(true)
 {% endhighlight %}
+
+## Api
+
+For the API documentation for all the classes, check the [versions page]({{ site.baseurl }}/apiversions.html).
