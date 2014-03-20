@@ -26,6 +26,7 @@
 
 namespace Flikore\Validator;
 
+use Flikore\Validator\Interfaces\IValidator;
 use Flikore\Validator\Validator;
 
 /**
@@ -45,7 +46,7 @@ class ValidationChoice extends Validator
 
     /**
      * An array of validators to test.
-     * @var Validator[] An array of validators to test.
+     * @var IValidator[] An array of validators to test.
      */
     protected $validators = array();
 
@@ -56,16 +57,21 @@ class ValidationChoice extends Validator
     protected $message = 'The %key% must match one of the validators.';
 
     /**
-     * Creates a new Or Validator. You can pass as many validators as you want.
+     * Creates a new Validation Choice. You can pass as many validators as you want.
      * 
-     * @param \Flikore\Validator\Validator $v1 The first validator to check.
-     * @param \Flikore\Validator\Validator $v2 The second validator to check.
-     * @param \Flikore\Validator\Validator ...$v The other validators to check.
+     * @param array|IValidator $... The validators to check (list as arguments or in an array).
      */
-    public function __construct(Validator $v1, Validator $v2)
+    public function __construct()
     {
+        $validators = func_get_args();
+        
+        if(count($validators) == 1 and is_array($validators[0]))
+        {
+            $validators = $validators[0];
+        }
+        
         $i = 1;
-        foreach (func_get_args() as $arg)
+        foreach ($validators as $arg)
         {
             if (!$arg instanceof Validator)
             {
