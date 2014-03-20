@@ -148,12 +148,12 @@
 				<b>Author:</b>
 				George Marques &lt;george at georgemarques.com.br&gt;<br />
 				<b>Version:</b>
-				0.5.0<br />
+				0.5.1<br />
 				<b>Since:</b>
 				0.5.0<br />
 				<b>CustomKey:</b>
 				<i>%vN%</i> The message of the Nth validator (1-index).<br />
-		<b>Located at</b> <a href="source-class-Flikore.Validator.ValidationChoice.html#31-130" title="Go to source code">Flikore/Validator/ValidationChoice.php</a><br />
+		<b>Located at</b> <a href="source-class-Flikore.Validator.ValidationChoice.html#31-156" title="Go to source code">Flikore/Validator/ValidationChoice.php</a><br />
 	</div>
 
 
@@ -171,26 +171,59 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-Flikore.Validator.ValidationChoice.html#58-77" title="Go to source code">__construct</a>( <span><code><a href="class-Flikore.Validator.Validator.html">Flikore\Validator\Validator</a></code> <var>$v1</var></span>, <span><code><a href="class-Flikore.Validator.Validator.html">Flikore\Validator\Validator</a></code> <var>$v2</var></span> )</code>
+			<code><a href="source-class-Flikore.Validator.ValidationChoice.html#58-82" title="Go to source code">__construct</a>( )</code>
 
 			<div class="description short">
 				
-<p>Creates a new Or Validator. You can pass as many validators as you want.</p>
+<p>Creates a new Validation Choice. You can pass as many validators as you
+want.</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>Creates a new Or Validator. You can pass as many validators as you want.</p>
+<p>Creates a new Validation Choice. You can pass as many validators as you
+want.</p>
+
+
+
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="addValidator" id="_addValidator">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_addValidator">#</a>
+			<code><a href="source-class-Flikore.Validator.ValidationChoice.html#84-99" title="Go to source code">addValidator</a>( <span><code><a href="class-Flikore.Validator.Validator.html">Flikore\Validator\Validator</a></code> <var>$validator</var></span> )</code>
+
+			<div class="description short">
+				
+<p>Adds a new validator to the combo.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Adds a new validator to the combo.</p>
 
 
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$v1</var></dt>
-						<dd><code><code><a href="class-Flikore.Validator.Validator.html">Flikore\Validator\Validator</a></code></code><br>$v1 The first validator to check.</dd>
-						<dt><var>$v2</var></dt>
-						<dd><code><code><a href="class-Flikore.Validator.Validator.html">Flikore\Validator\Validator</a></code></code><br>$v2 The second validator to check.</dd>
+						<dt><var>$validator</var></dt>
+						<dd><code><code><a href="class-Flikore.Validator.Validator.html">Flikore\Validator\Validator</a></code></code><br>$validator The validator to add.</dd>
 					</dl></div>
 
 
@@ -211,7 +244,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_addKeyValue">#</a>
-			<code><a href="source-class-Flikore.Validator.ValidationChoice.html#79-97" title="Go to source code">addKeyValue</a>( <span>string <var>$key</var></span>, <span>string <var>$value</var></span> )</code>
+			<code><a href="source-class-Flikore.Validator.ValidationChoice.html#101-119" title="Go to source code">addKeyValue</a>( <span>string <var>$key</var></span>, <span>string <var>$value</var></span> )</code>
 
 			<div class="description short">
 				
@@ -255,7 +288,7 @@ not check if it's replacing a specific validator value.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_applyTemplate">#</a>
-			<code><a href="source-class-Flikore.Validator.ValidationChoice.html#99-111" title="Go to source code">applyTemplate</a>( )</code>
+			<code><a href="source-class-Flikore.Validator.ValidationChoice.html#121-133" title="Go to source code">applyTemplate</a>( )</code>
 
 			<div class="description short">
 				
@@ -294,7 +327,7 @@ not check if it's replacing a specific validator value.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_doValidate">#</a>
-			<code><a href="source-class-Flikore.Validator.ValidationChoice.html#113-128" title="Go to source code">doValidate</a>( <span>mixed <var>$value</var></span> )</code>
+			<code><a href="source-class-Flikore.Validator.ValidationChoice.html#135-154" title="Go to source code">doValidate</a>( <span>mixed <var>$value</var></span> )</code>
 
 			<div class="description short">
 				
