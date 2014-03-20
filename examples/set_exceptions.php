@@ -56,6 +56,11 @@ catch (Exception\ValidatorException $e)
     {
         echo $key . ': ' . $innerException->getMessage() . PHP_EOL;
     }
+    // Alternative: use the getMessages() method.
+    foreach ($e->getMessages() as $key => $value)
+    {
+        echo $key . ': ' . $value . PHP_EOL;
+    }
     // Output:
     // user_name: The Name must have at least 5 characters.
     // user_age: The Age must be equal or greater than 13.
