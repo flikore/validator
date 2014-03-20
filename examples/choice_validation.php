@@ -1,6 +1,6 @@
 <?php
 
-/**
+/* 
  * The MIT License
  *
  * Copyright 2014 George Marques <george at georgemarques.com.br>.
@@ -24,40 +24,24 @@
  * THE SOFTWARE.
  */
 
-namespace Flikore\Validator\Validators;
+namespace Flikore\Validator;
 
-/**
- * Validates that a string contains only letters (including foreign ones) and numbers. This ignores spaces.
- *
- * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.1
- * @since 0.5.0
- * @license http://opensource.org/licenses/MIT MIT
- * @copyright (c) 2014, George Marques
- * @package Flikore\Validator
- */
-class LetterNumericValidator extends \Flikore\Validator\Validator
-{
+require '../autoload.php';
 
-    /**
-     * The error message for this validator.
-     * @var string The error message for this validator.
-     */
-    protected $message = 'The %key% must contain only letters and numbers.';
-    
-    /**
-     * Executes the real validation so it can be reused.
-     * @param mixed $value The value to validate.
-     * @return boolean Whether the value pass the validation.
-     */
-    protected function doValidate($value)
-    {
-        if($this->isEmpty($value))
-        {
-            return true;
-        }
-        
-        return (bool)(preg_match('/^[\pL\s\pN]+$/uD', $value));
-    }
+use Flikore\Validator\Validators as v;
 
-}
+// Use the ValidationChoice class to reunite validators with an "Or" condition.
+$choice = new ValidationChoice(
+  new v\NumericValidator(),
+  new v\AlphaValidator()
+  // May have any number of arguments
+);
+
+// First condition met (numeric)
+var_dump($choice->validate('12345'));  // bool(true)
+// Second condition met (alpha)
+var_dump($choice->validate('abcdef')); // bool(true)
+// None of them matches (mixed value)
+var_dump($choice->validate('abc123')); // bool(false)
+// Empty (ok as with any validator)
+var_dump($choice->validate(''));       // bool(true)

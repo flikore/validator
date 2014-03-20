@@ -32,7 +32,7 @@ namespace Flikore\Validator;
  * of the validator that went wrong.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.0
+ * @version 0.5.1
  * @since 0.2
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -52,6 +52,30 @@ class ValidationCombo extends Validator
      * @var Validator[] A collection of all validators.
      */
     protected $validators = array();
+    
+    /**
+     * Creates a new Validation Combo. You can pass as many validators as you want.
+     * 
+     * @param array|Validator $... The validators to check (list as arguments or in an array).
+     */
+    public function __construct()
+    {
+        $validators = func_get_args();
+        
+        if(count($validators) == 1 and is_array($validators[0]))
+        {
+            $validators = $validators[0];
+        }
+        
+        foreach ($validators as $arg)
+        {
+            if (!$arg instanceof Validator)
+            {
+                throw new \InvalidArgumentException(Intl\GetText::_d('Flikore.Validator', 'The arguments must be intances of validators'));
+            }
+            array_push($this->validators, $arg);
+        }
+    }
 
     /**
      * Adds a new validator to the combo.

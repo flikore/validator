@@ -30,7 +30,7 @@ namespace Flikore\Validator\Validators;
  * Tests for IPv4Validator class.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.0
+ * @version 0.5.1
  * @since 0.3
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques

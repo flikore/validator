@@ -34,7 +34,7 @@ use Flikore\Validator\Validator;
  * @customKey <i>%vN%</i> The message of the Nth validator (1-index).
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.0
+ * @version 0.5.1
  * @since 0.5.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -56,16 +56,21 @@ class ValidationChoice extends Validator
     protected $message = 'The %key% must match one of the validators.';
 
     /**
-     * Creates a new Or Validator. You can pass as many validators as you want.
+     * Creates a new Validation Choice. You can pass as many validators as you want.
      * 
-     * @param \Flikore\Validator\Validator $v1 The first validator to check.
-     * @param \Flikore\Validator\Validator $v2 The second validator to check.
-     * @param \Flikore\Validator\Validator ...$v The other validators to check.
+     * @param array|Validator $... The validators to check (list as arguments or in an array).
      */
-    public function __construct(Validator $v1, Validator $v2)
+    public function __construct()
     {
+        $validators = func_get_args();
+        
+        if(count($validators) == 1 and is_array($validators[0]))
+        {
+            $validators = $validators[0];
+        }
+        
         $i = 1;
-        foreach (func_get_args() as $arg)
+        foreach ($validators as $arg)
         {
             if (!$arg instanceof Validator)
             {
@@ -74,6 +79,23 @@ class ValidationChoice extends Validator
             $this->validators[] = $arg;
             $this->addKeyValue('v' . $i++, $arg->getErrorMessage());
         }
+    }
+    
+    /**
+     * Adds a new validator to the combo.
+     * @param Validator $validator The validator to add.
+     */
+    public function addValidator(Validator $validator)
+    {
+        foreach ($this->values as $key => $value)
+        {
+            if (preg_match('/^v[0-9]+$/', $key) == 0)
+            {
+                $validator->addKeyValue($key, $value);
+            }
+        }
+        
+        array_push($this->validators, $validator);
     }
 
     /**
@@ -117,6 +139,10 @@ class ValidationChoice extends Validator
      */
     protected function doValidate($value)
     {
+        if(empty($this->validators))
+        {
+            return true;
+        }
         foreach ($this->validators as $v)
         {
             if($v->validate($value))
