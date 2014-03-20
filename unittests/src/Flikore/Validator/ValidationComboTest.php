@@ -58,15 +58,6 @@ class ValidationComboTest extends \PHPUnit_Framework_TestCase
         $this->object = new ValidationCombo;
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-        
-    }
-
     public function testComboValidationSuccess()
     {
         $v = $this->object;
@@ -124,6 +115,20 @@ class ValidationComboTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Flikore\Validator\Exception\ValidatorException', $msg);
 
         $v->assert(0);
+    }
+    
+    public function testZeroValidator()
+    {
+        $v = new ValidationCombo(); // no validator, anything is ok
+
+        $this->assertTrue($v->validate('654'));
+        $this->assertTrue($v->validate(654));
+        $this->assertTrue($v->validate('sda'));
+        $this->assertTrue($v->validate('sda123'));
+        $this->assertTrue($v->validate(array(2)));
+        $this->assertTrue($v->validate(new \stdClass()));
+        $this->assertTrue($v->validate(''));
+        $this->assertTrue($v->validate(null));
     }
 
 }
