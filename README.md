@@ -116,6 +116,45 @@ var_dump($v->validate('36')); // bool(true)
 
 ```
 
+## Available validators
+
+Currently, there are the following validator classes (click to see the API documentation):
+
+* [AfterDateTimeValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.AfterDateTimeValidator.html "AfterDateTimeValidator")
+* [AlphaNumericValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.AlphaNumericValidator.html "AlphaNumericValidator")
+* [AlphaValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.AlphaValidator.html "AlphaValidator")
+* [BeforeDateTimeValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.BeforeDateTimeValidator.html "BeforeDateTimeValidator")
+* [DateTimeValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.DateTimeValidator.html "DateTimeValidator")
+* [DateValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.DateValidator.html "DateValidator") *(deprecated)*
+* [EmailValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.EmailValidator.html "EmailValidator")
+* [EqualsValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.EqualsValidator.html "EqualsValidator")
+* [ExactLengthValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.ExactLengthValidator.html "ExactLengthValidator")
+* [ExactValueValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.ExactValueValidator.html "ExactValueValidator")
+* [GreaterThanValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.GreaterThanValidator.html "GreaterThanValidator")
+* [IPv4Validator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.IPv4Validator.html "IPv4Validator")
+* [IPv6Validator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.IPv6Validator.html "IPv6Validator")
+* [InstanceOfValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.InstanceOfValidator.html "InstanceOfValidator")
+* [LengthBetweenValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.LengthBetweenValidator.html "LengthBetweenValidator")
+* [LessThanValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.LessThanValidator.html "LessThanValidator")
+* [LetterNumericValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.LetterNumericValidator.html "LetterNumericValidator")
+* [LetterValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.LetterValidator.html "LetterValidator")
+* [MaxDateTimeValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.MaxDateTimeValidator.html "MaxDateTimeValidator")
+* [MaxLengthValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.MaxLengthValidator.html "MaxLengthValidator")
+* [MaxValueValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.MaxValueValidator.html "MaxValueValidator")
+* [MinAgeValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.MinAgeValidator.html "MinAgeValidator")
+* [MinDateTimeValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.MinDateTimeValidator.html "MinDateTimeValidator")
+* [MinLengthValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.MinLengthValidator.html "MinLengthValidator")
+* [MinValueValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.MinValueValidator.html "MinValueValidator")
+* [NoSpaceValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.NoSpaceValidator.html "NoSpaceValidator")
+* [NotEmptyValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.NotEmptyValidator.html "NotEmptyValidator")
+* [NotEqualsValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.NotEqualsValidator.html "NotEqualsValidator")
+* [NumericValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.NumericValidator.html "NumericValidator")
+* [OrValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.OrValidator.html "OrValidator") *(deprecated)*
+* [RecursiveValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.RecursiveValidator.html "RecursiveValidator")
+* [RegexValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.RegexValidator.html "RegexValidator")
+* [UriValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.UriValidator.html "UriValidator")
+* [ValueBetweenValidator](http://flikore.github.io/validator/api/master/class-Flikore.Validator.Validators.ValueBetweenValidator.html "ValueBetweenValidator")
+
 ## Contributing
 
 Flikore Validator is an open source project and, for now, maintained by a single person ([George Marques](https://github.com/vnen)). If you want to help, there are many ways to do so.
