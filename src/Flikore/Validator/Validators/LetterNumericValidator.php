@@ -30,7 +30,7 @@ namespace Flikore\Validator\Validators;
  * Validates that a string contains only letters (including foreign ones) and numbers. This ignores spaces.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.0
+ * @version 0.5.1
  * @since 0.5.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
