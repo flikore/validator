@@ -26,7 +26,6 @@
 
 namespace Flikore\Validator;
 
-use Flikore\Validator\Interfaces\IValidator;
 use Flikore\Validator\Validator;
 
 /**
@@ -46,7 +45,7 @@ class ValidationChoice extends Validator
 
     /**
      * An array of validators to test.
-     * @var IValidator[] An array of validators to test.
+     * @var Validator[] An array of validators to test.
      */
     protected $validators = array();
 
@@ -59,7 +58,7 @@ class ValidationChoice extends Validator
     /**
      * Creates a new Validation Choice. You can pass as many validators as you want.
      * 
-     * @param array|IValidator $... The validators to check (list as arguments or in an array).
+     * @param array|Validator $... The validators to check (list as arguments or in an array).
      */
     public function __construct()
     {
@@ -80,6 +79,23 @@ class ValidationChoice extends Validator
             $this->validators[] = $arg;
             $this->addKeyValue('v' . $i++, $arg->getErrorMessage());
         }
+    }
+    
+    /**
+     * Adds a new validator to the combo.
+     * @param Validator $validator The validator to add.
+     */
+    public function addValidator(Validator $validator)
+    {
+        foreach ($this->values as $key => $value)
+        {
+            if (preg_match('/^v[0-9]+$/', $key) == 0)
+            {
+                $validator->addKeyValue($key, $value);
+            }
+        }
+        
+        array_push($this->validators, $validator);
     }
 
     /**
@@ -123,6 +139,10 @@ class ValidationChoice extends Validator
      */
     protected function doValidate($value)
     {
+        if(empty($this->validators))
+        {
+            return true;
+        }
         foreach ($this->validators as $v)
         {
             if($v->validate($value))

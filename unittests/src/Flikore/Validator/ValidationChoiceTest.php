@@ -62,6 +62,32 @@ class ValidationChoiceTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($v->validate(new \stdClass())); // object, not ok
         $this->assertFalse($v->validate('2014-12-12')); // not aplha nor numeric, not ok
     }
+    
+    public function testAddValidator()
+    {
+        $v = new ValidationChoice();
+        $v->addValidator(new v\NumericValidator);
+        $v->addValidator(new v\AlphaValidator);
+
+        $this->assertTrue($v->validate('654')); // numeric, ok
+        $this->assertTrue($v->validate(654)); // numeric, ok
+        $this->assertTrue($v->validate('sda')); // alpha, ok
+        $this->assertFalse($v->validate('sda123')); // mix, not ok
+    }
+    
+    public function testZeroValidator()
+    {
+        $v = new ValidationChoice(); // no validator, anything is ok
+
+        $this->assertTrue($v->validate('654'));
+        $this->assertTrue($v->validate(654));
+        $this->assertTrue($v->validate('sda'));
+        $this->assertTrue($v->validate('sda123'));
+        $this->assertTrue($v->validate(array(2)));
+        $this->assertTrue($v->validate(new \stdClass()));
+        $this->assertTrue($v->validate(''));
+        $this->assertTrue($v->validate(null));
+    }
 
     public function testMessages()
     {
