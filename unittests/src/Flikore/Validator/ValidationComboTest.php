@@ -26,9 +26,7 @@
 
 namespace Flikore\Validator;
 
-use Flikore\Validator\Validators\ExactValueValidator;
-use Flikore\Validator\Validators\MaxValueValidator;
-use Flikore\Validator\Validators\MinValueValidator;
+use Flikore\Validator\Validators as v;
 
 /**
  * Tests for ValidationCombo class.
@@ -61,14 +59,40 @@ class ValidationComboTest extends \PHPUnit_Framework_TestCase
     public function testComboValidationSuccess()
     {
         $v = $this->object;
-        $v->addValidator(new MinValueValidator(5));
-        $v->addValidator(new MaxValueValidator(9));
+        $v->addValidator(new v\MinValueValidator(5));
+        $v->addValidator(new v\MaxValueValidator(9));
 
         $this->assertTrue($v->validate(5));
         $this->assertTrue($v->validate(6));
         $this->assertTrue($v->validate(7));
         $this->assertTrue($v->validate(8));
         $this->assertTrue($v->validate(9));
+    }
+    
+    public function testComboValidationConstruct()
+    {
+        $v = new ValidationCombo(
+            new v\MinValueValidator(5),
+            new v\MaxValueValidator(9)
+        );
+
+        $this->assertTrue($v->validate(6));
+        $this->assertTrue($v->validate(9));
+        $this->assertFalse($v->validate(0));
+        $this->assertFalse($v->validate(10));
+    }
+    
+    public function testComboValidationConstructArray()
+    {
+        $v = new ValidationCombo(array(
+            new v\MinValueValidator(5),
+            new v\MaxValueValidator(9)
+        ));
+
+        $this->assertTrue($v->validate(6));
+        $this->assertTrue($v->validate(9));
+        $this->assertFalse($v->validate(0));
+        $this->assertFalse($v->validate(10));
     }
 
     /**
@@ -77,20 +101,16 @@ class ValidationComboTest extends \PHPUnit_Framework_TestCase
     public function testComboValidationFailure()
     {
         $v = $this->object;
-        $v->addValidator(new MinValueValidator(9));
-        $v->addValidator(new MaxValueValidator(5));
+        $v->addValidator(new v\MinValueValidator(9));
+        $v->addValidator(new v\MaxValueValidator(5));
 
         ($v->assert(5));
-        ($v->assert(6));
-        ($v->assert(7));
-        ($v->assert(8));
-        ($v->assert(9));
     }
 
     public function testAddKeyValue()
     {
         $v = $this->object;
-        $a = new ExactValueValidator(5);
+        $a = new v\ExactValueValidator(5);
 
         $msgA = 'msgA';
 
@@ -105,7 +125,7 @@ class ValidationComboTest extends \PHPUnit_Framework_TestCase
     public function testCustomMessage()
     {
         $v = $this->object;
-        $a = new ExactValueValidator(5);
+        $a = new v\ExactValueValidator(5);
 
         $msg = 'This is the test message';
 
@@ -129,6 +149,26 @@ class ValidationComboTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($v->validate(new \stdClass()));
         $this->assertTrue($v->validate(''));
         $this->assertTrue($v->validate(null));
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNotValidatorThirdParam()
+    {
+        new ValidationCombo(new v\NotEmptyValidator(), new v\AlphaValidator(), new \stdClass());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNotValidatorThirdParamArray()
+    {
+        new ValidationCombo(array(
+            new v\NotEmptyValidator(),
+            new v\AlphaValidator(),
+            new \stdClass()
+        ));
     }
 
 }
