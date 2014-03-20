@@ -43,7 +43,7 @@ abstract class Validator implements Interfaces\IValidator
      * The error message for this validator.
      * @var string The error message for this validator.
      */
-    protected $message = '';
+    protected $message = 'The %key% must be valid.';
 
     /**
      * Stores the values to change in the template.
