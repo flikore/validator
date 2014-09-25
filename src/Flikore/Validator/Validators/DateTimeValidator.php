@@ -61,7 +61,7 @@ class DateTimeValidator extends \Flikore\Validator\Validator
 
     /**
      * Creates a new Date Validator.
-     * @param s $format The format of the date/time (if any).
+     * @param string $format The format of the date/time (if any).
      */
     public function __construct($format = null)
     {
