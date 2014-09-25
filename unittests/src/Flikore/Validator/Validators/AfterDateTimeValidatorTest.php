@@ -30,7 +30,7 @@ namespace Flikore\Validator\Validators;
  * Tests for AfterDateTimeValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.1
+ * @version 0.5.2
  * @since 0.4.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -41,30 +41,30 @@ class AfterDateTimeValidatorTest extends \PHPUnit_Framework_TestCase
 {
     public function testValidatePass()
     {
-        $val = new AfterDateTimeValidator(new \DateTime);
+        $v1 = new AfterDateTimeValidator(new \DateTime);
         
-        $this->assertTrue($val->validate(new \DateTime('+1 second')));
-        $this->assertTrue($val->validate(new \DateTime('+1 day')));
+        $this->assertTrue($v1->validate(new \DateTime('+1 second')));
+        $this->assertTrue($v1->validate(new \DateTime('+1 day')));
         
-        $val = new AfterDateTimeValidator(new \DateTime('2014-03-05'));
-        $this->assertTrue($val->validate(new \DateTime('2014-03-06')));
-        $this->assertTrue($val->validate('2014-03-06'));
+        $v2 = new AfterDateTimeValidator(new \DateTime('2014-03-05'));
+        $this->assertTrue($v2->validate(new \DateTime('2014-03-06')));
+        $this->assertTrue($v2->validate('2014-03-06'));
     }
     
     public function testValidateFail()
     {
-        $val = new AfterDateTimeValidator(new \DateTime);
+        $v1 = new AfterDateTimeValidator(new \DateTime);
         
-        $this->assertFalse($val->validate(new \DateTime));
-        $this->assertFalse($val->validate(new \DateTime('-1 second')));
-        $this->assertFalse($val->validate(new \DateTime('-1 day')));
+        $this->assertFalse($v1->validate(new \DateTime));
+        $this->assertFalse($v1->validate(new \DateTime('-1 second')));
+        $this->assertFalse($v1->validate(new \DateTime('-1 day')));
         
-        $val = new AfterDateTimeValidator(new \DateTime('2014-03-05'));
+        $v2 = new AfterDateTimeValidator(new \DateTime('2014-03-05'));
         
-        $this->assertFalse($val->validate('2014-03-04'));
-        $this->assertFalse($val->validate('2014-02-20'));
-        $this->assertFalse($val->validate(new \DateTime('2014-03-05')));
-        $this->assertFalse($val->validate('2014-03-05'));
+        $this->assertFalse($v2->validate('2014-03-04'));
+        $this->assertFalse($v2->validate('2014-02-20'));
+        $this->assertFalse($v2->validate(new \DateTime('2014-03-05')));
+        $this->assertFalse($v2->validate('2014-03-05'));
     }
 
     /**
@@ -77,20 +77,28 @@ class AfterDateTimeValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testValidateEmptyValue()
     {
-        $val = new AfterDateTimeValidator(new \DateTime);
+        $v = new AfterDateTimeValidator(new \DateTime);
         
-        $this->assertTrue($val->validate(''));
-        $this->assertTrue($val->validate(null));
+        $this->assertTrue($v->validate(''));
+        $this->assertTrue($v->validate(null));
     }
     
     public function testValidateFailNotADate()
     {
-        $val = new AfterDateTimeValidator(new \DateTime);
+        $v = new AfterDateTimeValidator(new \DateTime);
         
-        $this->assertFalse($val->validate('aaa'));
-        $this->assertFalse($val->validate(25));
-        $this->assertFalse($val->validate(0));
-        $this->assertFalse($val->validate(new \stdClass));
+        $this->assertFalse($v->validate('aaa'));
+        $this->assertFalse($v->validate(25));
+        $this->assertFalse($v->validate(0));
+        $this->assertFalse($v->validate(new \stdClass));
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullFormatArgument()
+    {
+        new AfterDateTimeValidator(new \DateTime(), null);
     }
 
 }

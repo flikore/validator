@@ -9,12 +9,13 @@ Open an issue in the GitHub project [issue tracker](https://github.com/flikore/v
 If you want to contribute with code, follow these steps:
 
 1. Fork this repository.
-2. Create a new feature branch in your fork.
-3. Create unit tests for your changes.
-4. Change or add new code to conform your tests.
-5. Commit the modifications.
-6. Repeat 3-5 until you're done (you can create as many commits as you want).
-5. Send a pull request (with your feature branch's last commit). And don't forget to comment what you're doing.
+2. Checkout the **develop** branch.
+3. Create a new feature branch (the name of the branch must start with "feature/") in your fork.
+4. Create unit tests for your changes.
+5. Change or add new code to conform your tests.
+6. Commit the modifications.
+7. Repeat 4-6 until you're done (you can create as many commits as you want).
+8. Send a pull request (with your feature branch's last commit). And don't forget to comment what you're doing.
 
 Open an issue if you want approval before diving into the code, but remember to state that you can codify it.
 

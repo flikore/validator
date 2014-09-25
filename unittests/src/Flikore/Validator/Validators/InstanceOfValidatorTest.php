@@ -30,7 +30,7 @@ namespace Flikore\Validator\Validators;
  * Tests for InstanceOfValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.1
+ * @version 0.5.2
  * @since 0.2
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -45,7 +45,7 @@ class InstanceOfValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidIntegerArgument()
     {
-        $v = new InstanceOfValidator(123);
+        new InstanceOfValidator(123);
     }
 
     /**
@@ -53,7 +53,7 @@ class InstanceOfValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidNullArgument()
     {
-        $v = new InstanceOfValidator(null);
+        new InstanceOfValidator(null);
     }
     
     public function testSuccessClassName()

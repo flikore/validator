@@ -32,7 +32,7 @@ namespace Flikore\Validator\Validators;
  * @customKey <i>%protocol%</i> The valid(s) protocol(s) set in the constructor.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.1
+ * @version 0.5.2
  * @since 0.3
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -77,8 +77,21 @@ class UriValidator extends \Flikore\Validator\Validator
         {
             $this->setErrorMessage($this->message_protocol);
         }
+
+        if (!empty($protocol) && !is_scalar($protocol))
+        {
+            if (!$this->testInputList($protocol))
+            {
+                throw new \InvalidArgumentException('The list of protocols must be a collection of strings');
+            }
+            
+            $this->addKeyValue('protocol', implode(', ', $protocol));
+        }
+        else
+        {
+            $this->addKeyValue('protocol', $protocol);
+        }
         $this->protocol = $protocol;
-        $this->addKeyValue('protocol', $protocol);
     }
 
     /**
@@ -94,7 +107,7 @@ class UriValidator extends \Flikore\Validator\Validator
             return true;
         }
         $uri_valid = $value === filter_var($value, FILTER_VALIDATE_URL);
-        if (!$this->protocol)
+        if (empty($this->protocol))
         {
             return $uri_valid;
         }
@@ -124,6 +137,24 @@ class UriValidator extends \Flikore\Validator\Validator
                 }
             }
         }
+    }
+
+    /**
+     * Tests the input list of protocols to check if all elements are valid.
+     * 
+     * @param mixed $list Array or Traversable to test.
+     * @return boolean Returns true if the list is valid.
+     */
+    private function testInputList($list)
+    {
+        foreach ($list as $value)
+        {
+            if (!is_scalar($value))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

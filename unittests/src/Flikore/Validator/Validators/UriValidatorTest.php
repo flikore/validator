@@ -30,7 +30,7 @@ namespace Flikore\Validator\Validators;
  * Tests for UriValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.1
+ * @version 0.5.2
  * @since 0.3
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -71,23 +71,23 @@ class UriValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testValidateProtocolsSuccess()
     {
-        $v = new UriValidator(array('http', 'https'));
-        $this->assertTrue($v->validate('http://georgemarques.com.br'));
-        $this->assertTrue($v->validate('http://flikore.github.io/validator'));
-        $this->assertTrue($v->validate('https://example.com'));
+        $v1 = new UriValidator(array('http', 'https'));
+        $this->assertTrue($v1->validate('http://georgemarques.com.br'));
+        $this->assertTrue($v1->validate('http://flikore.github.io/validator'));
+        $this->assertTrue($v1->validate('https://example.com'));
 
-        $v = new UriValidator('http');
-        $this->assertTrue($v->validate('http://georgemarques.com.br'));
+        $v2 = new UriValidator('http');
+        $this->assertTrue($v2->validate('http://georgemarques.com.br'));
     }
 
     public function testValidateProtocolsFail()
     {
-        $v = new UriValidator(array('http', 'https'));
-        $this->assertFalse($v->validate('ftp://example.com'));
-        $this->assertFalse($v->validate('ssh://192.168.1.1'));
+        $v1 = new UriValidator(array('http', 'https'));
+        $this->assertFalse($v1->validate('ftp://example.com'));
+        $this->assertFalse($v1->validate('ssh://192.168.1.1'));
 
-        $v = new UriValidator('http');
-        $this->assertFalse($v->validate('https://example.com'));
+        $v2 = new UriValidator('http');
+        $this->assertFalse($v2->validate('https://example.com'));
     }
 
     /**
@@ -95,7 +95,7 @@ class UriValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidProtocolObject()
     {
-        $v = new UriValidator(new \stdClass());
+        new UriValidator(new \stdClass());
     }
 
     /**
@@ -103,7 +103,39 @@ class UriValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidProtocolEmptyArray()
     {
-        $v = new UriValidator(array());
+        new UriValidator(array());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testNotArrayOfStrings()
+    {
+        new UriValidator(array(
+            array(),
+            'one string',
+            new \stdClass(),
+        ));
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testNotTraversableOfStrings()
+    {
+        $list = new \SplDoublyLinkedList();
+        $list->push('one string');
+        $list->push(array());
+        $list->push(new \stdClass());
+
+        new UriValidator($list);
+    }
+    
+    public function testNullProtocolArgument()
+    {
+        $v = new UriValidator(null);
+        $this->assertFalse($v->validate('notaulr'));
+        $this->assertTrue($v->validate('http://flikore.github.io/validator'));
     }
 
 }

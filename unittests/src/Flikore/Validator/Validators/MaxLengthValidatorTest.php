@@ -30,7 +30,7 @@ namespace Flikore\Validator\Validators;
  * Tests for MaxLengthValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.1
+ * @version 0.5.2
  * @since 0.2
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -60,7 +60,7 @@ class MaxLengthValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongLengthArgument()
     {
-        $t = new MaxLengthValidator('aa');
+        new MaxLengthValidator('aa');
     }
 
     public function testValidateEmptyValue()
@@ -70,4 +70,11 @@ class MaxLengthValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($val->validate(null));
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullMaxLengthArgument()
+    {
+        new MaxLengthValidator(null);
+    }
 }

@@ -32,7 +32,7 @@ namespace Flikore\Validator\Validators;
  * @customKey <i>%format%</i> The format specified to check the valid date/time.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.1
+ * @version 0.5.2
  * @since 0.4.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -61,7 +61,7 @@ class DateTimeValidator extends \Flikore\Validator\Validator
 
     /**
      * Creates a new Date Validator.
-     * @param s $format The format of the date/time (if any).
+     * @param string $format The format of the date/time (if any).
      */
     public function __construct($format = null)
     {
