@@ -59,33 +59,43 @@ class ExactValueValidatorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        
     }
-    
+
     public function testSuccess()
     {
         $v = new ExactValueValidator(5);
         $this->assertTrue($v->validate(5));
     }
-    
+
     public function testFailure()
     {
         $v = new ExactValueValidator(5);
         $this->assertFalse($v->validate(7));
         $this->assertFalse($v->validate(2));
     }
-    
+
     /**
      * @expectedException \InvalidArgumentException
      */
     public function testInvalidValueArgument()
     {
-        $v = new ExactValueValidator('aa');
+        new ExactValueValidator('aa');
     }
-    
+
     public function testValidateEmptyValue()
     {
         $val = new ExactValueValidator(5);
         $this->assertTrue($val->validate(''));
         $this->assertTrue($val->validate(null));
     }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullValueArgument()
+    {
+        new ExactValueValidator(null);
+    }
+
 }

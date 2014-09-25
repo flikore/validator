@@ -70,4 +70,11 @@ class MaxValueValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($val->validate(null));
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullMaxValueArgument()
+    {
+        new MaxValueValidator(null);
+    }
 }

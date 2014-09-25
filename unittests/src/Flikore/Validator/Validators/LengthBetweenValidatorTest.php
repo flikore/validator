@@ -78,4 +78,19 @@ class LengthBetweenValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($val->validate(null));
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullMaxValueArgument()
+    {
+        new LengthBetweenValidator(3, null);
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullMinValueArgument()
+    {
+        new LengthBetweenValidator(null, 3);
+    }
 }

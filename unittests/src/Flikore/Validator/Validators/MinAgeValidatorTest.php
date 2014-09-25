@@ -137,5 +137,13 @@ class MinAgeValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($min, $v->getErrorMessage());
                 
     }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullMinAgeArgument()
+    {
+        new MinAgeValidator(null);
+    }
 
 }

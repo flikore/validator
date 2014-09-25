@@ -65,9 +65,17 @@ class ExactLengthValidatorTest extends \PHPUnit_Framework_TestCase
     public function testValidateEmptyValue()
     {
         $val = new ExactLengthValidator(2);
-        
+
         $this->assertTrue($val->validate(''));
         $this->assertTrue($val->validate(null));
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullLengthArgument()
+    {
+        new ExactLengthValidator(null);
     }
 
 }

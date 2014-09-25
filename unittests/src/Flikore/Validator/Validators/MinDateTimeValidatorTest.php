@@ -93,5 +93,13 @@ class MinDateTimeValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($val->validate(0));
         $this->assertFalse($val->validate(new \stdClass));
     }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullFormatArgument()
+    {
+        new MinDateTimeValidator(new \DateTime(), null);
+    }
 
 }

@@ -92,4 +92,11 @@ class BeforeDateTimeValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($val->validate(new \stdClass));
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullFormatArgument()
+    {
+        new ExactValueValidator(new \DateTime(), null);
+    }
 }

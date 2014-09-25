@@ -130,5 +130,12 @@ class UriValidatorTest extends \PHPUnit_Framework_TestCase
 
         new UriValidator($list);
     }
+    
+    public function testNullProtocolArgument()
+    {
+        $v = new UriValidator(null);
+        $this->assertFalse($v->validate('notaulr'));
+        $this->assertTrue($v->validate('http://flikore.github.io/validator'));
+    }
 
 }

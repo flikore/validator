@@ -115,4 +115,19 @@ class ValueBetweenValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('3', $val->getErrorMessage());
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullMinValueArgument()
+    {
+        new ValueBetweenValidator(null, 3);
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullMaxValueArgument()
+    {
+        new ValueBetweenValidator(0, null);
+    }
 }

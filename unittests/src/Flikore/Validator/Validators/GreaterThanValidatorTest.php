@@ -74,4 +74,11 @@ class GreaterThanValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($val->validate(null));
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullValueArgument()
+    {
+        new GreaterThanValidator(null);
+    }
 }

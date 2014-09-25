@@ -70,4 +70,11 @@ class LessThanValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($val->validate(null));
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullMaxValueArgument()
+    {
+        new LessThanValidator(null);
+    }
 }

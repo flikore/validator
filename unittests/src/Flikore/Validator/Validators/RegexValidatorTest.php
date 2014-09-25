@@ -87,5 +87,13 @@ class RegexValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($val->validate(''));
         $this->assertTrue($val->validate(null));
     }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullRegexArgument()
+    {
+        new RegexValidator(null);
+    }
 
 }
