@@ -42,20 +42,20 @@ class GreaterThanValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testValidatePass()
     {
-        $val = new GreaterThanValidator(5);
+        $v = new GreaterThanValidator(5);
 
-        $this->assertTrue($val->validate(6));
-        $this->assertTrue($val->validate(7));
-        $this->assertTrue($val->validate(PHP_INT_MAX));
+        $this->assertTrue($v->validate(6));
+        $this->assertTrue($v->validate(7));
+        $this->assertTrue($v->validate(PHP_INT_MAX));
     }
 
     public function testValidateFail()
     {
-        $val = new GreaterThanValidator(3);
+        $v = new GreaterThanValidator(3);
 
-        $this->assertFalse($val->validate(2));
-        $this->assertFalse($val->validate(3));
-        $this->assertFalse($val->validate(0));
+        $this->assertFalse($v->validate(2));
+        $this->assertFalse($v->validate(3));
+        $this->assertFalse($v->validate(0));
     }
 
     /**
@@ -68,10 +68,10 @@ class GreaterThanValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testValidateEmptyValue()
     {
-        $val = new GreaterThanValidator(5);
+        $v = new GreaterThanValidator(5);
 
-        $this->assertTrue($val->validate(''));
-        $this->assertTrue($val->validate(null));
+        $this->assertTrue($v->validate(''));
+        $this->assertTrue($v->validate(null));
     }
 
     /**

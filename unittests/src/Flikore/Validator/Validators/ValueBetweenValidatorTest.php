@@ -81,7 +81,7 @@ class ValueBetweenValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongMinValueArgument()
     {
-        $t = new ValueBetweenValidator('aa', 4);
+        new ValueBetweenValidator('aa', 4);
     }
 
     /**
@@ -89,7 +89,7 @@ class ValueBetweenValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongMaxValueArgument()
     {
-        $t = new ValueBetweenValidator(4, 'a');
+        new ValueBetweenValidator(4, 'a');
     }
 
     public function testValidateEmptyValue()

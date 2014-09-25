@@ -42,17 +42,17 @@ class LessThanValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testValidatePass()
     {
-        $val = new LessThanValidator(5);
-        $this->assertTrue($val->validate(0));
-        $this->assertTrue($val->validate(4));
+        $v = new LessThanValidator(5);
+        $this->assertTrue($v->validate(0));
+        $this->assertTrue($v->validate(4));
     }
 
     public function testValidateFail()
     {
-        $val = new LessThanValidator(3);
-        $this->assertFalse($val->validate(4));
-        $this->assertFalse($val->validate(3));
-        $this->assertFalse($val->validate(PHP_INT_MAX));
+        $v = new LessThanValidator(3);
+        $this->assertFalse($v->validate(4));
+        $this->assertFalse($v->validate(3));
+        $this->assertFalse($v->validate(PHP_INT_MAX));
     }
 
     /**
@@ -60,14 +60,14 @@ class LessThanValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongValueArgument()
     {
-        $t = new LessThanValidator('aa');
+        new LessThanValidator('aa');
     }
 
     public function testValidateEmptyValue()
     {
-        $val = new LessThanValidator(5);
-        $this->assertTrue($val->validate(''));
-        $this->assertTrue($val->validate(null));
+        $v = new LessThanValidator(5);
+        $this->assertTrue($v->validate(''));
+        $this->assertTrue($v->validate(null));
     }
 
     /**

@@ -70,7 +70,7 @@ class RegexValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidRegexArgument()
     {
-        $t = new RegexValidator('aaa');
+        new RegexValidator('aaa');
     }
     
     /**
@@ -78,7 +78,7 @@ class RegexValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidRegexNumberArgument()
     {
-        $t = new RegexValidator(0);
+        new RegexValidator(0);
     }
 
     public function testValidateEmptyValue()

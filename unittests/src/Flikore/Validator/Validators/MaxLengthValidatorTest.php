@@ -60,7 +60,7 @@ class MaxLengthValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongLengthArgument()
     {
-        $t = new MaxLengthValidator('aa');
+        new MaxLengthValidator('aa');
     }
 
     public function testValidateEmptyValue()

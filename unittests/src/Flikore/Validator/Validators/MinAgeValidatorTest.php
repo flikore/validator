@@ -109,7 +109,7 @@ class MinAgeValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongMinAgeArgumentString()
     {
-        $v = new MinAgeValidator('not valid');
+        new MinAgeValidator('not valid');
     }
     
     /**
@@ -117,7 +117,7 @@ class MinAgeValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongMinAgeArgumentNotGiven()
     {
-        $v = new MinAgeValidator(null);
+        new MinAgeValidator(null);
     }
 
     public function testValidateEmptyValue()

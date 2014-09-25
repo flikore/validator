@@ -45,7 +45,7 @@ class InstanceOfValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidIntegerArgument()
     {
-        $v = new InstanceOfValidator(123);
+        new InstanceOfValidator(123);
     }
 
     /**
@@ -53,7 +53,7 @@ class InstanceOfValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidNullArgument()
     {
-        $v = new InstanceOfValidator(null);
+        new InstanceOfValidator(null);
     }
     
     public function testSuccessClassName()

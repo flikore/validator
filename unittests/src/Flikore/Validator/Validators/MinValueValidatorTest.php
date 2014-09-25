@@ -60,7 +60,7 @@ class MinValueValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongValueArgument()
     {
-        $t = new MinValueValidator('aa');
+        new MinValueValidator('aa');
     }
 
     public function testValidateEmptyValue()

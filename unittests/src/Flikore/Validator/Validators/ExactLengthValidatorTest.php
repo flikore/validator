@@ -43,15 +43,15 @@ class ExactLengthValidatorTest extends \PHPUnit_Framework_TestCase
     public function testValidatePass()
     {
         $string = 'aa';
-        $val = new ExactLengthValidator(2);
-        $this->assertTrue($val->validate($string));
+        $v = new ExactLengthValidator(2);
+        $this->assertTrue($v->validate($string));
     }
 
     public function testValidateFail()
     {
-        $val = new ExactLengthValidator(2);
-        $this->assertFalse($val->validate('aaa'));
-        $this->assertFalse($val->validate('a'));
+        $v = new ExactLengthValidator(2);
+        $this->assertFalse($v->validate('aaa'));
+        $this->assertFalse($v->validate('a'));
     }
 
     /**
@@ -59,15 +59,15 @@ class ExactLengthValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongLengthArgument()
     {
-        $t = new ExactLengthValidator('aa');
+        new ExactLengthValidator('aa');
     }
 
     public function testValidateEmptyValue()
     {
-        $val = new ExactLengthValidator(2);
+        $v = new ExactLengthValidator(2);
 
-        $this->assertTrue($val->validate(''));
-        $this->assertTrue($val->validate(null));
+        $this->assertTrue($v->validate(''));
+        $this->assertTrue($v->validate(null));
     }
 
     /**

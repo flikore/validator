@@ -43,31 +43,31 @@ class MaxDateTimeValidatorTest extends \PHPUnit_Framework_TestCase
     public function testValidatePass()
     {
         $d = new \DateTime();
-        $val = new MaxDateTimeValidator($d);
+        $v1 = new MaxDateTimeValidator($d);
         
-        $this->assertTrue($val->validate($d));
-        $this->assertTrue($val->validate(new \DateTime('-1 second')));
-        $this->assertTrue($val->validate(new \DateTime('-1 day')));
+        $this->assertTrue($v1->validate($d));
+        $this->assertTrue($v1->validate(new \DateTime('-1 second')));
+        $this->assertTrue($v1->validate(new \DateTime('-1 day')));
         
-        $val = new MaxDateTimeValidator(new \DateTime('2014-03-05'));
+        $v2 = new MaxDateTimeValidator(new \DateTime('2014-03-05'));
         
-        $this->assertTrue($val->validate(new \DateTime('2014-03-05')));
-        $this->assertTrue($val->validate('2014-03-05'));
-        $this->assertTrue($val->validate(new \DateTime('2014-03-04')));
-        $this->assertTrue($val->validate('2014-03-04'));
-        $this->assertTrue($val->validate('2014-02-20'));
+        $this->assertTrue($v2->validate(new \DateTime('2014-03-05')));
+        $this->assertTrue($v2->validate('2014-03-05'));
+        $this->assertTrue($v2->validate(new \DateTime('2014-03-04')));
+        $this->assertTrue($v2->validate('2014-03-04'));
+        $this->assertTrue($v2->validate('2014-02-20'));
     }
 
     public function testValidateFail()
     {
-        $val = new MaxDateTimeValidator(new \DateTime);
+        $v1 = new MaxDateTimeValidator(new \DateTime);
         
-        $this->assertFalse($val->validate(new \DateTime('+1 second')));
-        $this->assertFalse($val->validate(new \DateTime('+1 day')));
+        $this->assertFalse($v1->validate(new \DateTime('+1 second')));
+        $this->assertFalse($v1->validate(new \DateTime('+1 day')));
         
-        $val = new MaxDateTimeValidator(new \DateTime('2014-03-05'));
-        $this->assertFalse($val->validate(new \DateTime('2014-03-06')));
-        $this->assertFalse($val->validate('2014-03-06'));
+        $v2 = new MaxDateTimeValidator(new \DateTime('2014-03-05'));
+        $this->assertFalse($v2->validate(new \DateTime('2014-03-06')));
+        $this->assertFalse($v2->validate('2014-03-06'));
     }
 
     /**
@@ -80,20 +80,20 @@ class MaxDateTimeValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testValidateEmptyValue()
     {
-        $val = new MaxDateTimeValidator(new \DateTime);
+        $v = new MaxDateTimeValidator(new \DateTime);
         
-        $this->assertTrue($val->validate(''));
-        $this->assertTrue($val->validate(null));
+        $this->assertTrue($v->validate(''));
+        $this->assertTrue($v->validate(null));
     }
     
     public function testValidateFailNotADate()
     {
-        $val = new MaxDateTimeValidator(new \DateTime);
+        $v = new MaxDateTimeValidator(new \DateTime);
         
-        $this->assertFalse($val->validate('aaa'));
-        $this->assertFalse($val->validate(25));
-        $this->assertFalse($val->validate(0));
-        $this->assertFalse($val->validate(new \stdClass));
+        $this->assertFalse($v->validate('aaa'));
+        $this->assertFalse($v->validate(25));
+        $this->assertFalse($v->validate(0));
+        $this->assertFalse($v->validate(new \stdClass));
     }
     
     /**

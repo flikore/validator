@@ -42,56 +42,56 @@ class NotEqualsValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testValidatePass()
     {
-        $v = new NotEqualsValidator('aa');
-        $this->assertTrue($v->validate('aaa'));
+        $v1 = new NotEqualsValidator('aa');
+        $this->assertTrue($v1->validate('aaa'));
 
-        $v = new NotEqualsValidator(0);
-        $this->assertTrue($v->validate(1));
-        $this->assertTrue($v->validate('1'));
+        $v2 = new NotEqualsValidator(0);
+        $this->assertTrue($v2->validate(1));
+        $this->assertTrue($v2->validate('1'));
 
-        $v = new NotEqualsValidator(new \stdClass());
-        $this->assertTrue($v->validate(new \ArrayIterator()));
+        $v3 = new NotEqualsValidator(new \stdClass());
+        $this->assertTrue($v3->validate(new \ArrayIterator()));
     }
 
     public function testValidateFail()
     {
-        $v = new NotEqualsValidator('aa');
-        $this->assertFalse($v->validate('aa'));
-        $this->assertFalse($v->validate(0));
+        $v1 = new NotEqualsValidator('aa');
+        $this->assertFalse($v1->validate('aa'));
+        $this->assertFalse($v1->validate(0));
 
-        $v = new NotEqualsValidator(0);
-        $this->assertFalse($v->validate(0));
-        $this->assertFalse($v->validate('0'));
-        $this->assertFalse($v->validate('a'));
+        $v2 = new NotEqualsValidator(0);
+        $this->assertFalse($v2->validate(0));
+        $this->assertFalse($v2->validate('0'));
+        $this->assertFalse($v2->validate('a'));
 
-        $v = new NotEqualsValidator(new \stdClass());
-        $this->assertFalse($v->validate(new \stdClass()));
+        $v3 = new NotEqualsValidator(new \stdClass());
+        $this->assertFalse($v3->validate(new \stdClass()));
     }
 
     public function testValidateStrictPass()
     {
-        $v = new NotEqualsValidator('aa', true);
-        $this->assertTrue($v->validate('aaa'));
+        $v1 = new NotEqualsValidator('aa', true);
+        $this->assertTrue($v1->validate('aaa'));
 
-        $v = new NotEqualsValidator(0, true);
-        $this->assertTrue($v->validate(1));
-        $this->assertTrue($v->validate('0'));
+        $v2 = new NotEqualsValidator(0, true);
+        $this->assertTrue($v2->validate(1));
+        $this->assertTrue($v2->validate('0'));
 
-        $v = new NotEqualsValidator(new \stdClass(), true);
-        $this->assertTrue($v->validate(new \stdClass()));
+        $v3 = new NotEqualsValidator(new \stdClass(), true);
+        $this->assertTrue($v3->validate(new \stdClass()));
     }
     
     public function testValidateStrictFail()
     {
-        $v = new NotEqualsValidator('aa', true);
-        $this->assertFalse($v->validate('aa'));
+        $v1 = new NotEqualsValidator('aa', true);
+        $this->assertFalse($v1->validate('aa'));
 
-        $v = new NotEqualsValidator(0, true);
-        $this->assertFalse($v->validate(0));
+        $v2 = new NotEqualsValidator(0, true);
+        $this->assertFalse($v2->validate(0));
 
         $obj = new \stdClass();
-        $v = new NotEqualsValidator($obj, true);
-        $this->assertFalse($v->validate($obj));
+        $v3 = new NotEqualsValidator($obj, true);
+        $this->assertFalse($v3->validate($obj));
     }
 
     public function testValidateEmptyValue()
@@ -104,18 +104,18 @@ class NotEqualsValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testMessageKeys()
     {
-        $v = new NotEqualsValidator('any', true);
+        $v1 = new NotEqualsValidator('any', true);
 
-        $v->setErrorMessage('%compare%');
-        $this->assertEquals('any', $v->getErrorMessage());
+        $v1->setErrorMessage('%compare%');
+        $this->assertEquals('any', $v1->getErrorMessage());
 
-        $v->setErrorMessage('%strict%');
-        $this->assertEquals('true', $v->getErrorMessage());
+        $v1->setErrorMessage('%strict%');
+        $this->assertEquals('true', $v1->getErrorMessage());
 
-        $v = new NotEqualsValidator('any', false);
+        $v2 = new NotEqualsValidator('any', false);
 
-        $v->setErrorMessage('%strict%');
-        $this->assertEquals('false', $v->getErrorMessage());
+        $v2->setErrorMessage('%strict%');
+        $this->assertEquals('false', $v2->getErrorMessage());
     }
 
 }

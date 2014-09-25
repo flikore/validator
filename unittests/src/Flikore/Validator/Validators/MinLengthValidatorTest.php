@@ -60,7 +60,7 @@ class MinLengthValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongLengthArgument()
     {
-        $t = new MinLengthValidator('aa');
+        new MinLengthValidator('aa');
     }
 
     public function testValidateEmptyValue()

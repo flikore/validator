@@ -42,17 +42,17 @@ class LengthBetweenValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testValidatePass()
     {
-        $val = new LengthBetweenValidator(2, 4);
-        $this->assertTrue($val->validate('aa'));
-        $this->assertTrue($val->validate('aaa'));
-        $this->assertTrue($val->validate('aaaa'));
+        $v = new LengthBetweenValidator(2, 4);
+        $this->assertTrue($v->validate('aa'));
+        $this->assertTrue($v->validate('aaa'));
+        $this->assertTrue($v->validate('aaaa'));
     }
 
     public function testValidateFail()
     {
-        $val = new LengthBetweenValidator(2, 4);
-        $this->assertFalse($val->validate('aaaaa'));
-        $this->assertFalse($val->validate('a'));
+        $v = new LengthBetweenValidator(2, 4);
+        $this->assertFalse($v->validate('aaaaa'));
+        $this->assertFalse($v->validate('a'));
     }
 
     /**
@@ -60,7 +60,7 @@ class LengthBetweenValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongMinLengthArgument()
     {
-        $t = new LengthBetweenValidator('aa', 4);
+        new LengthBetweenValidator('aa', 4);
     }
     
     /**
@@ -68,14 +68,14 @@ class LengthBetweenValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongMaxLengthArgument()
     {
-        $t = new LengthBetweenValidator(4, 'a');
+        new LengthBetweenValidator(4, 'a');
     }
 
     public function testValidateEmptyValue()
     {
-        $val = new LengthBetweenValidator(2, 4);
-        $this->assertTrue($val->validate(''));
-        $this->assertTrue($val->validate(null));
+        $v = new LengthBetweenValidator(2, 4);
+        $this->assertTrue($v->validate(''));
+        $this->assertTrue($v->validate(null));
     }
 
     /**

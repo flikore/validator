@@ -60,7 +60,7 @@ class MaxValueValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongValueArgument()
     {
-        $t = new MaxValueValidator('aa');
+        new MaxValueValidator('aa');
     }
 
     public function testValidateEmptyValue()

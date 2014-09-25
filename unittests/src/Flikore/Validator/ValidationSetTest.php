@@ -51,7 +51,7 @@ class ArrayAccessTestingImplementation implements \ArrayAccess
 
     public function offsetUnset($offset)
     {
-        
+        unset($this->$offset);
     }
 
 }
