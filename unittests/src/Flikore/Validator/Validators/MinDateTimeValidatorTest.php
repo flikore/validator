@@ -30,7 +30,7 @@ namespace Flikore\Validator\Validators;
  * Tests for MinDateTimeValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.1
+ * @version 0.5.2
  * @since 0.4.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -42,30 +42,30 @@ class MinDateTimeValidatorTest extends \PHPUnit_Framework_TestCase
     public function testValidatePass()
     {
         $d = new \DateTime();
-        $val = new MinDateTimeValidator($d);
+        $v1 = new MinDateTimeValidator($d);
         
-        $this->assertTrue($val->validate($d));
-        $this->assertTrue($val->validate(new \DateTime('+1 second')));
-        $this->assertTrue($val->validate(new \DateTime('+1 day')));
+        $this->assertTrue($v1->validate($d));
+        $this->assertTrue($v1->validate(new \DateTime('+1 second')));
+        $this->assertTrue($v1->validate(new \DateTime('+1 day')));
         
-        $val = new MinDateTimeValidator(new \DateTime('2014-03-05'));
-        $this->assertTrue($val->validate(new \DateTime('2014-03-06')));
-        $this->assertTrue($val->validate('2014-03-06'));
-        $this->assertTrue($val->validate(new \DateTime('2014-03-05')));
-        $this->assertTrue($val->validate('2014-03-05'));
+        $v2 = new MinDateTimeValidator(new \DateTime('2014-03-05'));
+        $this->assertTrue($v2->validate(new \DateTime('2014-03-06')));
+        $this->assertTrue($v2->validate('2014-03-06'));
+        $this->assertTrue($v2->validate(new \DateTime('2014-03-05')));
+        $this->assertTrue($v2->validate('2014-03-05'));
     }
     
     public function testValidateFail()
     {
-        $val = new MinDateTimeValidator(new \DateTime);
+        $v1 = new MinDateTimeValidator(new \DateTime);
         
-        $this->assertFalse($val->validate(new \DateTime('-1 second')));
-        $this->assertFalse($val->validate(new \DateTime('-1 day')));
+        $this->assertFalse($v1->validate(new \DateTime('-1 second')));
+        $this->assertFalse($v1->validate(new \DateTime('-1 day')));
         
-        $val = new MinDateTimeValidator(new \DateTime('2014-03-05'));
+        $v2 = new MinDateTimeValidator(new \DateTime('2014-03-05'));
         
-        $this->assertFalse($val->validate('2014-03-04'));
-        $this->assertFalse($val->validate('2014-02-20'));
+        $this->assertFalse($v2->validate('2014-03-04'));
+        $this->assertFalse($v2->validate('2014-02-20'));
     }
 
     /**
@@ -92,6 +92,14 @@ class MinDateTimeValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($val->validate(25));
         $this->assertFalse($val->validate(0));
         $this->assertFalse($val->validate(new \stdClass));
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullFormatArgument()
+    {
+        new MinDateTimeValidator(new \DateTime(), null);
     }
 
 }

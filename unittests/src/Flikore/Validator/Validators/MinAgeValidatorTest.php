@@ -30,7 +30,7 @@ namespace Flikore\Validator\Validators;
  * Tests for MinAgeValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.1
+ * @version 0.5.2
  * @since 0.3
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -109,7 +109,7 @@ class MinAgeValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongMinAgeArgumentString()
     {
-        $v = new MinAgeValidator('not valid');
+        new MinAgeValidator('not valid');
     }
     
     /**
@@ -117,7 +117,7 @@ class MinAgeValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongMinAgeArgumentNotGiven()
     {
-        $v = new MinAgeValidator(null);
+        new MinAgeValidator(null);
     }
 
     public function testValidateEmptyValue()
@@ -136,6 +136,14 @@ class MinAgeValidatorTest extends \PHPUnit_Framework_TestCase
         
         $this->assertEquals($min, $v->getErrorMessage());
                 
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullMinAgeArgument()
+    {
+        new MinAgeValidator(null);
     }
 
 }

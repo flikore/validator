@@ -34,7 +34,7 @@ use Flikore\Validator\Intl;
  * @customKey <i>%max%</i> The exclusive upper boundary.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.1
+ * @version 0.5.2
  * @since 0.4.0
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques

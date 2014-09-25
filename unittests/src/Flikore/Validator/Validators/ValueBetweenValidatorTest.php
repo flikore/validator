@@ -30,7 +30,7 @@ namespace Flikore\Validator\Validators;
  * Tests for ValueBetweenValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.1
+ * @version 0.5.2
  * @since 0.3
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -81,7 +81,7 @@ class ValueBetweenValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongMinValueArgument()
     {
-        $t = new ValueBetweenValidator('aa', 4);
+        new ValueBetweenValidator('aa', 4);
     }
 
     /**
@@ -89,7 +89,7 @@ class ValueBetweenValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongMaxValueArgument()
     {
-        $t = new ValueBetweenValidator(4, 'a');
+        new ValueBetweenValidator(4, 'a');
     }
 
     public function testValidateEmptyValue()
@@ -115,4 +115,19 @@ class ValueBetweenValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('3', $val->getErrorMessage());
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullMinValueArgument()
+    {
+        new ValueBetweenValidator(null, 3);
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullMaxValueArgument()
+    {
+        new ValueBetweenValidator(0, null);
+    }
 }

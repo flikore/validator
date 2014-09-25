@@ -30,7 +30,7 @@ namespace Flikore\Validator\Validators;
  * Tests for RegexValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.1
+ * @version 0.5.2
  * @since 0.2
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -70,7 +70,7 @@ class RegexValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidRegexArgument()
     {
-        $t = new RegexValidator('aaa');
+        new RegexValidator('aaa');
     }
     
     /**
@@ -78,7 +78,7 @@ class RegexValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidRegexNumberArgument()
     {
-        $t = new RegexValidator(0);
+        new RegexValidator(0);
     }
 
     public function testValidateEmptyValue()
@@ -86,6 +86,14 @@ class RegexValidatorTest extends \PHPUnit_Framework_TestCase
         $val = new RegexValidator('/^[a-z]+$/i');
         $this->assertTrue($val->validate(''));
         $this->assertTrue($val->validate(null));
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullRegexArgument()
+    {
+        new RegexValidator(null);
     }
 
 }

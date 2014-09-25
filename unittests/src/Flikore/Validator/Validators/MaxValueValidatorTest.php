@@ -30,7 +30,7 @@ namespace Flikore\Validator\Validators;
  * Tests for MaxValueValidator class.
  *
  * @author George Marques <george at georgemarques.com.br>
- * @version 0.5.1
+ * @version 0.5.2
  * @since 0.2
  * @license http://opensource.org/licenses/MIT MIT
  * @copyright (c) 2014, George Marques
@@ -60,7 +60,7 @@ class MaxValueValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongValueArgument()
     {
-        $t = new MaxValueValidator('aa');
+        new MaxValueValidator('aa');
     }
 
     public function testValidateEmptyValue()
@@ -70,4 +70,11 @@ class MaxValueValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($val->validate(null));
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testErrorNullMaxValueArgument()
+    {
+        new MaxValueValidator(null);
+    }
 }
