@@ -8,6 +8,15 @@
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script src="{{ site.baseurl }}/js/autos.js"></script>
         <title>{{ site.data.meta.title }}{% if page.title %} &raquo; {{ page.title }}{% endif %}</title>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z9B7F50G9E"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-Z9B7F50G9E');
+        </script>
     </head>
     <body data-spy="scroll" data-target="#ulmenu">
         <div class="container">
